@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>Libreta 4º B · 1ª evaluación</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Kalam:wght@400;700&family=Patrick+Hand&display=swap">
+<style>
+@font-face{font-family:"BarFix";src:local("Arial"),local("Helvetica"),local("Roboto"),local("DejaVu Sans");unicode-range:U+007C}
+/* Layout: hojas de cuaderno cuadriculado apiladas sobre la mesa; pestañas de tema fijas arriba */
+:root{
+  --desk:#e6ebef; --paper:#fbfcf8; --grid:#d5e4ee; --grid2:#bfd3e1; --margin:#ef9a9a;
+  --ink:#24429c; --red:#cf3535; --green:#1d8655; --violet:#7a46b8; --pencil:#5a5f68;
+  --hl:#fff07a; --hlp:#ffc6da; --hlg:#c8f0c6; --postit:#fff4a3; --postit2:#ffd9b0;
+  --shadow:rgba(30,40,60,.16);
+  --f-body:"BarFix","Patrick Hand","Comic Sans MS","Segoe Print",cursive;
+  --f-head:"Kalam","Patrick Hand","Comic Sans MS",cursive;
+  --f-note:"Caveat","Kalam","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#10141c; --paper:#1b2130; --grid:#262f42; --grid2:#303c54; --margin:#7c3a46;
+  --ink:#9fc2ff; --red:#ff8d88; --green:#79dba6; --violet:#c9a7ff; --pencil:#aeb6c4;
+  --hl:rgba(255,226,70,.30); --hlp:rgba(255,110,170,.30); --hlg:rgba(110,230,150,.24); --postit:#4a4424; --postit2:#4d3a25;
+  --shadow:rgba(0,0,0,.5); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --desk:#10141c; --paper:#1b2130; --grid:#262f42; --grid2:#303c54; --margin:#7c3a46;
+  --ink:#9fc2ff; --red:#ff8d88; --green:#79dba6; --violet:#c9a7ff; --pencil:#aeb6c4;
+  --hl:rgba(255,226,70,.30); --hlp:rgba(255,110,170,.30); --hlg:rgba(110,230,150,.24); --postit:#4a4424; --postit2:#4d3a25;
+  --shadow:rgba(0,0,0,.5); color-scheme:dark }
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:20px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--desk)}
+
+/* ---------- pestañas ---------- */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--desk);display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding-block:10px 8px;max-width:940px;margin:0 auto}
+.tabs a{font-family:var(--f-head);font-weight:700;font-size:16px;text-decoration:none;color:var(--ink);background:var(--paper);
+  padding:4px 12px 2px;border:2px solid currentColor;border-radius:14px 4px 12px 5px/5px 12px 4px 14px;white-space:nowrap}
+.tabs a:nth-child(2){color:var(--violet)} .tabs a:nth-child(3){color:var(--red)} .tabs a:nth-child(4){color:var(--green)} .tabs a:nth-child(5){color:var(--ink)}
+.tabs a:focus-visible,.tabs button:focus-visible,summary:focus-visible{outline:3px dashed var(--red);outline-offset:3px}
+.tabs button{font-family:var(--f-note);font-size:20px;font-weight:700;background:var(--postit);color:var(--ink);border:none;padding:2px 12px;cursor:pointer;transform:rotate(-1.5deg);box-shadow:1px 2px 0 var(--shadow)}
+
+/* ---------- hoja ---------- */
+.sheet{position:relative;max-width:900px;margin:22px auto 0;background-color:var(--paper);
+  background-image:linear-gradient(var(--grid2) 1px,transparent 1px),linear-gradient(90deg,var(--grid2) 1px,transparent 1px),
+   linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:100px 100px,100px 100px,20px 20px,20px 20px;
+  box-shadow:0 1px 0 var(--grid2),0 8px 22px var(--shadow);border-radius:3px;
+  padding:34px 34px 40px 74px;min-width:0}
+.sheet::before{content:"";position:absolute;left:52px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.8}
+.sheet::after{content:"";position:absolute;left:14px;top:16px;bottom:16px;width:16px;
+  background:radial-gradient(circle at 8px 10px,var(--desk) 5px,transparent 6px) 0 0/16px 40px repeat-y}
+@media (max-width:620px){.sheet{padding:26px 16px 30px 40px}.sheet::before{left:30px}.sheet::after{left:6px;width:14px;background-size:14px 34px}body{font-size:18px}}
+
+.date{position:absolute;right:26px;top:12px;font-family:var(--f-note);font-size:21px;color:var(--pencil)}
+h1,h2,h3{font-family:var(--f-head);font-weight:700;text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(34px,6vw,54px);color:var(--violet);letter-spacing:.5px}
+h2{font-size:clamp(26px,4.4vw,36px);text-transform:uppercase;letter-spacing:1.5px;margin-top:6px}
+h3{font-size:23px;text-transform:uppercase;letter-spacing:1px;margin:30px 0 10px;display:inline-block;
+  text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+h3.r{color:var(--red)} h3.g{color:var(--green)} h3.v{color:var(--violet)}
+.kicker{font-family:var(--f-note);font-size:24px;color:var(--pencil);display:block}
+.wavy{text-decoration:underline wavy var(--red);text-decoration-thickness:1.5px;text-underline-offset:5px}
+p{margin:8px 0;max-width:68ch}
+ul.pen{margin:6px 0;padding-left:0;list-style:none}
+ul.pen li{padding-left:26px;position:relative;margin:4px 0}
+ul.pen li::before{content:"→";position:absolute;left:0;color:var(--red)}
+.red{color:var(--red)} .grn{color:var(--green)} .vio{color:var(--violet)} .pen-grey{color:var(--pencil)}
+.hl{background:linear-gradient(transparent 45%,var(--hl) 45%,var(--hl) 92%,transparent 92%);padding:0 3px}
+.hlp{background:linear-gradient(transparent 45%,var(--hlp) 45%,var(--hlp) 92%,transparent 92%);padding:0 3px}
+.hlg{background:linear-gradient(transparent 45%,var(--hlg) 45%,var(--hlg) 92%,transparent 92%);padding:0 3px}
+.note{font-family:var(--f-note);font-size:23px;color:var(--red);line-height:1.15}
+
+/* cajas dibujadas a mano */
+.box{border:2.2px solid currentColor;border-radius:255px 14px 225px 14px/14px 225px 14px 255px;padding:10px 16px;margin:12px 0;display:block;width:fit-content;max-width:100%}
+.box.ink{color:var(--ink)} .box.red{color:var(--red)} .box.grn{color:var(--green)} .box.vio{color:var(--violet)}
+.box .t{font-family:var(--f-head);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:1px;display:block}
+.box > *:not(.t){color:var(--ink)}
+.dash{border:2px dashed var(--pencil);border-radius:8px;padding:8px 14px;margin:12px 0}
+.row{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-start}
+.row > *{min-width:0}
+.postit{background:var(--postit);padding:12px 16px 14px;transform:rotate(-1.2deg);box-shadow:2px 4px 8px var(--shadow);max-width:340px;font-size:19px;margin:10px 0}
+.postit.o{background:var(--postit2);transform:rotate(1.1deg)}
+.postit > b:first-child{font-family:var(--f-head);display:block;color:var(--red);font-size:17px;text-transform:uppercase;letter-spacing:1px}
+.ojo{position:relative;display:inline-flex;align-items:center;justify-content:center;width:118px;height:96px;flex:none;
+  font-family:var(--f-head);font-weight:700;color:var(--red);font-size:19px;text-align:center;line-height:1.05}
+.ojo::before{content:"";position:absolute;inset:0;background:var(--red);
+  clip-path:polygon(50% 0,59% 22%,80% 6%,75% 31%,100% 30%,82% 49%,100% 66%,75% 67%,82% 94%,60% 78%,50% 100%,40% 78%,17% 94%,25% 67%,0 68%,18% 49%,0 30%,25% 31%,20% 6%,41% 22%)}
+.ojo::after{content:"";position:absolute;inset:3px;background:var(--paper);
+  clip-path:polygon(50% 0,59% 22%,80% 6%,75% 31%,100% 30%,82% 49%,100% 66%,75% 67%,82% 94%,60% 78%,50% 100%,40% 78%,17% 94%,25% 67%,0 68%,18% 49%,0 30%,25% 31%,20% 6%,41% 22%)}
+.ojo span{position:relative;z-index:1;padding:0 20px}
+.warn{display:flex;gap:12px;align-items:center;margin:12px 0}
+.warn p{margin:0}
+
+/* matemáticas a mano */
+.m{white-space:nowrap}
+.f{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 3px;line-height:1.15}
+.f > i{font-style:normal;display:block;padding:0 3px}
+.f > i:first-child{border-bottom:1.7px solid currentColor}
+.sq{position:relative;display:inline-flex;align-items:flex-start;margin-left:2px}
+.sq::before{content:"√";font-size:1.1em;line-height:1.25}
+.sq > i{font-style:normal;border-top:1.7px solid currentColor;padding:0 3px;margin-top:.2em;line-height:1.25}
+.sq[data-n]::after{content:attr(data-n);position:absolute;left:-.25em;top:-.2em;font-size:.6em}
+.sq[data-n]{margin-left:.45em}
+sup,sub{font-size:.68em}
+.big{font-size:1.25em}
+.eqs{display:flex;flex-direction:column;gap:4px;margin:8px 0;padding-left:10px}
+.brace{border-left:2.2px solid currentColor;border-radius:10px 0 0 10px;padding:2px 0 2px 12px;display:inline-flex;flex-direction:column;gap:2px;vertical-align:middle}
+
+/* tablas */
+.wrap{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;font-family:var(--f-body)}
+.tb td,.tb th{border:1.6px solid var(--pencil);padding:4px 12px;text-align:center}
+.tb th{font-family:var(--f-head);font-weight:700;color:var(--violet)}
+.ruf td{padding:2px 12px;text-align:center;min-width:30px}
+.ruf tr:nth-child(2) td{border-bottom:2px solid var(--ink)}
+.ruf td:first-child{border-right:2px solid var(--ink);color:var(--red)}
+.ruf .rest{border:2px solid var(--red);border-radius:6px;color:var(--red)}
+.sg td,.sg th{border:1.4px solid var(--pencil);padding:3px 12px;text-align:center}
+.sg th{font-weight:400;color:var(--pencil)}
+.sg td:first-child{text-align:right;color:var(--ink)}
+.sg .p{color:var(--green);font-weight:700} .sg .n{color:var(--red);font-weight:700}
+.sg tr:last-child td{border-top:2.4px solid var(--ink)}
+
+/* conjuntos */
+.sets{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;border:2.4px solid var(--ink);border-radius:10px 4px 12px 6px;padding:26px 12px 12px;position:relative;width:fit-content;max-width:100%}
+.sets::before{content:"ℝ  reales";position:absolute;top:2px;right:12px;font-family:var(--f-head);font-weight:700;color:var(--ink)}
+.set{border:2px solid currentColor;border-radius:8px 3px 9px 4px;padding:22px 10px 8px;position:relative;display:flex;align-items:flex-end}
+.set > .lbl{position:absolute;top:2px;left:8px;font-size:16px;white-space:nowrap}
+.set.q{color:var(--violet)} .set.z{color:var(--green)} .set.n{color:var(--red)} .set.i{color:var(--pencil);min-width:150px;align-items:center}
+.set .x{color:var(--ink);font-size:16px}
+
+/* temporalización */
+.plan{margin:14px 0 6px}
+.bar{display:flex;gap:4px;height:46px;margin:6px 0}
+.bar > div{border:2px solid currentColor;border-radius:6px 3px 7px 2px;display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-size:14px;line-height:1.05;text-align:center;padding:0 4px;min-width:0;overflow:hidden}
+.bar .on{background:repeating-linear-gradient(-45deg,transparent 0 6px,var(--hl) 6px 10px)}
+.bar .off{color:var(--pencil);opacity:.65;border-style:dashed}
+.legend{font-family:var(--f-note);font-size:19px;color:var(--pencil)}
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:16px}
+.toc a{display:block;text-decoration:none;color:var(--ink);border:2px solid currentColor;border-radius:14px 5px 12px 6px/6px 12px 5px 14px;padding:10px 14px;background:var(--paper)}
+.toc a b{font-family:var(--f-head);display:block;font-size:20px}
+.toc a span{font-family:var(--f-note);font-size:19px;color:var(--pencil)}
+.toc a:nth-child(1){color:var(--violet)} .toc a:nth-child(2){color:var(--red)} .toc a:nth-child(3){color:var(--green)} .toc a:nth-child(4){color:var(--ink)}
+
+/* ejercicios */
+.ejs{display:flex;flex-direction:column;gap:18px;margin-top:10px}
+.ej{border-top:1.5px dashed var(--grid2);padding-top:12px}
+.ej-h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.num{font-family:var(--f-head);font-weight:700;color:var(--red);border:2px solid var(--red);border-radius:50%;min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;font-size:17px;flex:none}
+.lvl{color:var(--violet);font-size:17px;letter-spacing:2px}
+.tag{font-family:var(--f-note);font-size:20px;color:var(--green);border-bottom:2px solid var(--green);line-height:1}
+.ej-h .q{flex:1 1 300px;min-width:0}
+.done{font-family:var(--f-note);font-size:19px;color:var(--pencil);display:inline-flex;gap:4px;align-items:center;cursor:pointer;margin-left:auto}
+.done input{accent-color:var(--green);width:17px;height:17px}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 20px;margin:6px 0 4px 44px}
+@media (max-width:620px){.items{margin-left:0}}
+details{margin:6px 0 0 44px}
+@media (max-width:620px){details{margin-left:0}}
+summary{cursor:pointer;font-family:var(--f-note);font-size:22px;color:var(--green);width:fit-content;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"✎ ";}
+details[open] summary{color:var(--pencil)}
+.sol{border-left:3px solid var(--green);padding:6px 0 6px 14px;margin-top:6px;color:var(--ink)}
+.sol .ok{color:var(--green);font-weight:700}
+.res{border:2px solid var(--ink);border-radius:5px 2px 6px 3px;padding:0 6px;display:inline-block}
+.endnote{font-family:var(--f-note);font-size:22px;color:var(--pencil);text-align:right;margin-top:24px}
+svg text{font-family:var(--f-body)}
+</style>
+
+<nav class="tabs" aria-label="Temas">
+  <a href="#portada">Índice</a>
+  <a href="#t11">1.1 Números</a>
+  <a href="#t31">3.1 Polinomios</a>
+  <a href="#t32">3.2 Ecuaciones</a>
+  <a href="#t33">3.3 Inecuaciones</a>
+  <button type="button" id="toggleSol">ver todas las soluciones</button>
+</nav>
+
+<!-- ===================== PORTADA ===================== -->
+<section class="sheet" id="portada">
+  <span class="date">curso 2026 / 27</span>
+  <span class="kicker">Matemáticas B · 4º ESO</span>
+  <h1>Apuntes de la 1ª evaluación</h1>
+  <p>Resumen de la teoría, ejemplos resueltos y ejercicios con solución, sacados de las libretas de clase de 4º B y ordenados según la <span class="hl">temporalización del curso 26‑27</span>.</p>
+
+  <div class="plan">
+    <h3 class="v" style="margin-top:14px">El curso de un vistazo</h3>
+    <div class="bar" aria-label="Sesiones por evaluación">
+      <div class="on" style="flex:45;color:var(--violet)">1ª eval · 45 ses.</div>
+      <div class="off" style="flex:32">2ª · 32</div>
+      <div class="off" style="flex:40">3ª · 40</div>
+    </div>
+    <p class="legend">Rayado = lo que recogen estos apuntes. 2ª: semejanza, trigonometría y geometría analítica. 3ª: funciones, estadística y probabilidad.</p>
+
+    <h3 class="r">1ª evaluación: 45 sesiones</h3>
+    <div class="bar" aria-label="Sesiones por tema">
+      <div style="flex:10;color:var(--violet)">1.1 · 10</div>
+      <div style="flex:11;color:var(--red)">3.1 · 11</div>
+      <div style="flex:12;color:var(--green)">3.2 · 12</div>
+      <div style="flex:12;color:var(--ink)">3.3 · 12</div>
+    </div>
+    <div class="row legend" style="justify-content:space-between">
+      <span>UP1 · Números reales y polinomios (21 sesiones)</span>
+      <span>UP2 · Ecuaciones, inecuaciones y sistemas (24 sesiones)</span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Índice de temas">
+    <a href="#t11"><b>1.1 La realidad en números</b><span>reales, intervalos, potencias, radicales, logaritmos</span></a>
+    <a href="#t31"><b>3.1 Un lenguaje universal</b><span>polinomios, Ruffini, factorizar, fracciones algebraicas</span></a>
+    <a href="#t32"><b>3.2 La igualdad es la clave</b><span>ecuaciones de todo tipo y sistemas</span></a>
+    <a href="#t33"><b>3.3 No me da igual</b><span>inecuaciones y sistemas de inecuaciones</span></a>
+  </nav>
+
+  <div class="row" style="margin-top:22px">
+    <div class="postit"><b>Cómo usar los apuntes</b>Lee la teoría, tapa la solución e inténtalo. Despliega <span class="grn">✎ Ver solución</span> solo para comprobar. Marca <span class="pen-grey">☐ hecho</span> en cada ejercicio terminado: se queda guardado en tu navegador.</div>
+    <div class="postit o"><b>Niveles</b>★ básico · ★★ medio · ★★★ reto.<br>Los <span class="tag">Ejercicio de Guillermo</span> son los retos de clase.</div>
+  </div>
+</section>
+
+<!-- ===================== TEMA 1.1 ===================== -->
+<section class="sheet" id="t11">
+  <span class="date">UP1 · 10 sesiones</span>
+  <span class="kicker">Tema 1.1</span>
+  <h2 class="vio">La realidad en números</h2>
+
+  <h3 class="v">Conjuntos numéricos</h3>
+  <div class="row">
+    <div class="sets" role="img" aria-label="Diagrama: N dentro de Z dentro de Q; Q e I forman R">
+      <div class="set q"><span class="lbl">ℚ racionales</span>
+        <div class="set z"><span class="lbl">ℤ enteros</span>
+          <div class="set n"><span class="lbl">ℕ naturales</span><span class="x">1, 2, 3…</span></div>
+          <span class="x">&nbsp;−3, 0</span>
+        </div>
+        <span class="x">&nbsp;<span class="f"><i>1</i><i>5</i></span>, 0,3̂</span>
+      </div>
+      <div class="set i"><span class="lbl">𝕀 irracionales</span><span class="x"><span class="sq"><i>2</i></span>, π, e, Φ</span></div>
+    </div>
+    <div style="flex:1 1 260px">
+      <ul class="pen">
+        <li><b>Racional</b>: se puede escribir como fracción. Decimales exactos o periódicos.</li>
+        <li><b>Irracional</b>: infinitas cifras decimales <span class="hl">sin periodo</span>.</li>
+        <li class="red">ℝ = ℚ ∪ 𝕀 &nbsp;&nbsp; ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Fracción generatriz</h3>
+  <div class="row">
+    <div class="box vio"><span class="t">Periódico puro</span>
+      <span class="m">2,5̂ = <span class="f"><i>25 − 2</i><i>9</i></span> = <span class="f"><i>23</i><i>9</i></span></span><br>
+      <span class="note">un 9 por cada cifra del periodo</span></div>
+    <div class="box vio"><span class="t">Periódico mixto</span>
+      <span class="m">0,16̂ = <span class="f"><i>16 − 1</i><i>90</i></span> = <span class="f"><i>15</i><i>90</i></span> = <span class="f"><i>1</i><i>6</i></span></span><br>
+      <span class="note">9 por periodo, 0 por anteperiodo</span></div>
+  </div>
+
+  <h3>Valor absoluto y distancia</h3>
+  <div class="row">
+    <div class="box ink"><span class="m big">|a| = <span class="brace"><span>a &nbsp;&nbsp;si a ≥ 0</span><span>−a si a &lt; 0</span></span></span></div>
+    <div class="box red"><span class="t">Distancia entre dos números</span><span class="m big">d(a, b) = |b − a|</span></div>
+  </div>
+  <p>Ejemplo: <span class="m">|x − 1| = 2</span> → <span class="m">x − 1 = 2</span> ó <span class="m">x − 1 = −2</span> → <span class="res">x = 3</span> , <span class="res">x = −1</span>. <span class="note">siempre DOS caminos</span></p>
+
+  <h3>Intervalos y semirrectas</h3>
+  <div class="wrap"><table class="tb">
+    <tr><th>Nombre</th><th>Notación</th><th>Desigualdad</th><th>Dibujo</th></tr>
+    <tr><td>Abierto</td><td>(−2, 3)</td><td>−2 &lt; x &lt; 3</td><td><div class="nl" data-r="-3,4" data-s="-2o,3o"></div></td></tr>
+    <tr><td>Cerrado</td><td>[−1, 4]</td><td>−1 ≤ x ≤ 4</td><td><div class="nl" data-r="-2,5" data-s="-1c,4c"></div></td></tr>
+    <tr><td>Semiabierto</td><td>(2, 5]</td><td>2 &lt; x ≤ 5</td><td><div class="nl" data-r="1,6" data-s="2o,5c"></div></td></tr>
+    <tr><td>Semirrecta</td><td>[1, +∞)</td><td>x ≥ 1</td><td><div class="nl" data-r="-2,5" data-s="1c,inf"></div></td></tr>
+    <tr><td>Semirrecta</td><td>(−∞, −2)</td><td>x &lt; −2</td><td><div class="nl" data-r="-5,2" data-s="-inf,-2o"></div></td></tr>
+  </table></div>
+  <div class="row" style="margin-top:8px">
+    <p style="flex:1 1 280px"><span class="hlp">Paréntesis ( )</span> = extremo <b>no</b> incluido, punto hueco ○.<br><span class="hlg">Corchete [ ]</span> = extremo incluido, punto relleno ●.<br>En el infinito, <span class="red">siempre paréntesis</span>.</p>
+    <div class="dash" style="flex:1 1 280px"><b class="vio">∪ unión</b>: todo lo que está en A <b>o</b> en B.<br><b class="vio">∩ intersección</b>: lo que está en A <b>y</b> en B a la vez.<br><span class="m">(2, 5) ∩ (3, 7) = (3, 5)</span></div>
+  </div>
+
+  <h3>Potencias</h3>
+  <div class="row">
+    <div class="box ink"><span class="t">Propiedades</span>
+      <span class="m">a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup></span> &nbsp;&nbsp; <span class="m">a<sup>m</sup> : a<sup>n</sup> = a<sup>m−n</sup></span><br>
+      <span class="m">(a<sup>m</sup>)<sup>n</sup> = a<sup>m·n</sup></span> &nbsp;&nbsp; <span class="m">(a·b)<sup>n</sup> = a<sup>n</sup>·b<sup>n</sup></span><br>
+      <span class="m">a<sup>0</sup> = 1</span> &nbsp;&nbsp; <span class="m">a<sup>−n</sup> = <span class="f"><i>1</i><i>a<sup>n</sup></i></span></span> &nbsp;&nbsp; <span class="m">(<span class="f"><i>a</i><i>b</i></span>)<sup>−n</sup> = (<span class="f"><i>b</i><i>a</i></span>)<sup>n</sup></span>
+    </div>
+    <div class="postit"><b>Base negativa</b>Exponente par → resultado <span class="grn">+</span><br>Exponente impar → resultado <span class="red">−</span><br><span class="m">(−2)<sup>4</sup> = 16</span> pero <span class="m">−2<sup>4</sup> = −16</span></div>
+  </div>
+
+  <h3>Notación científica</h3>
+  <div class="row">
+    <div class="box red"><span class="m big">a · 10<sup>n</sup></span> &nbsp; con <span class="m">1 ≤ |a| &lt; 10</span>, n ∈ ℤ</div>
+    <p style="flex:1 1 260px">Para <b>sumar o restar</b> hay que poner primero las dos potencias con el <span class="hl">mismo orden de magnitud</span>:<br>
+    <span class="m">2,3·10<sup>5</sup> + 5,1·10<sup>4</sup> = 23·10<sup>4</sup> + 5,1·10<sup>4</sup> = 28,1·10<sup>4</sup> = <span class="res">2,81·10<sup>5</sup></span></span></p>
+  </div>
+
+  <h3>Radicales</h3>
+  <div class="row">
+    <div class="box vio"><span class="m big"><span class="sq" data-n="n"><i>a</i></span> = b ⇔ b<sup>n</sup> = a</span><br><span class="m big"><span class="sq" data-n="n"><i>a<sup>m</sup></i></span> = a<sup>m/n</sup></span><br><span class="note">n = índice · a = radicando</span></div>
+    <div class="wrap"><table class="tb">
+      <tr><th>radicando</th><th>índice</th><th>raíces</th></tr>
+      <tr><td>a &gt; 0</td><td>par</td><td>dos: ±  <span class="pen-grey">(<span class="sq"><i>16</i></span> → ±4)</span></td></tr>
+      <tr><td>a &gt; 0</td><td>impar</td><td>una, positiva</td></tr>
+      <tr><td>a &lt; 0</td><td>par</td><td class="red">no existe en ℝ</td></tr>
+      <tr><td>a &lt; 0</td><td>impar</td><td>una, negativa</td></tr>
+    </table></div>
+  </div>
+  <div class="box ink"><span class="t">Propiedades</span>
+    <span class="m"><span class="sq" data-n="n"><i>a</i></span>·<span class="sq" data-n="n"><i>b</i></span> = <span class="sq" data-n="n"><i>a·b</i></span></span> &nbsp;&nbsp;
+    <span class="m"><span class="f"><i><span class="sq" data-n="n"><i>a</i></span></i><i><span class="sq" data-n="n"><i>b</i></span></i></span> = <span class="sq" data-n="n"><i><span class="f"><i>a</i><i>b</i></span></i></span></span> &nbsp;&nbsp;
+    <span class="m">(<span class="sq" data-n="n"><i>a</i></span>)<sup>m</sup> = <span class="sq" data-n="n"><i>a<sup>m</sup></i></span></span> &nbsp;&nbsp;
+    <span class="m"><span class="sq" data-n="m"><i><span class="sq" data-n="n"><i>a</i></span></i></span> = <span class="sq" data-n="m·n"><i>a</i></span></span>
+  </div>
+  <ul class="pen">
+    <li><b>Radicales equivalentes</b>: <span class="m"><span class="sq" data-n="n"><i>a<sup>m</sup></i></span> = <span class="sq" data-n="n·k"><i>a<sup>m·k</sup></i></span></span>. Sirve para poner <span class="hl">índice común</span> (m.c.m. de los índices) y así multiplicar o dividir.</li>
+    <li><b>Extraer factores</b>: <span class="m"><span class="sq"><i>72</i></span> = <span class="sq"><i>2<sup>3</sup>·3<sup>2</sup></i></span> = 2·3·<span class="sq"><i>2</i></span> = 6<span class="sq"><i>2</i></span></span>. <span class="note">el exponente se divide entre el índice: cociente sale, resto se queda</span></li>
+    <li><b>Sumar y restar</b>: solo radicales <span class="hl">semejantes</span> (mismo índice y mismo radicando). <span class="m">3<span class="sq"><i>5</i></span> + 2<span class="sq"><i>5</i></span> = 5<span class="sq"><i>5</i></span></span>, pero <span class="m"><span class="sq"><i>2</i></span> + <span class="sq"><i>3</i></span></span> no se puede sumar.</li>
+  </ul>
+
+  <div class="warn"><span class="ojo"><span>¡OJO!</span></span><p><span class="m"><span class="sq"><i>a + b</i></span> ≠ <span class="sq"><i>a</i></span> + <span class="sq"><i>b</i></span></span> &nbsp; Ejemplo: <span class="m"><span class="sq"><i>9 + 16</i></span> = 5</span>, pero <span class="m">3 + 4 = 7</span>.</p></div>
+
+  <h3 class="r">Racionalizar</h3>
+  <p>Quitar las raíces del denominador multiplicando arriba y abajo por lo mismo.</p>
+  <div class="row">
+    <div class="box red"><span class="t">1 · Raíz cuadrada</span><span class="m"><span class="f"><i>3</i><i><span class="sq"><i>6</i></span></i></span> = <span class="f"><i>3<span class="sq"><i>6</i></span></i><i>6</i></span> = <span class="f"><i><span class="sq"><i>6</i></span></i><i>2</i></span></span></div>
+    <div class="box red"><span class="t">2 · Otro índice</span><span class="m"><span class="f"><i>10</i><i><span class="sq" data-n="3"><i>5</i></span></i></span> = <span class="f"><i>10<span class="sq" data-n="3"><i>5<sup>2</sup></i></span></i><i>5</i></span> = 2<span class="sq" data-n="3"><i>25</i></span></span><br><span class="note">completa el exponente hasta el índice</span></div>
+    <div class="box red"><span class="t">3 · Binomio: conjugado</span><span class="m"><span class="f"><i>4</i><i><span class="sq"><i>7</i></span> + <span class="sq"><i>3</i></span></i></span> = <span class="f"><i>4(<span class="sq"><i>7</i></span> − <span class="sq"><i>3</i></span>)</i><i>7 − 3</i></span> = <span class="sq"><i>7</i></span> − <span class="sq"><i>3</i></span></span><br><span class="note">(a+b)(a−b) = a² − b²</span></div>
+  </div>
+
+  <h3 class="g">Logaritmos</h3>
+  <div class="row">
+    <div class="box grn"><span class="m big">log<sub>a</sub> N = x &nbsp;⇔&nbsp; a<sup>x</sup> = N</span><br><span class="note" style="color:var(--green)">a &gt; 0, a ≠ 1, N &gt; 0 · «un logaritmo es un exponente»</span></div>
+    <ul class="pen" style="flex:1 1 240px">
+      <li><b>log</b> sin base = base 10 (decimal).</li>
+      <li><b>ln</b> = base e ≈ 2,718… (neperiano).</li>
+      <li><span class="m">log<sub>a</sub> 1 = 0</span> · <span class="m">log<sub>a</sub> a = 1</span> · <span class="m">log<sub>a</sub> a<sup>x</sup> = x</span></li>
+      <li class="red">No existe el logaritmo de 0 ni de un negativo.</li>
+    </ul>
+  </div>
+  <div class="box ink"><span class="t">Propiedades</span>
+    <span class="m">log<sub>a</sub>(P·Q) = log<sub>a</sub> P + log<sub>a</sub> Q</span><br>
+    <span class="m">log<sub>a</sub> <span class="f"><i>P</i><i>Q</i></span> = log<sub>a</sub> P − log<sub>a</sub> Q</span><br>
+    <span class="m">log<sub>a</sub> P<sup>n</sup> = n · log<sub>a</sub> P</span> &nbsp;&nbsp; <span class="m">log<sub>a</sub> <span class="sq" data-n="n"><i>P</i></span> = <span class="f"><i>1</i><i>n</i></span> log<sub>a</sub> P</span><br>
+    <span class="vio">Cambio de base:</span> <span class="m">log<sub>a</sub> N = <span class="f"><i>log N</i><i>log a</i></span></span>
+  </div>
+  <div class="warn"><span class="ojo"><span>¡OJO!</span></span><p><span class="m">log(A + B) ≠ log A + log B</span><br><span class="m">(log A)<sup>2</sup> ≠ log A<sup>2</sup></span> · <span class="m"><span class="f"><i>log A</i><i>log B</i></span> ≠ log <span class="f"><i>A</i><i>B</i></span></span></p></div>
+
+  <h3 class="r">Ejercicios · Tema 1.1</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Clasifica cada número indicando el menor conjunto al que pertenece.</span><label class="done"><input type="checkbox" id="ck-t11-1"> hecho</label></div>
+      <div class="items"><span>a) <span class="f"><i>−18</i><i>3</i></span></span><span>b) <span class="sq" data-n="3"><i>3</i></span></span><span>c) 4,121231234…</span><span>d) 0,333…</span><span>e) <span class="sq"><i>25</i></span></span><span>f) <span class="f"><i>π</i><i>2</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) −6 ∈ ℤ · b) 𝕀 · c) 𝕀 (no hay periodo) · d) <span class="f"><i>1</i><i>3</i></span> ∈ ℚ · e) 5 ∈ ℕ · f) 𝕀</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="q">Halla la fracción generatriz.</span><label class="done"><input type="checkbox" id="ck-t11-2"> hecho</label></div>
+      <div class="items"><span>a) 3,7̂</span><span>b) 1,2525… (periodo 25)</span><span>c) 0,1666…</span><span>d) 2,1333…</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="f"><i>37 − 3</i><i>9</i></span> = <span class="f"><i>34</i><i>9</i></span> · b) <span class="f"><i>125 − 1</i><i>99</i></span> = <span class="f"><i>124</i><i>99</i></span> · c) <span class="f"><i>16 − 1</i><i>90</i></span> = <span class="f"><i>1</i><i>6</i></span> · d) <span class="f"><i>213 − 21</i><i>90</i></span> = <span class="f"><i>192</i><i>90</i></span> = <span class="f"><i>32</i><i>15</i></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★</span><span class="q">Escribe como intervalo y representa. Después calcula la unión o intersección.</span><label class="done"><input type="checkbox" id="ck-t11-3"> hecho</label></div>
+      <div class="items"><span>a) −3 &lt; x ≤ 2</span><span>b) x ≥ 5</span><span>c) (−2, 4] ∩ [1, 6)</span><span>d) (−∞, 1) ∪ [0, 3]</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) (−3, 2] <div class="nl" data-r="-4,3" data-s="-3o,2c"></div> b) [5, +∞) <div class="nl" data-r="2,8" data-s="5c,inf"></div> c) <span class="res">[1, 4]</span> (la parte común) · d) <span class="res">(−∞, 3]</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">Resuelve con valor absoluto.</span><label class="done"><input type="checkbox" id="ck-t11-4"> hecho</label></div>
+      <div class="items"><span>a) |x − 3| = 5</span><span>b) |2x + 1| ≤ 5</span><span>c) |x + 1| &gt; 2</span><span>d) |5 − x| = <span class="f"><i>1</i><i>5</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) x − 3 = 5 → <span class="res">x = 8</span>; x − 3 = −5 → <span class="res">x = −2</span><br>
+      b) −5 ≤ 2x + 1 ≤ 5 → −6 ≤ 2x ≤ 4 → <span class="res">[−3, 2]</span><br>
+      c) x + 1 &gt; 2 → x &gt; 1; x + 1 &lt; −2 → x &lt; −3 → <span class="res">(−∞, −3) ∪ (1, +∞)</span> <div class="nl" data-r="-6,4" data-s="-inf,-3o;1o,inf"></div>
+      d) 5 − x = <span class="f"><i>1</i><i>5</i></span> → x = <span class="f"><i>24</i><i>5</i></span>; 5 − x = −<span class="f"><i>1</i><i>5</i></span> → x = <span class="f"><i>26</i><i>5</i></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">Simplifica usando las propiedades de las potencias.</span><label class="done"><input type="checkbox" id="ck-t11-5"> hecho</label></div>
+      <div class="items"><span>a) <span class="m">(<span class="f"><i>3</i><i>4</i></span>)<sup>−3</sup> · (<span class="f"><i>9</i><i>8</i></span>)<sup>2</sup></span></span><span>b) <span class="m"><span class="f"><i>6<sup>4</sup> · 10<sup>3</sup></i><i>15<sup>3</sup> · 2<sup>5</sup></i></span></span></span><span>c) <span class="m">(−2)<sup>4</sup> · (−2)<sup>−7</sup></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="f"><i>4<sup>3</sup></i><i>3<sup>3</sup></i></span> · <span class="f"><i>3<sup>4</sup></i><i>2<sup>6</sup></i></span> = <span class="f"><i>2<sup>6</sup>·3<sup>4</sup></i><i>3<sup>3</sup>·2<sup>6</sup></i></span> = <span class="res">3</span><br>
+      b) <span class="f"><i>2<sup>4</sup>·3<sup>4</sup>·2<sup>3</sup>·5<sup>3</sup></i><i>3<sup>3</sup>·5<sup>3</sup>·2<sup>5</sup></i></span> = 2<sup>2</sup>·3 = <span class="res">12</span><br>
+      c) (−2)<sup>−3</sup> = <span class="res">−<span class="f"><i>1</i><i>8</i></span></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★</span><span class="q">Opera y da el resultado en notación científica.</span><label class="done"><input type="checkbox" id="ck-t11-6"> hecho</label></div>
+      <div class="items"><span>a) 3,4·10<sup>6</sup> − 8·10<sup>5</sup></span><span>b) (3,6·10<sup>−4</sup>)·(5·10<sup>7</sup>)</span><span>c) <span class="f"><i>8,4·10<sup>6</sup></i><i>2,1·10<sup>−3</sup></i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) 34·10<sup>5</sup> − 8·10<sup>5</sup> = 26·10<sup>5</sup> = <span class="res">2,6·10<sup>6</sup></span><br>b) 18·10<sup>3</sup> = <span class="res">1,8·10<sup>4</sup></span><br>c) <span class="res">4·10<sup>9</sup></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★</span><span class="q">Extrae factores y opera.</span><label class="done"><input type="checkbox" id="ck-t11-7"> hecho</label></div>
+      <div class="items"><span>a) <span class="sq" data-n="3"><i>54</i></span></span><span>b) <span class="sq"><i>125</i></span> + <span class="sq"><i>500</i></span> − 4<span class="sq"><i>45</i></span> + <span class="sq"><i>20</i></span></span><span>c) 2<span class="sq"><i>50</i></span> − 3<span class="sq"><i>18</i></span> + <span class="sq"><i>8</i></span></span><span>d) <span class="sq"><i>2</i></span> · <span class="sq" data-n="3"><i>2</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="sq" data-n="3"><i>2·3<sup>3</sup></i></span> = <span class="res">3<span class="sq" data-n="3"><i>2</i></span></span><br>
+      b) 5<span class="sq"><i>5</i></span> + 10<span class="sq"><i>5</i></span> − 12<span class="sq"><i>5</i></span> + 2<span class="sq"><i>5</i></span> = <span class="res">5<span class="sq"><i>5</i></span></span><br>
+      c) 10<span class="sq"><i>2</i></span> − 9<span class="sq"><i>2</i></span> + 2<span class="sq"><i>2</i></span> = <span class="res">3<span class="sq"><i>2</i></span></span><br>
+      d) índice común 6: <span class="sq" data-n="6"><i>2<sup>3</sup></i></span>·<span class="sq" data-n="6"><i>2<sup>2</sup></i></span> = <span class="res"><span class="sq" data-n="6"><i>32</i></span></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">8</span><span class="lvl">★★</span><span class="q">Racionaliza.</span><label class="done"><input type="checkbox" id="ck-t11-8"> hecho</label></div>
+      <div class="items"><span>a) <span class="f"><i>6</i><i><span class="sq"><i>3</i></span></i></span></span><span>b) <span class="f"><i>6</i><i><span class="sq" data-n="3"><i>2</i></span></i></span></span><span>c) <span class="f"><i>2<span class="sq"><i>5</i></span></i><i><span class="sq"><i>5</i></span> − 1</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="f"><i>6<span class="sq"><i>3</i></span></i><i>3</i></span> = <span class="res">2<span class="sq"><i>3</i></span></span><br>
+      b) <span class="f"><i>6<span class="sq" data-n="3"><i>2<sup>2</sup></i></span></i><i>2</i></span> = <span class="res">3<span class="sq" data-n="3"><i>4</i></span></span><br>
+      c) <span class="f"><i>2<span class="sq"><i>5</i></span>(<span class="sq"><i>5</i></span> + 1)</i><i>5 − 1</i></span> = <span class="f"><i>10 + 2<span class="sq"><i>5</i></span></i><i>4</i></span> = <span class="res"><span class="f"><i>5 + <span class="sq"><i>5</i></span></i><i>2</i></span></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">9</span><span class="lvl">★</span><span class="q">Calcula aplicando la definición de logaritmo.</span><label class="done"><input type="checkbox" id="ck-t11-9"> hecho</label></div>
+      <div class="items"><span>a) log<sub>2</sub> 64</span><span>b) log<sub>3</sub> <span class="f"><i>1</i><i>81</i></span></span><span>c) log 0,001</span><span>d) ln <span class="sq"><i>e</i></span></span><span>e) log<sub>x</sub> 125 = 3</span><span>f) log<sub>2</sub> x = −3</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) 2<sup>6</sup> = 64 → <span class="res">6</span> · b) 3<sup>−4</sup> → <span class="res">−4</span> · c) 10<sup>−3</sup> → <span class="res">−3</span> · d) e<sup>1/2</sup> → <span class="res"><span class="f"><i>1</i><i>2</i></span></span><br>e) x<sup>3</sup> = 125 → <span class="res">x = 5</span> · f) x = 2<sup>−3</sup> → <span class="res">x = <span class="f"><i>1</i><i>8</i></span></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">10</span><span class="lvl">★★</span><span class="q">Sabiendo que log 2 ≈ 0,301 y log 3 ≈ 0,477, calcula sin calculadora:</span><label class="done"><input type="checkbox" id="ck-t11-10"> hecho</label></div>
+      <div class="items"><span>a) log 6</span><span>b) log 5</span><span>c) log 0,3</span><span>d) log 72</span><span>e) log <span class="sq"><i>12</i></span></span><span>f) log<sub>5</sub> 2</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) log 2 + log 3 = <span class="res">0,778</span><br>b) log <span class="f"><i>10</i><i>2</i></span> = 1 − 0,301 = <span class="res">0,699</span><br>c) log <span class="f"><i>3</i><i>10</i></span> = 0,477 − 1 = <span class="res">−0,523</span><br>d) log (2<sup>3</sup>·3<sup>2</sup>) = 0,903 + 0,954 = <span class="res">1,857</span><br>e) <span class="f"><i>1</i><i>2</i></span>(2·0,301 + 0,477) = <span class="res">0,5395</span><br>f) cambio de base: <span class="f"><i>log 2</i><i>log 5</i></span> = <span class="f"><i>0,301</i><i>0,699</i></span> ≈ <span class="res">0,431</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">11</span><span class="lvl">★★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">a) Expresa como un único logaritmo y calcula: log<sub>2</sub> 24 − log<sub>2</sub> 3 &nbsp;·&nbsp; 2 log 5 + log 4.<br>b) Desarrolla: <span class="m">log <span class="f"><i>x<sup>2</sup>·<span class="sq" data-n="3"><i>y</i></span></i><i>z<sup>3</sup></i></span></span>.<br>c) ¿Verdadero o falso? <span class="m">ln <span class="f"><i>2x</i><i>2</i></span> = ln x</span></span><label class="done"><input type="checkbox" id="ck-t11-11"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) log<sub>2</sub> <span class="f"><i>24</i><i>3</i></span> = log<sub>2</sub> 8 = <span class="res">3</span> · log (5<sup>2</sup>·4) = log 100 = <span class="res">2</span><br>
+      b) <span class="res">2 log x + <span class="f"><i>1</i><i>3</i></span> log y − 3 log z</span><br>
+      c) <span class="ok">Verdadero</span>: primero se simplifica, <span class="f"><i>2x</i><i>2</i></span> = x.</div></details></div>
+  </div>
+  <p class="endnote">fin del tema 1.1 ✓</p>
+</section>
+
+<!-- ===================== TEMA 3.1 ===================== -->
+<section class="sheet" id="t31">
+  <span class="date">UP1 · 11 sesiones</span>
+  <span class="kicker">Tema 3.1</span>
+  <h2 class="red">Un lenguaje universal</h2>
+
+  <h3 class="r">Monomios y polinomios</h3>
+  <div class="row">
+    <div style="flex:1 1 300px">
+      <p><span class="hl">Expresión algebraica</span>: números y letras unidos por operaciones. Su <b>valor numérico</b> se obtiene sustituyendo las letras por números.</p>
+      <svg viewBox="0 0 330 120" width="330" style="max-width:100%" role="img" aria-label="Partes de un monomio: coeficiente 7, parte literal a²bc³, grado 6">
+        <text x="70" y="62" font-size="40" fill="var(--ink)">7</text>
+        <text x="100" y="62" font-size="40" fill="var(--ink)">a²bc³</text>
+        <ellipse cx="81" cy="49" rx="22" ry="26" fill="none" stroke="var(--red)" stroke-width="2"/>
+        <rect x="96" y="20" width="110" height="54" rx="10" fill="none" stroke="var(--violet)" stroke-width="2" stroke-dasharray="6 4"/>
+        <path d="M70 76 Q55 100 30 104" fill="none" stroke="var(--red)" stroke-width="2"/>
+        <text x="0" y="116" font-size="17" fill="var(--red)">coeficiente</text>
+        <path d="M160 76 Q170 98 190 104" fill="none" stroke="var(--violet)" stroke-width="2"/>
+        <text x="160" y="116" font-size="17" fill="var(--violet)">parte literal</text>
+        <path d="M206 30 Q250 20 260 40" fill="none" stroke="var(--green)" stroke-width="2"/>
+        <text x="226" y="62" font-size="17" fill="var(--green)">grado 2+1+3 = 6</text>
+      </svg>
+    </div>
+    <ul class="pen" style="flex:1 1 280px">
+      <li><b>Monomios semejantes</b>: misma parte literal. Solo esos se suman.</li>
+      <li><b>Polinomio</b>: suma de monomios. Grado = el mayor grado de sus monomios.</li>
+      <li><b>Ordenado</b>: de mayor a menor grado. <b>Completo</b>: tiene todos los grados.</li>
+      <li><b>Mónico</b>: el coeficiente principal es 1. <b>Término independiente</b>: el de grado 0.</li>
+    </ul>
+  </div>
+
+  <h3>Identidades notables</h3>
+  <div class="row">
+    <div class="box red">
+      <span class="m">(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup></span><br>
+      <span class="m">(a − b)<sup>2</sup> = a<sup>2</sup> − 2ab + b<sup>2</sup></span><br>
+      <span class="m">(a + b)(a − b) = a<sup>2</sup> − b<sup>2</sup></span>
+    </div>
+    <svg viewBox="0 0 170 170" width="150" role="img" aria-label="Cuadrado de lado a+b dividido en a², ab, ab y b²">
+      <rect x="20" y="20" width="90" height="90" fill="var(--hl)" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="110" y="20" width="40" height="90" fill="none" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="20" y="110" width="90" height="40" fill="none" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="110" y="110" width="40" height="40" fill="var(--hlp)" stroke="var(--ink)" stroke-width="2"/>
+      <text x="55" y="72" font-size="22" fill="var(--ink)">a²</text><text x="118" y="72" font-size="18" fill="var(--ink)">ab</text>
+      <text x="55" y="137" font-size="18" fill="var(--ink)">ab</text><text x="118" y="137" font-size="18" fill="var(--ink)">b²</text>
+      <text x="60" y="14" font-size="16" fill="var(--red)">a</text><text x="126" y="14" font-size="16" fill="var(--red)">b</text>
+      <text x="4" y="70" font-size="16" fill="var(--red)">a</text><text x="4" y="136" font-size="16" fill="var(--red)">b</text>
+    </svg>
+  </div>
+
+  <h3>División de polinomios</h3>
+  <div class="row">
+    <div class="wrap" style="flex:1 1 360px">
+<pre style="font-family:var(--f-body);font-size:19px;line-height:1.35;margin:4px 0;color:var(--ink)">  2x⁴ − 3x³ + 8x² − 6x + 5   <span style="border-left:2px solid currentColor;border-bottom:2px solid currentColor;padding:0 6px"> 2x² − x + 5 </span>
+<span class="red">−2x⁴ +  x³ − 5x²</span>              x² − x + 1   <span class="note">← cociente</span>
+       −2x³ + 3x² − 6x
+<span class="red">       +2x³ −  x² + 5x</span>
+              2x² −  x + 5
+<span class="red">             −2x² +  x − 5</span>
+                         <span class="res">0</span>  <span class="note">← resto</span></pre>
+    </div>
+    <div style="flex:1 1 220px">
+      <div class="box ink"><span class="m big">D(x) = d(x)·C(x) + R(x)</span></div>
+      <p class="note">grado del resto &lt; grado del divisor.<br>Si R = 0 → división exacta.</p>
+      <p>Truco: deja <span class="hl">huecos</span> para los grados que faltan.</p>
+    </div>
+  </div>
+
+  <h3 class="v">Regla de Ruffini</h3>
+  <p>Solo cuando el divisor es de la forma <span class="hl">(x − a)</span>. Ejemplo: <span class="m">(3x<sup>3</sup> + 4x<sup>2</sup> − 8x) : (x + 3)</span>, aquí a = −3.</p>
+  <div class="row">
+    <div class="wrap"><table class="ruf">
+      <tr><td></td><td>3</td><td>4</td><td>−8</td><td>0</td></tr>
+      <tr><td>−3</td><td></td><td>−9</td><td>15</td><td>−21</td></tr>
+      <tr><td></td><td>3</td><td>−5</td><td>7</td><td><span class="rest">−21</span></td></tr>
+    </table></div>
+    <p style="flex:1 1 260px">C(x) = <span class="res">3x<sup>2</sup> − 5x + 7</span> &nbsp; R = <span class="red">−21</span><br><span class="note">el cociente tiene un grado menos · ¡el 0 del término que falta!</span></p>
+  </div>
+
+  <h3 class="r">Teorema del resto y del factor</h3>
+  <div class="row">
+    <div class="box red"><span class="t">Teorema del resto</span>El resto de dividir P(x) entre (x − a) es <span class="m big">P(a)</span>.</div>
+    <div class="box grn"><span class="t">Teorema del factor</span><span class="m">(x − a)</span> es factor de P(x) ⇔ <span class="m">P(a) = 0</span>.<br>Entonces <b>a es raíz</b> de P(x).</div>
+  </div>
+  <p>Ejemplo: ¿es (x − 2) factor de P(x) = x<sup>3</sup> + x<sup>2</sup> − 7x + 4? &nbsp; P(2) = 8 + 4 − 14 + 4 = <span class="res">2</span> ≠ 0 → <span class="red">no es factor</span> (y el resto vale 2).</p>
+  <div class="postit"><b>Pista de las raíces enteras</b>Las raíces enteras de un polinomio con coeficientes enteros son <span class="hl">divisores del término independiente</span>. Pruébalas con Ruffini.</div>
+
+  <h3 class="g">Factorizar un polinomio</h3>
+  <div class="row">
+    <div class="dash" style="flex:1 1 260px">
+      <b class="red">1.</b> Sacar <b>factor común</b>.<br>
+      <b class="red">2.</b> ¿Es una <b>identidad notable</b>?<br>
+      <b class="red">3.</b> <b>Ruffini</b> con los divisores del término independiente, hasta llegar a grado 2.<br>
+      <b class="red">4.</b> Grado 2 → fórmula: <span class="m">ax<sup>2</sup> + bx + c = a(x − x<sub>1</sub>)(x − x<sub>2</sub>)</span>
+    </div>
+    <div style="flex:1 1 260px">
+      <p><b>Ejemplo</b>: <span class="m">x<sup>4</sup> − 2x<sup>3</sup> − 11x<sup>2</sup> + 12x + 36</span></p>
+      <div class="wrap"><table class="ruf">
+        <tr><td></td><td>1</td><td>−2</td><td>−11</td><td>12</td><td>36</td></tr>
+        <tr><td>3</td><td></td><td>3</td><td>3</td><td>−24</td><td>−36</td></tr>
+        <tr><td></td><td>1</td><td>1</td><td>−8</td><td>−12</td><td><span class="rest">0</span></td></tr>
+      </table></div>
+      <p>De nuevo x = 3 → queda x<sup>2</sup> + 4x + 4 = (x + 2)<sup>2</sup><br>→ <span class="res">(x − 3)<sup>2</sup>(x + 2)<sup>2</sup></span></p>
+    </div>
+  </div>
+  <ul class="pen">
+    <li><b>Irreducible</b>: no se puede factorizar más (grado 1, o grado 2 con Δ &lt; 0).</li>
+    <li><b>M.C.D.</b>: factores comunes con el menor exponente. <b>m.c.m.</b>: comunes y no comunes con el mayor exponente.</li>
+    <li>Dos polinomios son <b>primos entre sí</b> si no tienen ningún factor en común.</li>
+  </ul>
+
+  <h3 class="v">Fracciones algebraicas</h3>
+  <p><span class="m"><span class="f"><i>P(x)</i><i>Q(x)</i></span></span> con Q(x) ≠ 0. Se trabajan igual que las fracciones numéricas:</p>
+  <div class="row">
+    <div class="box vio"><span class="t">Simplificar</span>¡Primero factorizar!<br><span class="m"><span class="f"><i>x<sup>2</sup> − 9</i><i>x<sup>2</sup> − 6x + 9</i></span> = <span class="f"><i>(x + 3)<s>(x − 3)</s></i><i>(x − 3)<s>(x − 3)</s></i></span> = <span class="f"><i>x + 3</i><i>x − 3</i></span></span></div>
+    <div class="box vio"><span class="t">Sumar / restar</span>con el <b>m.c.m.</b> de los denominadores</div>
+    <div class="box vio"><span class="t">Multiplicar · dividir</span>en línea · en cruz,<br>y simplificar al final</div>
+  </div>
+  <div class="warn"><span class="ojo"><span>¡NO!</span></span><p><span class="m"><span class="f"><i>x + 5</i><i>x</i></span> ≠ 5</span>. Solo se tachan <b>factores</b> (cosas que multiplican), nunca sumandos.</p></div>
+
+  <h3 class="r">Ejercicios · Tema 3.1</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Dados P(x) = 2x<sup>3</sup> − x<sup>2</sup> + 4 y Q(x) = x<sup>2</sup> − 3x + 1, calcula P + Q, P · Q y P(−1).</span><label class="done"><input type="checkbox" id="ck-t31-1"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">P + Q = <span class="res">2x<sup>3</sup> − 3x + 5</span><br>P · Q = 2x<sup>5</sup> − 6x<sup>4</sup> + 2x<sup>3</sup> − x<sup>4</sup> + 3x<sup>3</sup> − x<sup>2</sup> + 4x<sup>2</sup> − 12x + 4 = <span class="res">2x<sup>5</sup> − 7x<sup>4</sup> + 5x<sup>3</sup> + 3x<sup>2</sup> − 12x + 4</span><br>P(−1) = −2 − 1 + 4 = <span class="res">1</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="q">Desarrolla, o escribe como identidad notable.</span><label class="done"><input type="checkbox" id="ck-t31-2"> hecho</label></div>
+      <div class="items"><span>a) (3x − 2)<sup>2</sup></span><span>b) (2x + 5y)<sup>2</sup></span><span>c) (x<sup>2</sup> − 3)(x<sup>2</sup> + 3)</span><span>d) x<sup>2</sup> − 10x + 25</span><span>e) 4x<sup>2</sup> − 49</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) 9x<sup>2</sup> − 12x + 4 · b) 4x<sup>2</sup> + 20xy + 25y<sup>2</sup> · c) x<sup>4</sup> − 9 · d) (x − 5)<sup>2</sup> · e) (2x + 7)(2x − 7)</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★★</span><span class="q">Divide (x<sup>4</sup> − 3x<sup>3</sup> + 2x<sup>2</sup> − x + 5) : (x<sup>2</sup> − x + 1) y comprueba el resultado.</span><label class="done"><input type="checkbox" id="ck-t31-3"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">C(x) = <span class="res">x<sup>2</sup> − 2x − 1</span>, &nbsp; R = <span class="res">6</span><br>Comprobación: (x<sup>2</sup> − x + 1)(x<sup>2</sup> − 2x − 1) + 6 = x<sup>4</sup> − 3x<sup>3</sup> + 2x<sup>2</sup> − x − 1 + 6 <span class="ok">✓</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★</span><span class="q">Divide por Ruffini: (x<sup>4</sup> − 2x<sup>2</sup> + x − 3) : (x − 2).</span><label class="done"><input type="checkbox" id="ck-t31-4"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol"><div class="wrap"><table class="ruf">
+        <tr><td></td><td>1</td><td>0</td><td>−2</td><td>1</td><td>−3</td></tr>
+        <tr><td>2</td><td></td><td>2</td><td>4</td><td>4</td><td>10</td></tr>
+        <tr><td></td><td>1</td><td>2</td><td>2</td><td>5</td><td><span class="rest">7</span></td></tr></table></div>
+        C(x) = <span class="res">x<sup>3</sup> + 2x<sup>2</sup> + 2x + 5</span>, R = <span class="res">7</span> <span class="note">(comprueba: P(2) = 16 − 8 + 2 − 3 = 7)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">a) Sin dividir, halla el resto de (x<sup>5</sup> − 3x<sup>3</sup> + 2) : (x + 1).<br>b) Halla k para que x<sup>3</sup> − 7x + k sea divisible entre (x − 2).</span><label class="done"><input type="checkbox" id="ck-t31-5"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) P(−1) = −1 + 3 + 2 = <span class="res">4</span><br>b) P(2) = 8 − 14 + k = 0 → <span class="res">k = 6</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">Factoriza y da las raíces.</span><label class="done"><input type="checkbox" id="ck-t31-6"> hecho</label></div>
+      <div class="items"><span>a) x<sup>3</sup> − 5x<sup>2</sup> + 6x</span><span>b) x<sup>3</sup> + x<sup>2</sup> − 9x − 9</span><span>c) 2x<sup>3</sup> + 8x<sup>2</sup> − 2x − 8</span><span>d) 4x<sup>2</sup> − 4x − 3</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) x(x<sup>2</sup> − 5x + 6) = <span class="res">x(x − 2)(x − 3)</span> → 0, 2, 3<br>
+      b) x<sup>2</sup>(x + 1) − 9(x + 1) = (x + 1)(x<sup>2</sup> − 9) = <span class="res">(x + 1)(x − 3)(x + 3)</span> → −1, 3, −3<br>
+      c) 2(x<sup>3</sup> + 4x<sup>2</sup> − x − 4) = <span class="res">2(x − 1)(x + 1)(x + 4)</span> → 1, −1, −4<br>
+      d) x = <span class="f"><i>4 ± <span class="sq"><i>16 + 48</i></span></i><i>8</i></span> = <span class="f"><i>4 ± 8</i><i>8</i></span> → <span class="f"><i>3</i><i>2</i></span> y −<span class="f"><i>1</i><i>2</i></span> → <span class="res">4(x − <span class="f"><i>3</i><i>2</i></span>)(x + <span class="f"><i>1</i><i>2</i></span>) = (2x − 3)(2x + 1)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★</span><span class="q">Halla el M.C.D. y el m.c.m. de P(x) = x<sup>2</sup> − 2x + 1 y Q(x) = x<sup>2</sup> + x − 2.</span><label class="done"><input type="checkbox" id="ck-t31-7"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">P = (x − 1)<sup>2</sup>, &nbsp; Q = (x − 1)(x + 2)<br>M.C.D. = <span class="res">x − 1</span>, &nbsp; m.c.m. = <span class="res">(x − 1)<sup>2</sup>(x + 2)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">8</span><span class="lvl">★★</span><span class="q">Simplifica.</span><label class="done"><input type="checkbox" id="ck-t31-8"> hecho</label></div>
+      <div class="items"><span>a) <span class="f"><i>x<sup>2</sup> − 16</i><i>x<sup>2</sup> + 8x + 16</i></span></span><span>b) <span class="f"><i>x<sup>2</sup> − 5x + 6</i><i>2x<sup>2</sup> − 7x + 6</i></span></span><span>c) <span class="f"><i>3x − 3x<sup>2</sup></i><i>2x<sup>2</sup> − 2x</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="f"><i>(x + 4)(x − 4)</i><i>(x + 4)<sup>2</sup></i></span> = <span class="res"><span class="f"><i>x − 4</i><i>x + 4</i></span></span><br>
+      b) <span class="f"><i>(x − 2)(x − 3)</i><i>(x − 2)(2x − 3)</i></span> = <span class="res"><span class="f"><i>x − 3</i><i>2x − 3</i></span></span><br>
+      c) <span class="f"><i>3x(1 − x)</i><i>2x(x − 1)</i></span> = <span class="res">−<span class="f"><i>3</i><i>2</i></span></span> <span class="note">1 − x = −(x − 1)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">9</span><span class="lvl">★★</span><span class="q">Opera y simplifica.</span><label class="done"><input type="checkbox" id="ck-t31-9"> hecho</label></div>
+      <div class="items"><span>a) <span class="f"><i>2</i><i>x − 1</i></span> + <span class="f"><i>3</i><i>x + 1</i></span></span><span>b) <span class="f"><i>x</i><i>x<sup>2</sup> − 4</i></span> − <span class="f"><i>1</i><i>x − 2</i></span></span><span>c) <span class="f"><i>x + 3</i><i>x − 2</i></span> : <span class="f"><i>x<sup>2</sup> − 9</i><i>x<sup>2</sup> − 4</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="f"><i>2(x + 1) + 3(x − 1)</i><i>x<sup>2</sup> − 1</i></span> = <span class="res"><span class="f"><i>5x − 1</i><i>x<sup>2</sup> − 1</i></span></span><br>
+      b) <span class="f"><i>x − (x + 2)</i><i>x<sup>2</sup> − 4</i></span> = <span class="res"><span class="f"><i>−2</i><i>x<sup>2</sup> − 4</i></span></span><br>
+      c) en cruz: <span class="f"><i>(x + 3)(x − 2)(x + 2)</i><i>(x − 2)(x − 3)(x + 3)</i></span> = <span class="res"><span class="f"><i>x + 2</i><i>x − 3</i></span></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">10</span><span class="lvl">★★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">Calcula a y b para que P(x) = x<sup>3</sup> + ax<sup>2</sup> + bx − 6 sea divisible entre (x − 1) y entre (x + 2). Después factoriza P(x).</span><label class="done"><input type="checkbox" id="ck-t31-10"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">P(1) = 0 → 1 + a + b − 6 = 0 → a + b = 5<br>P(−2) = 0 → −8 + 4a − 2b − 6 = 0 → 2a − b = 7<br>Sumando: 3a = 12 → <span class="res">a = 4</span>, <span class="res">b = 1</span><br>P(x) = x<sup>3</sup> + 4x<sup>2</sup> + x − 6 = <span class="res">(x − 1)(x + 2)(x + 3)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">11</span><span class="lvl">★★★</span><span class="q">Escribe un polinomio mónico de grado 3 que tenga x = 2 como raíz doble y x = −1 como raíz simple.</span><label class="done"><input type="checkbox" id="ck-t31-11"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">(x − 2)<sup>2</sup>(x + 1) = (x<sup>2</sup> − 4x + 4)(x + 1) = <span class="res">x<sup>3</sup> − 3x<sup>2</sup> + 4</span></div></details></div>
+  </div>
+  <p class="endnote">fin del tema 3.1 ✓ · fin de la UP1</p>
+</section>
+
+<!-- ===================== TEMA 3.2 ===================== -->
+<section class="sheet" id="t32">
+  <span class="date">UP2 · 12 sesiones</span>
+  <span class="kicker">Tema 3.2</span>
+  <h2 class="grn">La igualdad es la clave</h2>
+
+  <p><span class="hl">Identidad</span>: igualdad que se cumple siempre, como (x + 1)<sup>2</sup> = x<sup>2</sup> + 2x + 1. <span class="hlp">Ecuación</span>: solo se cumple para algunos valores, las <b>soluciones</b>.</p>
+
+  <h3 class="g">Ecuaciones de 2º grado</h3>
+  <div class="row">
+    <div class="box grn"><span class="m">ax<sup>2</sup> + bx + c = 0</span><br><span class="m big">x = <span class="f"><i>−b ± <span class="sq"><i>b<sup>2</sup> − 4ac</i></span></i><i>2a</i></span></span></div>
+    <div class="dash"><b class="vio">Δ = b<sup>2</sup> − 4ac</b> (discriminante)<br>Δ &gt; 0 → dos soluciones<br>Δ = 0 → una solución (doble)<br>Δ &lt; 0 → <span class="red">sin solución real</span></div>
+  </div>
+  <div class="row">
+    <div class="postit"><b>Incompletas, sin fórmula</b>b = 0: ax<sup>2</sup> + c = 0 → x = ±<span class="sq"><i>−c/a</i></span><br>c = 0: x(ax + b) = 0 → x = 0 ó x = −b/a</div>
+    <div class="postit o"><b>¡Nunca dividas entre x!</b>En 5x<sup>2</sup> = 15x, si divides entre x pierdes la solución x = 0. Saca factor común.</div>
+  </div>
+
+  <h3>Bicuadradas y grado ≥ 3</h3>
+  <div class="row">
+    <div style="flex:1 1 300px">
+      <p><b>Bicuadrada</b> ax<sup>4</sup> + bx<sup>2</sup> + c = 0 → <span class="hl">cambio t = x<sup>2</sup></span></p>
+      <p class="m">x<sup>4</sup> − 15x<sup>2</sup> − 16 = 0 → t<sup>2</sup> − 15t − 16 = 0</p>
+      <p>t = <span class="f"><i>15 ± 17</i><i>2</i></span> → t = 16 → x = ±4 <span class="red">· t = −1 → no hay x</span></p>
+      <p>Solución: <span class="res">x = 4, x = −4</span></p>
+    </div>
+    <div style="flex:1 1 260px">
+      <p><b>Grado ≥ 3</b>: pasar todo a un lado, <span class="hl">factorizar</span> e igualar cada factor a 0.</p>
+      <p class="m">x<sup>3</sup> − 5x<sup>2</sup> + 6x = 0</p>
+      <p class="m">x(x − 2)(x − 3) = 0 → <span class="res">x = 0, 2, 3</span></p>
+      <p class="note">grado n → como mucho n soluciones</p>
+    </div>
+  </div>
+
+  <h3 class="r">Ecuaciones racionales</h3>
+  <p>Con la x en el denominador. Se multiplica todo por el <b>m.c.m.</b> de los denominadores y se resuelve.</p>
+  <div class="row">
+    <div style="flex:1 1 320px">
+      <p class="m"><span class="f"><i>x</i><i>x − 2</i></span> + <span class="f"><i>2</i><i>x + 2</i></span> = <span class="f"><i>8</i><i>x<sup>2</sup> − 4</i></span></p>
+      <p class="m">x(x + 2) + 2(x − 2) = 8</p>
+      <p class="m">x<sup>2</sup> + 4x − 12 = 0 → x = 2, x = −6</p>
+      <p>x = 2 anula el denominador → <span class="red">no vale</span>. Solución: <span class="res">x = −6</span></p>
+    </div>
+    <div class="warn"><span class="ojo"><span>¡COM&shy;PRUEBA!</span></span><p class="note" style="max-width:200px">las soluciones que anulan un denominador se descartan</p></div>
+  </div>
+
+  <h3 class="v">Ecuaciones con radicales</h3>
+  <div class="row">
+    <div class="dash" style="flex:1 1 240px"><b class="red">1.</b> Aísla la raíz en un miembro.<br><b class="red">2.</b> Eleva al cuadrado <b>los dos miembros</b> enteros.<br><b class="red">3.</b> Resuelve.<br><b class="red">4.</b> <span class="hl">Comprueba siempre</span>: al elevar aparecen soluciones falsas.</div>
+    <div style="flex:1 1 300px">
+      <p class="m"><span class="sq"><i>x + 3</i></span> + 1 = x − 8 → <span class="sq"><i>x + 3</i></span> = x − 9</p>
+      <p class="m">x + 3 = x<sup>2</sup> − 18x + 81 <span class="note">¡identidad notable!</span></p>
+      <p class="m">x<sup>2</sup> − 19x + 78 = 0 → x = 13, x = 6</p>
+      <p>x = 13: <span class="sq"><i>16</i></span> = 4 = 13 − 9 <span class="grn">✓</span> &nbsp; x = 6: 3 ≠ −3 <span class="red">✗</span> → <span class="res">x = 13</span></p>
+    </div>
+  </div>
+
+  <h3 class="g">Exponenciales</h3>
+  <p>La incógnita está en el <b>exponente</b>. Tres estrategias:</p>
+  <div class="row">
+    <div class="box grn"><span class="t">1 · Igualar bases</span><span class="m">5<sup>2x − 3</sup> = <span class="f"><i>1</i><i>25</i></span> = 5<sup>−2</sup></span><br><span class="m">2x − 3 = −2 → x = <span class="f"><i>1</i><i>2</i></span></span></div>
+    <div class="box grn"><span class="t">2 · Cambio de variable</span><span class="m">4<sup>x</sup> − 9·2<sup>x</sup> + 8 = 0</span><br>t = 2<sup>x</sup>: t<sup>2</sup> − 9t + 8 = 0<br>t = 8 → x = 3 · t = 1 → x = 0</div>
+    <div class="box grn"><span class="t">3 · Tomar logaritmos</span><span class="m">2<sup>x</sup> = 9</span><br><span class="m">x · log 2 = log 9</span><br><span class="m">x = <span class="f"><i>log 9</i><i>log 2</i></span> ≈ 3,17</span></div>
+  </div>
+  <p class="note">recuerda: 2<sup>x+1</sup> = 2·2<sup>x</sup> &nbsp;·&nbsp; 2<sup>x−1</sup> = 2<sup>x</sup>/2 &nbsp;·&nbsp; 4<sup>x</sup> = (2<sup>x</sup>)<sup>2</sup></p>
+
+  <h3 class="r">Logarítmicas</h3>
+  <div class="row">
+    <div style="flex:1 1 280px">
+      <p>Con las propiedades se llega a <span class="hl">log A = log B → A = B</span>. Si queda un número suelto, escríbelo como logaritmo: 5 = log<sub>2</sub> 32.</p>
+      <p class="m">log<sub>2</sub> x + log<sub>2</sub>(x + 14) = 5</p>
+      <p class="m">x(x + 14) = 32 → x<sup>2</sup> + 14x − 32 = 0</p>
+      <p>x = 2 <span class="grn">✓</span> · x = −16 <span class="red">✗</span> (log de un negativo) → <span class="res">x = 2</span></p>
+    </div>
+    <div class="warn"><span class="ojo"><span>¡SIEM&shy;PRE!</span></span><p class="note" style="max-width:190px">comprueba que los argumentos de los log son positivos</p></div>
+  </div>
+
+  <h3 class="v">Sistemas de ecuaciones lineales</h3>
+  <div class="row">
+    <div class="box vio"><span class="brace"><span>ax + by = c</span><span>a'x + b'y = c'</span></span><p class="note" style="color:var(--violet);margin:4px 0 0">cada ecuación es una recta</p></div>
+    <div class="wrap" style="flex:1 1 360px"><table class="tb">
+      <tr><th>Rectas</th><th>Soluciones</th><th>Tipo</th></tr>
+      <tr><td>
+        <svg viewBox="0 0 60 40" width="60" aria-hidden="true"><path d="M5 35 L55 5 M5 8 L55 32" stroke="var(--ink)" stroke-width="2.2" fill="none"/></svg> secantes</td><td>una</td><td>S. compatible <b>determinado</b></td></tr>
+      <tr><td><svg viewBox="0 0 60 40" width="60" aria-hidden="true"><path d="M5 30 L45 5 M15 35 L55 10" stroke="var(--ink)" stroke-width="2.2" fill="none"/></svg> paralelas</td><td>ninguna</td><td class="red">S. incompatible</td></tr>
+      <tr><td><svg viewBox="0 0 60 40" width="60" aria-hidden="true"><path d="M5 35 L55 5" stroke="var(--ink)" stroke-width="5" fill="none" opacity=".35"/><path d="M5 35 L55 5" stroke="var(--ink)" stroke-width="2" fill="none"/></svg> coincidentes</td><td>infinitas</td><td>S. compatible <b>indeterminado</b></td></tr>
+    </table></div>
+  </div>
+  <p>Métodos: <b>sustitución</b>, <b>igualación</b>, <b>reducción</b> (y gráfico). Reducción, ejemplo:</p>
+  <div class="row">
+    <p class="m"><span class="brace"><span>5x + y = 13</span><span>3x + 4y = 1</span></span> → <span class="brace"><span>−20x − 4y = −52</span><span>&nbsp;&nbsp;3x + 4y = 1</span></span> → −17x = −51 → x = 3, y = −2</p>
+    <span class="res">(3, −2)</span>
+  </div>
+
+  <h3>Sistemas no lineales, exponenciales y logarítmicos</h3>
+  <ul class="pen">
+    <li><b>No lineales</b>: casi siempre <span class="hl">sustitución</span>. Una recta y una parábola pueden cortarse en 2, 1 o 0 puntos.</li>
+    <li><b>Exponenciales</b>: cambio de variable (u = 2<sup>x</sup>, v = 3<sup>y</sup>) y queda un sistema lineal.</li>
+    <li><b>Logarítmicos</b>: cambio (u = log x, v = log y) o propiedades para quitar los logaritmos. ¡Comprueba!</li>
+  </ul>
+
+  <h3 class="r">Ejercicios · Tema 3.2</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Resuelve.</span><label class="done"><input type="checkbox" id="ck-t32-1"> hecho</label></div>
+      <div class="items"><span>a) x<sup>2</sup> − 8x + 16 = 0</span><span>b) x<sup>2</sup> − 10x + 24 = 0</span><span>c) 2x<sup>2</sup> − 3x − 2 = 0</span><span>d) 3x<sup>2</sup> − 12 = 0</span><span>e) 5x<sup>2</sup> + 15x = 0</span><span>f) x<sup>2</sup> + x + 3 = 0</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) Δ = 0 → <span class="res">x = 4</span> doble · b) <span class="f"><i>10 ± 2</i><i>2</i></span> → <span class="res">6 y 4</span> · c) <span class="f"><i>3 ± 5</i><i>4</i></span> → <span class="res">2 y −<span class="f"><i>1</i><i>2</i></span></span><br>d) x<sup>2</sup> = 4 → <span class="res">±2</span> · e) 5x(x + 3) = 0 → <span class="res">0 y −3</span> · f) Δ = 1 − 12 &lt; 0 → <span class="red">sin solución</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="q">Sin resolver, ¿cuántas soluciones tiene cada ecuación?</span><label class="done"><input type="checkbox" id="ck-t32-2"> hecho</label></div>
+      <div class="items"><span>a) x<sup>2</sup> − 6x + 9 = 0</span><span>b) 2x<sup>2</sup> + x + 1 = 0</span><span>c) −3x<sup>2</sup> + 4x + 5 = 0</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) Δ = 36 − 36 = 0 → <span class="res">una</span> · b) Δ = 1 − 8 &lt; 0 → <span class="res">ninguna</span> · c) Δ = 16 + 60 = 76 &gt; 0 → <span class="res">dos</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★★</span><span class="q">Bicuadradas y de grado mayor que 2.</span><label class="done"><input type="checkbox" id="ck-t32-3"> hecho</label></div>
+      <div class="items"><span>a) x<sup>4</sup> − 5x<sup>2</sup> + 4 = 0</span><span>b) x<sup>4</sup> + 3x<sup>2</sup> − 4 = 0</span><span>c) x<sup>3</sup> − 2x<sup>2</sup> − x + 2 = 0</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) t = 4, t = 1 → <span class="res">x = ±2, ±1</span><br>b) t = 1, t = −4 (no vale) → <span class="res">x = ±1</span><br>c) x<sup>2</sup>(x − 2) − (x − 2) = (x − 2)(x − 1)(x + 1) → <span class="res">x = 2, 1, −1</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">Ecuaciones racionales.</span><label class="done"><input type="checkbox" id="ck-t32-4"> hecho</label></div>
+      <div class="items"><span>a) <span class="f"><i>1</i><i>x</i></span> + <span class="f"><i>1</i><i>2x</i></span> = <span class="f"><i>3</i><i>10</i></span></span><span>b) <span class="f"><i>x + 1</i><i>x − 1</i></span> = <span class="f"><i>2x − 1</i><i>x</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) m.c.m. = 10x: 10 + 5 = 3x → <span class="res">x = 5</span><br>b) x(x + 1) = (2x − 1)(x − 1) → x<sup>2</sup> + x = 2x<sup>2</sup> − 3x + 1 → x<sup>2</sup> − 4x + 1 = 0 → <span class="res">x = 2 ± <span class="sq"><i>3</i></span></span> (ninguna anula denominadores)</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">Ecuaciones con radicales (¡comprueba!).</span><label class="done"><input type="checkbox" id="ck-t32-5"> hecho</label></div>
+      <div class="items"><span>a) <span class="sq"><i>x + 3</i></span> = −x − 1</span><span>b) x = 2 − <span class="sq"><i>8 − x</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) x + 3 = x<sup>2</sup> + 2x + 1 → x<sup>2</sup> + x − 2 = 0 → x = 1, x = −2.<br>x = 1: 2 ≠ −2 <span class="red">✗</span> · x = −2: 1 = 1 <span class="ok">✓</span> → <span class="res">x = −2</span><br>
+      b) <span class="sq"><i>8 − x</i></span> = 2 − x → 8 − x = 4 − 4x + x<sup>2</sup> → x<sup>2</sup> − 3x − 4 = 0 → x = 4, x = −1.<br>x = 4: 4 ≠ 2 − 2 <span class="red">✗</span> · x = −1: −1 = 2 − 3 <span class="ok">✓</span> → <span class="res">x = −1</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">Ecuaciones exponenciales.</span><label class="done"><input type="checkbox" id="ck-t32-6"> hecho</label></div>
+      <div class="items"><span>a) 6<sup>3 − x</sup> = 216</span><span>b) 2<sup>x+1</sup> + 2<sup>x</sup> = 24</span><span>c) 9<sup>x</sup> − 4·3<sup>x</sup> + 3 = 0</span><span>d) 5<sup>x+3</sup> = 9999</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) 216 = 6<sup>3</sup> → 3 − x = 3 → <span class="res">x = 0</span><br>
+      b) 2·2<sup>x</sup> + 2<sup>x</sup> = 3·2<sup>x</sup> = 24 → 2<sup>x</sup> = 8 → <span class="res">x = 3</span><br>
+      c) t = 3<sup>x</sup>: t<sup>2</sup> − 4t + 3 = 0 → t = 3 → x = 1; t = 1 → x = 0 → <span class="res">x = 1, x = 0</span><br>
+      d) (x + 3) log 5 = log 9999 → x = <span class="f"><i>log 9999</i><i>log 5</i></span> − 3 ≈ <span class="res">2,72</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★</span><span class="q">Ecuaciones logarítmicas.</span><label class="done"><input type="checkbox" id="ck-t32-7"> hecho</label></div>
+      <div class="items"><span>a) log x + log (x + 1) = log 6</span><span>b) 2 log x = log (5x − 6)</span><span>c) log<sub>3</sub> x = 4</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) x(x + 1) = 6 → x = 2 <span class="ok">✓</span>, x = −3 <span class="red">✗</span> → <span class="res">x = 2</span><br>
+      b) x<sup>2</sup> = 5x − 6 → x<sup>2</sup> − 5x + 6 = 0 → <span class="res">x = 2, x = 3</span> (las dos valen)<br>
+      c) x = 3<sup>4</sup> = <span class="res">81</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">8</span><span class="lvl">★</span><span class="q">Resuelve y clasifica cada sistema.</span><label class="done"><input type="checkbox" id="ck-t32-8"> hecho</label></div>
+      <div class="items"><span>a) <span class="brace"><span>2x + 5y = 20</span><span>2x − 5y = 0</span></span></span><span>b) <span class="brace"><span>x + y = 5</span><span>2x + 2y = 12</span></span></span><span>c) <span class="brace"><span>x − 2y = 3</span><span>2x − 4y = 6</span></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) sumando: 4x = 20 → x = 5, y = 2 → <span class="res">(5, 2)</span>, S.C.D.<br>
+      b) la 2ª dividida entre 2 da x + y = 6, imposible a la vez que x + y = 5 → <span class="red">S.I.</span> (rectas paralelas)<br>
+      c) la 2ª es el doble de la 1ª → <span class="res">S.C.I.</span>, infinitas soluciones: (3 + 2y, y)</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">9</span><span class="lvl">★★</span><span class="q">Sistemas no lineales, exponenciales y logarítmicos.</span><label class="done"><input type="checkbox" id="ck-t32-9"> hecho</label></div>
+      <div class="items"><span>a) <span class="brace"><span>x + y = 7</span><span>x<sup>2</sup> − 3y = 7</span></span></span><span>b) <span class="brace"><span>2<sup>x</sup> + 3<sup>y</sup> = 7</span><span>2<sup>x+1</sup> − 3<sup>y</sup> = 5</span></span></span><span>c) <span class="brace"><span>log x + log y = 3</span><span>log x − log y = 1</span></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) y = 7 − x → x<sup>2</sup> + 3x − 28 = 0 → x = 4, x = −7 → <span class="res">(4, 3)</span> y <span class="res">(−7, 14)</span><br>
+      b) u = 2<sup>x</sup>, v = 3<sup>y</sup>: u + v = 7, 2u − v = 5 → u = 4, v = 3 → <span class="res">x = 2, y = 1</span><br>
+      c) sumando: 2 log x = 4 → log x = 2 → x = 100; log y = 1 → <span class="res">x = 100, y = 10</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">10</span><span class="lvl">★★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">Problemas.<br>a) Un rectángulo tiene 94 m de perímetro y 37 m de diagonal. ¿Cuánto miden sus lados?<br>b) En un test de 20 preguntas, cada acierto suma 5 puntos y cada fallo resta 2. Se contestan todas y se sacan 58 puntos. ¿Cuántos aciertos hubo?<br>c) Una población crece un 5 % al año. ¿Cuántos años tardará en multiplicarse por 1,5?<br>d) En una fiesta todos se saludan una vez y hay 66 saludos. ¿Cuántas personas hay?</span><label class="done"><input type="checkbox" id="ck-t32-10"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) x + y = 47, x<sup>2</sup> + y<sup>2</sup> = 37<sup>2</sup> = 1369 → y<sup>2</sup> − 47y + 420 = 0 → y = 35 ó 12 → <span class="res">35 m y 12 m</span><br>
+      b) x + y = 20, 5x − 2y = 58 → 7x = 98 → <span class="res">14 aciertos</span> y 6 fallos<br>
+      c) 1,05<sup>n</sup> = 1,5 → n = <span class="f"><i>log 1,5</i><i>log 1,05</i></span> ≈ 8,31 → <span class="res">a los 9 años</span><br>
+      d) <span class="f"><i>n(n − 1)</i><i>2</i></span> = 66 → n<sup>2</sup> − n − 132 = 0 → n = 12 (−11 no vale) → <span class="res">12 personas</span></div></details></div>
+  </div>
+  <p class="endnote">fin del tema 3.2 ✓</p>
+</section>
+
+<!-- ===================== TEMA 3.3 ===================== -->
+<section class="sheet" id="t33">
+  <span class="date">UP2 · 12 sesiones</span>
+  <span class="kicker">Tema 3.3</span>
+  <h2>No me da igual</h2>
+
+  <h3>Desigualdades</h3>
+  <div class="row">
+    <ul class="pen" style="flex:1 1 300px">
+      <li>Sumar o restar el mismo número a los dos lados: <span class="grn">la desigualdad se mantiene</span>.</li>
+      <li>Multiplicar o dividir por un número <b>positivo</b>: <span class="grn">se mantiene</span>.</li>
+      <li>Multiplicar o dividir por un número <b>negativo</b>: <span class="hlp">cambia de sentido</span>.</li>
+    </ul>
+    <div class="warn"><span class="ojo"><span>¡OJO!</span></span><p class="m big">2 &lt; 3 <span class="note">·(−1)</span> → −2 &gt; −3</p></div>
+  </div>
+  <p>Una <b>inecuación</b> es una desigualdad con incógnitas. Sus soluciones suelen ser <span class="hl">intervalos o semirrectas</span>: infinitos números.</p>
+
+  <h3 class="r">Inecuaciones de 1er grado</h3>
+  <div class="row">
+    <div style="flex:1 1 320px">
+      <p class="m">3(x − 5) − 5 &gt; 5(x + 1) − 1</p>
+      <p class="m">3x − 20 &gt; 5x + 4</p>
+      <p class="m">−2x &gt; 24 → <span class="red">x &lt; −12</span> <span class="note">÷(−2): ¡cambia!</span></p>
+      <p>Solución: <span class="res">(−∞, −12)</span></p>
+    </div>
+    <div class="nl" data-r="-16,-8" data-s="-inf,-12o" style="flex:1 1 240px"></div>
+  </div>
+
+  <h3 class="v">Inecuaciones polinómicas (grado ≥ 2)</h3>
+  <div class="row">
+    <div class="dash" style="flex:1 1 250px"><b class="red">1.</b> Todo a un lado: P(x) ≥ 0.<br><b class="red">2.</b> Factorizar (raíces).<br><b class="red">3.</b> <b>Tabla de signos</b> de cada factor.<br><b class="red">4.</b> Escoger los intervalos con el signo pedido. Las raíces van con [ ] si hay ≤ ó ≥.</div>
+    <div style="flex:1 1 330px;min-width:0">
+      <p class="m">x<sup>3</sup> + 4x<sup>2</sup> + x − 6 ≥ 0 → (x − 1)(x + 2)(x + 3) ≥ 0</p>
+      <div class="wrap"><table class="sg">
+        <tr><th></th><th>(−∞,−3)</th><th>(−3,−2)</th><th>(−2,1)</th><th>(1,+∞)</th></tr>
+        <tr><td>x + 3</td><td class="n">−</td><td class="p">+</td><td class="p">+</td><td class="p">+</td></tr>
+        <tr><td>x + 2</td><td class="n">−</td><td class="n">−</td><td class="p">+</td><td class="p">+</td></tr>
+        <tr><td>x − 1</td><td class="n">−</td><td class="n">−</td><td class="n">−</td><td class="p">+</td></tr>
+        <tr><td>producto</td><td class="n">−</td><td class="p">+</td><td class="n">−</td><td class="p">+</td></tr>
+      </table></div>
+      <p>Solución: <span class="res">[−3, −2] ∪ [1, +∞)</span></p>
+      <div class="nl" data-r="-5,3" data-s="-3c,-2c;1c,inf"></div>
+    </div>
+  </div>
+  <div class="postit"><b>Casos especiales</b>x<sup>2</sup> + 2 &gt; 0 → se cumple siempre: <span class="res">ℝ</span><br>x<sup>2</sup> + 2 &lt; 0 → <span class="red">nunca: sin solución</span></div>
+
+  <h3 class="r">Inecuaciones racionales</h3>
+  <div class="row">
+    <div style="flex:1 1 320px">
+      <p class="m"><span class="f"><i>x − 4</i><i>x + 5</i></span> &gt; 0</p>
+      <p>Tabla de signos con numerador y denominador:</p>
+      <div class="wrap"><table class="sg">
+        <tr><th></th><th>(−∞,−5)</th><th>(−5,4)</th><th>(4,+∞)</th></tr>
+        <tr><td>x − 4</td><td class="n">−</td><td class="n">−</td><td class="p">+</td></tr>
+        <tr><td>x + 5</td><td class="n">−</td><td class="p">+</td><td class="p">+</td></tr>
+        <tr><td>cociente</td><td class="p">+</td><td class="n">−</td><td class="p">+</td></tr>
+      </table></div>
+      <p>Solución: <span class="res">(−∞, −5) ∪ (4, +∞)</span></p>
+    </div>
+    <div style="flex:1 1 240px">
+      <div class="warn"><span class="ojo"><span>¡NO SE HACE!</span></span><p class="note">no se multiplica por el denominador: no sabemos su signo</p></div>
+      <p class="note">las raíces del denominador van <b>siempre abiertas</b> (no se puede dividir entre 0)</p>
+    </div>
+  </div>
+
+  <h3>Con valor absoluto</h3>
+  <div class="row">
+    <div class="box ink"><span class="m">|x − a| &lt; r ⇔ a − r &lt; x &lt; a + r</span><br><span class="note">«a menos de r de a» → un intervalo</span></div>
+    <div class="box ink"><span class="m">|x − a| &gt; r ⇔ x &lt; a − r ó x &gt; a + r</span><br><span class="note">«lejos de a» → dos semirrectas</span></div>
+  </div>
+  <p>|2x − 6| &gt; 10 → 2x − 6 &gt; 10 → x &gt; 8 · 2x − 6 &lt; −10 → x &lt; −2 → <span class="res">(−∞, −2) ∪ (8, +∞)</span></p>
+
+  <h3 class="g">Sistemas de inecuaciones con una incógnita</h3>
+  <p>Se resuelve cada una por separado y la solución es la <span class="hl">intersección</span>: lo que se cumple en las dos.</p>
+  <div class="row">
+    <p class="m" style="flex:1 1 300px"><span class="brace"><span>8x − 4 &gt; 7</span><span>x − 2 ≤ 18</span></span> → <span class="brace"><span>x &gt; 11/8</span><span>x ≤ 20</span></span> → <span class="res">(<span class="f"><i>11</i><i>8</i></span>, 20]</span></p>
+    <div class="nl" data-r="-2,22" data-s="1.375o:11/8,20c" style="flex:1 1 260px"></div>
+  </div>
+
+  <h3 class="v">Inecuaciones con dos incógnitas</h3>
+  <div class="row">
+    <div style="flex:1 1 300px">
+      <p>Su solución es un <b>semiplano</b>. Pasos para <span class="m">2x + 3y &gt; 8</span>:</p>
+      <ul class="pen">
+        <li>Dibuja la recta frontera 2x + 3y = 8: pasa por (4, 0) y (1, 2).</li>
+        <li>Línea <b>discontinua</b> si es &lt; ó &gt;; <b>continua</b> si es ≤ ó ≥.</li>
+        <li>Prueba un punto, como (0, 0): 0 &gt; 8 es <span class="red">falso</span> → la solución es el semiplano que <b>no</b> contiene el origen.</li>
+      </ul>
+      <p class="note">Sistemas: la solución es la zona común a todos los semiplanos.</p>
+    </div>
+    <svg viewBox="0 0 360 320" width="330" style="max-width:100%" role="img" aria-label="Semiplano 2x + 3y > 8 sombreado por encima de la recta discontinua">
+      <defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--violet)" stroke-width="2.4" opacity=".55"/></pattern></defs>
+      <polygon points="20,60 340,273.3 340,20 20,20" fill="url(#hatch)"/>
+      <g stroke="var(--grid2)" stroke-width="1">
+        <path d="M20 20 V300 M60 20 V300 M140 20 V300 M180 20 V300 M220 20 V300 M260 20 V300 M300 20 V300 M340 20 V300"/>
+        <path d="M20 20 H340 M20 60 H340 M20 100 H340 M20 140 H340 M20 180 H340 M20 260 H340 M20 300 H340"/>
+      </g>
+      <path d="M20 220 H345 M100 300 V15" stroke="var(--ink)" stroke-width="2" fill="none"/>
+      <path d="M338 215 L346 220 L338 225 M95 22 L100 14 L105 22" stroke="var(--ink)" stroke-width="2" fill="none"/>
+      <text x="348" y="214" font-size="16" fill="var(--ink)">x</text><text x="108" y="22" font-size="16" fill="var(--ink)">y</text>
+      <path d="M20 60 L340 273.3" stroke="var(--red)" stroke-width="2.6" stroke-dasharray="10 7" fill="none"/>
+      <circle cx="260" cy="220" r="5" fill="var(--red)"/><text x="252" y="242" font-size="15" fill="var(--red)">(4,0)</text>
+      <circle cx="140" cy="140" r="5" fill="var(--red)"/><text x="148" y="136" font-size="15" fill="var(--red)">(1,2)</text>
+      <circle cx="100" cy="220" r="5" fill="none" stroke="var(--green)" stroke-width="2.4"/><text x="40" y="244" font-size="15" fill="var(--green)">(0,0) ✗</text>
+      <text x="196" y="72" font-size="20" fill="var(--violet)">2x + 3y &gt; 8</text>
+      <text x="80" y="236" font-size="13" fill="var(--pencil)">0</text>
+      <text x="137" y="236" font-size="13" fill="var(--pencil)">1</text><text x="177" y="236" font-size="13" fill="var(--pencil)">2</text><text x="217" y="236" font-size="13" fill="var(--pencil)">3</text>
+      <text x="86" y="185" font-size="13" fill="var(--pencil)">1</text><text x="86" y="145" font-size="13" fill="var(--pencil)">2</text><text x="86" y="105" font-size="13" fill="var(--pencil)">3</text>
+    </svg>
+  </div>
+
+  <h3 class="r">Ejercicios · Tema 3.3</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Resuelve y representa la solución.</span><label class="done"><input type="checkbox" id="ck-t33-1"> hecho</label></div>
+      <div class="items"><span>a) x − 2(x + 3) &gt; −5 + 19x</span><span>b) <span class="f"><i>5x − 2</i><i>2</i></span> − 3(x − 1) ≥ <span class="f"><i>x + 6</i><i>10</i></span></span><span>c) <span class="f"><i>3x − 1</i><i>2</i></span> − <span class="f"><i>2x + 3</i><i>3</i></span> ≤ <span class="f"><i>x + 5</i><i>6</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) −x − 6 &gt; −5 + 19x → −20x &gt; 1 → <span class="res">x &lt; −<span class="f"><i>1</i><i>20</i></span></span> <span class="note">¡cambia el sentido!</span><br>
+      b) ×10: 25x − 10 − 30x + 30 ≥ x + 6 → −6x ≥ −14 → <span class="res">x ≤ <span class="f"><i>7</i><i>3</i></span></span><br>
+      c) ×6: 9x − 3 − 4x − 6 ≤ x + 5 → 4x ≤ 14 → <span class="res">x ≤ <span class="f"><i>7</i><i>2</i></span></span> <div class="nl" data-r="0,6" data-s="-inf,3.5c:7/2"></div></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★★</span><span class="q">Inecuaciones polinómicas.</span><label class="done"><input type="checkbox" id="ck-t33-2"> hecho</label></div>
+      <div class="items"><span>a) x<sup>2</sup> − x − 6 &lt; 0</span><span>b) 2x<sup>3</sup> − 4x<sup>2</sup> &gt; 5x(1 + x)</span><span>c) x<sup>4</sup> − 3x<sup>3</sup> ≤ 10x<sup>2</sup></span><span>d) x<sup>4</sup> + 4 &lt; 3x<sup>2</sup></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) (x − 3)(x + 2) &lt; 0 → <span class="res">(−2, 3)</span><br>
+      b) 2x<sup>3</sup> − 9x<sup>2</sup> − 5x &gt; 0 → x(x − 5)(2x + 1) &gt; 0 → <span class="res">(−<span class="f"><i>1</i><i>2</i></span>, 0) ∪ (5, +∞)</span><br>
+      c) x<sup>2</sup>(x − 5)(x + 2) ≤ 0; x<sup>2</sup> ≥ 0 siempre → <span class="res">[−2, 5]</span><br>
+      d) t = x<sup>2</sup>: t<sup>2</sup> − 3t + 4 &lt; 0, Δ = 9 − 16 &lt; 0 y el polinomio es siempre positivo → <span class="red">sin solución</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★★</span><span class="q">Inecuaciones racionales.</span><label class="done"><input type="checkbox" id="ck-t33-3"> hecho</label></div>
+      <div class="items"><span>a) <span class="f"><i>x + 1</i><i>x − 2</i></span> ≤ 0</span><span>b) <span class="f"><i>2x − 1</i><i>x + 3</i></span> ≥ 1</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) raíces −1 (cerrada) y 2 (abierta, es del denominador) → <span class="res">[−1, 2)</span><br>
+      b) <span class="f"><i>2x − 1</i><i>x + 3</i></span> − 1 ≥ 0 → <span class="f"><i>x − 4</i><i>x + 3</i></span> ≥ 0 → <span class="res">(−∞, −3) ∪ [4, +∞)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">Con valor absoluto.</span><label class="done"><input type="checkbox" id="ck-t33-4"> hecho</label></div>
+      <div class="items"><span>a) |x − 2| ≥ 2</span><span>b) |3x + 1| ≤ 5</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) x − 2 ≥ 2 → x ≥ 4; x − 2 ≤ −2 → x ≤ 0 → <span class="res">(−∞, 0] ∪ [4, +∞)</span><br>
+      b) −5 ≤ 3x + 1 ≤ 5 → −6 ≤ 3x ≤ 4 → <span class="res">[−2, <span class="f"><i>4</i><i>3</i></span>]</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">Sistemas de inecuaciones con una incógnita.</span><label class="done"><input type="checkbox" id="ck-t33-5"> hecho</label></div>
+      <div class="items"><span>a) <span class="brace"><span>3 − (2x − 1) ≤ x</span><span>4x − 3(x − 5) ≤ 1 − x</span></span></span><span>b) <span class="brace"><span>2x − 1 &gt; x − 3</span><span>3x + 2 ≤ 11</span></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) 4 ≤ 3x → x ≥ <span class="f"><i>4</i><i>3</i></span>; x + 15 ≤ 1 − x → x ≤ −7 → no tienen nada en común → <span class="red">∅, sin solución</span><br>
+      b) x &gt; −2 y x ≤ 3 → <span class="res">(−2, 3]</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">Representa la región solución.</span><label class="done"><input type="checkbox" id="ck-t33-6"> hecho</label></div>
+      <div class="items"><span>a) x + 4y ≥ 5</span><span>b) 5x − 6y ≤ 0</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) recta continua por (5, 0) y (1, 1). (0, 0): 0 ≥ 5 falso → semiplano <b>sin</b> el origen, por encima de la recta.<br>
+      b) recta continua por (0, 0) y (6, 5). El origen está en la recta, así que se prueba otro punto: (0, 1) → −6 ≤ 0 verdadero → semiplano que contiene (0, 1), por encima de la recta.</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">Plantea y resuelve.<br>a) Un rectángulo mide 6 m de ancho y su perímetro tiene que ser menor que 30 m. ¿Cuánto puede medir de largo?<br>b) Un bollo cuesta 1,20 € y con 6 € compro el bollo y 3 cafés, y me sobra dinero. ¿Qué puede costar cada café?<br>c) El oxígeno disuelto en un río es O = 7 − 0,1T (mg/L), con T en °C. Los peces necesitan al menos 5 mg/L. ¿Qué temperaturas son aceptables?</span><label class="done"><input type="checkbox" id="ck-t33-7"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) 2·6 + 2x &lt; 30 → x &lt; 9 → <span class="res">menos de 9 m</span><br>
+      b) 1,20 + 3x &lt; 6 → x &lt; 1,60 → <span class="res">menos de 1,60 €</span><br>
+      c) 7 − 0,1T ≥ 5 → −0,1T ≥ −2 → <span class="res">T ≤ 20 °C</span></div></details></div>
+  </div>
+  <p class="endnote">fin del tema 3.3 ✓ · fin de la 1ª evaluación</p>
+</section>
+
+<script>
+/* rectas numéricas dibujadas "a mano" */
+(function(){
+  const NS="http://www.w3.org/2000/svg";
+  function parse(tok){
+    const m=tok.trim().match(/^(-?inf|-?[\d.]+)([oc])?(?::(.+))?$/); if(!m) return null;
+    const inf=m[1].includes("inf"); return {v: inf ? (m[1][0]==="-"?-Infinity:Infinity) : parseFloat(m[1]), closed:m[2]==="c", label:m[3]||null, inf};
+  }
+  function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e}
+  document.querySelectorAll(".nl").forEach(box=>{
+    const [lo,hi]=box.dataset.r.split(",").map(Number);
+    const W=300,H=58,pad=18,y=30;
+    const X=v=>pad+(v-lo)/(hi-lo)*(W-2*pad);
+    const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,width:W,role:"img","aria-label":"Representación en la recta real"});
+    svg.style.maxWidth="100%";svg.style.display="block";
+    svg.appendChild(el("path",{d:`M4 ${y} L${W-4} ${y} M${W-12} ${y-5} L${W-4} ${y} L${W-12} ${y+5}`,stroke:"var(--ink)","stroke-width":1.8,fill:"none","stroke-linecap":"round"}));
+    const step=(hi-lo)>14?Math.ceil((hi-lo)/10):1;
+    const labels=[];
+    (box.dataset.s||"").split(";").forEach(seg=>{
+      const [a,b]=seg.split(",").map(parse); if(!a||!b) return;
+      const x1=a.inf?6:X(a.v), x2=b.inf?W-8:X(b.v);
+      let d=`M${x1} ${y-7}`;
+      for(let x=x1;x<=x2;x+=4) d+=` L${x.toFixed(1)} ${(y-7+Math.sin(x/3)*2.2).toFixed(1)}`;
+      svg.appendChild(el("path",{d,stroke:"var(--violet)","stroke-width":3,fill:"none","stroke-linecap":"round","stroke-linejoin":"round"}));
+      [a,b].forEach(p=>{ if(p.inf) return;
+        svg.appendChild(el("circle",{cx:X(p.v),cy:y,r:4.6,fill:p.closed?"var(--red)":"var(--paper)",stroke:"var(--red)","stroke-width":2}));
+        labels.push({v:p.v,t:p.label||String(p.v).replace(".",","),red:true});
+      });
+    });
+    for(let v=Math.ceil(lo);v<=hi;v+=step){
+      svg.appendChild(el("path",{d:`M${X(v)} ${y-3} L${X(v)} ${y+3}`,stroke:"var(--ink)","stroke-width":1.4}));
+      if(!labels.some(l=>Math.abs(X(l.v)-X(v))<10)) labels.push({v,t:String(v),red:false});
+    }
+    labels.forEach(l=>{const t=el("text",{x:X(l.v),y:y+22,"text-anchor":"middle","font-size":l.red?15:12,fill:l.red?"var(--red)":"var(--pencil)"});t.textContent=l.t.replace("-","−");svg.appendChild(t)});
+    box.appendChild(svg);
+  });
+})();
+
+/* "hecho": se guarda solo en este navegador */
+document.querySelectorAll('.done input').forEach(cb=>{
+  try{ cb.checked = localStorage.getItem(cb.id)==="1"; }catch(e){}
+  cb.addEventListener('change',()=>{ try{ localStorage.setItem(cb.id, cb.checked?"1":"0"); }catch(e){} });
+});
+
+/* mostrar/ocultar todas las soluciones */
+(function(){
+  const btn=document.getElementById('toggleSol'); let open=false;
+  btn.addEventListener('click',()=>{ open=!open;
+    document.querySelectorAll('.ej details').forEach(d=>d.open=open);
+    btn.textContent = open ? 'ocultar soluciones' : 'ver todas las soluciones'; });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>Libreta 4º B · 2ª evaluación</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Kalam:wght@400;700&family=Patrick+Hand&display=swap">
+<style>
+@font-face{font-family:"BarFix";src:local("Arial"),local("Helvetica"),local("Roboto"),local("DejaVu Sans");unicode-range:U+007C}
+/* Layout: hojas de cuaderno cuadriculado apiladas sobre la mesa; pestañas de tema fijas arriba */
+:root{
+  --desk:#e6ebef; --paper:#fbfcf8; --grid:#d5e4ee; --grid2:#bfd3e1; --margin:#ef9a9a;
+  --ink:#24429c; --red:#cf3535; --green:#1d8655; --violet:#7a46b8; --pencil:#5a5f68;
+  --hl:#fff07a; --hlp:#ffc6da; --hlg:#c8f0c6; --postit:#fff4a3; --postit2:#ffd9b0;
+  --shadow:rgba(30,40,60,.16);
+  --f-body:"BarFix","Patrick Hand","Comic Sans MS","Segoe Print",cursive;
+  --f-head:"Kalam","Patrick Hand","Comic Sans MS",cursive;
+  --f-note:"Caveat","Kalam","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#10141c; --paper:#1b2130; --grid:#262f42; --grid2:#303c54; --margin:#7c3a46;
+  --ink:#9fc2ff; --red:#ff8d88; --green:#79dba6; --violet:#c9a7ff; --pencil:#aeb6c4;
+  --hl:rgba(255,226,70,.30); --hlp:rgba(255,110,170,.30); --hlg:rgba(110,230,150,.24); --postit:#4a4424; --postit2:#4d3a25;
+  --shadow:rgba(0,0,0,.5); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --desk:#10141c; --paper:#1b2130; --grid:#262f42; --grid2:#303c54; --margin:#7c3a46;
+  --ink:#9fc2ff; --red:#ff8d88; --green:#79dba6; --violet:#c9a7ff; --pencil:#aeb6c4;
+  --hl:rgba(255,226,70,.30); --hlp:rgba(255,110,170,.30); --hlg:rgba(110,230,150,.24); --postit:#4a4424; --postit2:#4d3a25;
+  --shadow:rgba(0,0,0,.5); color-scheme:dark }
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:20px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--desk)}
+
+/* ---------- pestañas ---------- */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--desk);display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding-block:10px 8px;max-width:940px;margin:0 auto}
+.tabs a{font-family:var(--f-head);font-weight:700;font-size:16px;text-decoration:none;color:var(--ink);background:var(--paper);
+  padding:4px 12px 2px;border:2px solid currentColor;border-radius:14px 4px 12px 5px/5px 12px 4px 14px;white-space:nowrap}
+.tabs a:nth-child(2){color:var(--violet)} .tabs a:nth-child(3){color:var(--red)} .tabs a:nth-child(4){color:var(--green)} .tabs a:nth-child(5){color:var(--ink)}
+.tabs a:focus-visible,.tabs button:focus-visible,summary:focus-visible{outline:3px dashed var(--red);outline-offset:3px}
+.tabs button{font-family:var(--f-note);font-size:20px;font-weight:700;background:var(--postit);color:var(--ink);border:none;padding:2px 12px;cursor:pointer;transform:rotate(-1.5deg);box-shadow:1px 2px 0 var(--shadow)}
+
+/* ---------- hoja ---------- */
+.sheet{position:relative;max-width:900px;margin:22px auto 0;background-color:var(--paper);
+  background-image:linear-gradient(var(--grid2) 1px,transparent 1px),linear-gradient(90deg,var(--grid2) 1px,transparent 1px),
+   linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:100px 100px,100px 100px,20px 20px,20px 20px;
+  box-shadow:0 1px 0 var(--grid2),0 8px 22px var(--shadow);border-radius:3px;
+  padding:34px 34px 40px 74px;min-width:0}
+.sheet::before{content:"";position:absolute;left:52px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.8}
+.sheet::after{content:"";position:absolute;left:14px;top:16px;bottom:16px;width:16px;
+  background:radial-gradient(circle at 8px 10px,var(--desk) 5px,transparent 6px) 0 0/16px 40px repeat-y}
+@media (max-width:620px){.sheet{padding:26px 16px 30px 40px}.sheet::before{left:30px}.sheet::after{left:6px;width:14px;background-size:14px 34px}body{font-size:18px}}
+
+.date{position:absolute;right:26px;top:12px;font-family:var(--f-note);font-size:21px;color:var(--pencil)}
+h1,h2,h3{font-family:var(--f-head);font-weight:700;text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(34px,6vw,54px);color:var(--violet);letter-spacing:.5px}
+h2{font-size:clamp(26px,4.4vw,36px);text-transform:uppercase;letter-spacing:1.5px;margin-top:6px}
+h3{font-size:23px;text-transform:uppercase;letter-spacing:1px;margin:30px 0 10px;display:inline-block;
+  text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+h3.r{color:var(--red)} h3.g{color:var(--green)} h3.v{color:var(--violet)}
+.kicker{font-family:var(--f-note);font-size:24px;color:var(--pencil);display:block}
+.wavy{text-decoration:underline wavy var(--red);text-decoration-thickness:1.5px;text-underline-offset:5px}
+p{margin:8px 0;max-width:68ch}
+ul.pen{margin:6px 0;padding-left:0;list-style:none}
+ul.pen li{padding-left:26px;position:relative;margin:4px 0}
+ul.pen li::before{content:"→";position:absolute;left:0;color:var(--red)}
+.red{color:var(--red)} .grn{color:var(--green)} .vio{color:var(--violet)} .pen-grey{color:var(--pencil)}
+.hl{background:linear-gradient(transparent 45%,var(--hl) 45%,var(--hl) 92%,transparent 92%);padding:0 3px}
+.hlp{background:linear-gradient(transparent 45%,var(--hlp) 45%,var(--hlp) 92%,transparent 92%);padding:0 3px}
+.hlg{background:linear-gradient(transparent 45%,var(--hlg) 45%,var(--hlg) 92%,transparent 92%);padding:0 3px}
+.note{font-family:var(--f-note);font-size:23px;color:var(--red);line-height:1.15}
+
+/* cajas dibujadas a mano */
+.box{border:2.2px solid currentColor;border-radius:255px 14px 225px 14px/14px 225px 14px 255px;padding:10px 16px;margin:12px 0;display:block;width:fit-content;max-width:100%}
+.box.ink{color:var(--ink)} .box.red{color:var(--red)} .box.grn{color:var(--green)} .box.vio{color:var(--violet)}
+.box .t{font-family:var(--f-head);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:1px;display:block}
+.box > *:not(.t){color:var(--ink)}
+.dash{border:2px dashed var(--pencil);border-radius:8px;padding:8px 14px;margin:12px 0}
+.row{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-start}
+.row > *{min-width:0}
+.postit{background:var(--postit);padding:12px 16px 14px;transform:rotate(-1.2deg);box-shadow:2px 4px 8px var(--shadow);max-width:340px;font-size:19px;margin:10px 0}
+.postit.o{background:var(--postit2);transform:rotate(1.1deg)}
+.postit > b:first-child{font-family:var(--f-head);display:block;color:var(--red);font-size:17px;text-transform:uppercase;letter-spacing:1px}
+.ojo{position:relative;display:inline-flex;align-items:center;justify-content:center;width:118px;height:96px;flex:none;
+  font-family:var(--f-head);font-weight:700;color:var(--red);font-size:19px;text-align:center;line-height:1.05}
+.ojo::before{content:"";position:absolute;inset:0;background:var(--red);
+  clip-path:polygon(50% 0,59% 22%,80% 6%,75% 31%,100% 30%,82% 49%,100% 66%,75% 67%,82% 94%,60% 78%,50% 100%,40% 78%,17% 94%,25% 67%,0 68%,18% 49%,0 30%,25% 31%,20% 6%,41% 22%)}
+.ojo::after{content:"";position:absolute;inset:3px;background:var(--paper);
+  clip-path:polygon(50% 0,59% 22%,80% 6%,75% 31%,100% 30%,82% 49%,100% 66%,75% 67%,82% 94%,60% 78%,50% 100%,40% 78%,17% 94%,25% 67%,0 68%,18% 49%,0 30%,25% 31%,20% 6%,41% 22%)}
+.ojo span{position:relative;z-index:1;padding:0 20px}
+.warn{display:flex;gap:12px;align-items:center;margin:12px 0}
+.warn p{margin:0}
+
+/* matemáticas a mano */
+.m{white-space:nowrap}
+.f{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 3px;line-height:1.15}
+.f > i{font-style:normal;display:block;padding:0 3px}
+.f > i:first-child{border-bottom:1.7px solid currentColor}
+.sq{position:relative;display:inline-flex;align-items:flex-start;margin-left:2px}
+.sq::before{content:"√";font-size:1.1em;line-height:1.25}
+.sq > i{font-style:normal;border-top:1.7px solid currentColor;padding:0 3px;margin-top:.2em;line-height:1.25}
+.sq[data-n]::after{content:attr(data-n);position:absolute;left:-.25em;top:-.2em;font-size:.6em}
+.sq[data-n]{margin-left:.45em}
+sup,sub{font-size:.68em}
+.big{font-size:1.25em}
+.eqs{display:flex;flex-direction:column;gap:4px;margin:8px 0;padding-left:10px}
+.brace{border-left:2.2px solid currentColor;border-radius:10px 0 0 10px;padding:2px 0 2px 12px;display:inline-flex;flex-direction:column;gap:2px;vertical-align:middle}
+
+/* tablas */
+.wrap{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;font-family:var(--f-body)}
+.tb td,.tb th{border:1.6px solid var(--pencil);padding:4px 12px;text-align:center}
+.tb th{font-family:var(--f-head);font-weight:700;color:var(--violet)}
+.ruf td{padding:2px 12px;text-align:center;min-width:30px}
+.ruf tr:nth-child(2) td{border-bottom:2px solid var(--ink)}
+.ruf td:first-child{border-right:2px solid var(--ink);color:var(--red)}
+.ruf .rest{border:2px solid var(--red);border-radius:6px;color:var(--red)}
+.sg td,.sg th{border:1.4px solid var(--pencil);padding:3px 12px;text-align:center}
+.sg th{font-weight:400;color:var(--pencil)}
+.sg td:first-child{text-align:right;color:var(--ink)}
+.sg .p{color:var(--green);font-weight:700} .sg .n{color:var(--red);font-weight:700}
+.sg tr:last-child td{border-top:2.4px solid var(--ink)}
+
+/* conjuntos */
+.sets{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;border:2.4px solid var(--ink);border-radius:10px 4px 12px 6px;padding:26px 12px 12px;position:relative;width:fit-content;max-width:100%}
+.sets::before{content:"ℝ  reales";position:absolute;top:2px;right:12px;font-family:var(--f-head);font-weight:700;color:var(--ink)}
+.set{border:2px solid currentColor;border-radius:8px 3px 9px 4px;padding:22px 10px 8px;position:relative;display:flex;align-items:flex-end}
+.set > .lbl{position:absolute;top:2px;left:8px;font-size:16px;white-space:nowrap}
+.set.q{color:var(--violet)} .set.z{color:var(--green)} .set.n{color:var(--red)} .set.i{color:var(--pencil);min-width:150px;align-items:center}
+.set .x{color:var(--ink);font-size:16px}
+
+/* temporalización */
+.plan{margin:14px 0 6px}
+.bar{display:flex;gap:4px;height:46px;margin:6px 0}
+.bar > div{border:2px solid currentColor;border-radius:6px 3px 7px 2px;display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-size:14px;line-height:1.05;text-align:center;padding:0 4px;min-width:0;overflow:hidden}
+.bar .on{background:repeating-linear-gradient(-45deg,transparent 0 6px,var(--hl) 6px 10px)}
+.bar .off{color:var(--pencil);opacity:.65;border-style:dashed}
+.legend{font-family:var(--f-note);font-size:19px;color:var(--pencil)}
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:16px}
+.toc a{display:block;text-decoration:none;color:var(--ink);border:2px solid currentColor;border-radius:14px 5px 12px 6px/6px 12px 5px 14px;padding:10px 14px;background:var(--paper)}
+.toc a b{font-family:var(--f-head);display:block;font-size:20px}
+.toc a span{font-family:var(--f-note);font-size:19px;color:var(--pencil)}
+.toc a:nth-child(1){color:var(--violet)} .toc a:nth-child(2){color:var(--red)} .toc a:nth-child(3){color:var(--green)} .toc a:nth-child(4){color:var(--ink)}
+
+/* ejercicios */
+.ejs{display:flex;flex-direction:column;gap:18px;margin-top:10px}
+.ej{border-top:1.5px dashed var(--grid2);padding-top:12px}
+.ej-h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.num{font-family:var(--f-head);font-weight:700;color:var(--red);border:2px solid var(--red);border-radius:50%;min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;font-size:17px;flex:none}
+.lvl{color:var(--violet);font-size:17px;letter-spacing:2px}
+.tag{font-family:var(--f-note);font-size:20px;color:var(--green);border-bottom:2px solid var(--green);line-height:1}
+.ej-h .q{flex:1 1 300px;min-width:0}
+.done{font-family:var(--f-note);font-size:19px;color:var(--pencil);display:inline-flex;gap:4px;align-items:center;cursor:pointer;margin-left:auto}
+.done input{accent-color:var(--green);width:17px;height:17px}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 20px;margin:6px 0 4px 44px}
+@media (max-width:620px){.items{margin-left:0}}
+details{margin:6px 0 0 44px}
+@media (max-width:620px){details{margin-left:0}}
+summary{cursor:pointer;font-family:var(--f-note);font-size:22px;color:var(--green);width:fit-content;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"✎ ";}
+details[open] summary{color:var(--pencil)}
+.sol{border-left:3px solid var(--green);padding:6px 0 6px 14px;margin-top:6px;color:var(--ink)}
+.sol .ok{color:var(--green);font-weight:700}
+.res{border:2px solid var(--ink);border-radius:5px 2px 6px 3px;padding:0 6px;display:inline-block}
+.endnote{font-family:var(--f-note);font-size:22px;color:var(--pencil);text-align:right;margin-top:24px}
+svg text{font-family:var(--f-body)}
+</style>
+<style>
+.fig{flex:none;max-width:100%}
+.fig svg{display:block;max-width:100%;height:auto}
+.fig figcaption{font-family:var(--f-note);font-size:19px;color:var(--pencil);text-align:center}
+.s-ink{stroke:var(--ink)} .s-red{stroke:var(--red)} .s-grn{stroke:var(--green)} .s-vio{stroke:var(--violet)} .s-pen{stroke:var(--pencil)}
+.t-ink{fill:var(--ink)} .t-red{fill:var(--red)} .t-grn{fill:var(--green)} .t-vio{fill:var(--violet)} .t-pen{fill:var(--pencil)}
+svg .ln{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.tb.notab td{min-width:58px}
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:10px 0}
+.mini > div{text-align:center}
+.mini b{font-family:var(--f-head);display:block}
+.vc{position:relative;display:inline-block;padding-top:.15em}
+.vc::before{content:"";position:absolute;left:1px;right:1px;top:.12em;height:0;border-top:1.6px solid currentColor}
+.vc::after{content:"";position:absolute;right:0;top:calc(.12em - 3px);border:3.5px solid transparent;border-left:6px solid currentColor;border-right:0;transform:translateY(0.5px)}
+</style>
+
+<nav class="tabs" aria-label="Temas">
+  <a href="#portada">Índice</a>
+  <a href="#t21a">Semejanza</a>
+  <a href="#t21b">Trigonometría</a>
+  <a href="#t21c">Triángulos</a>
+  <a href="#t22">2.2 Geometría analítica</a>
+  <button type="button" id="toggleSol">ver todas las soluciones</button>
+</nav>
+
+<!-- ===================== PORTADA ===================== -->
+<section class="sheet" id="portada">
+  <span class="date">curso 2026 / 27</span>
+  <span class="kicker">Matemáticas B · 4º ESO</span>
+  <h1>Apuntes de la 2ª evaluación</h1>
+  <p>Resumen de la teoría, ejemplos resueltos y ejercicios con solución, sacados de las libretas de clase de 4º B y ordenados según la <span class="hl">temporalización del curso 26‑27</span>.</p>
+
+  <div class="plan">
+    <h3 class="v" style="margin-top:14px">El curso de un vistazo</h3>
+    <div class="bar" aria-label="Sesiones por evaluación">
+      <div class="off" style="flex:45">1ª · 45</div>
+      <div class="on" style="flex:32;color:var(--red)">2ª eval · 32 ses.</div>
+      <div class="off" style="flex:40">3ª · 40</div>
+    </div>
+    <p class="legend">Rayado = lo que recogen estos apuntes. 1ª: números, polinomios, ecuaciones e inecuaciones. 3ª: funciones, estadística y probabilidad.</p>
+
+    <h3 class="r">2ª evaluación: 32 sesiones</h3>
+    <div class="bar" aria-label="Sesiones por tema">
+      <div style="flex:16;color:var(--violet)">2.1 Triangulando · 16</div>
+      <div style="flex:16;color:var(--green)">2.2 Orientando el plano · 16</div>
+    </div>
+    <div class="row legend" style="justify-content:space-between">
+      <span>UP3 · Semejanza y trigonometría (16 sesiones)</span>
+      <span>UP4 · Geometría analítica (16 sesiones)</span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Índice de temas">
+    <a href="#t21a"><b>2.1 Triangulando (I)</b><span>semejanza, Tales, teoremas de la altura y del cateto</span></a>
+    <a href="#t21b"><b>2.1 Triangulando (II)</b><span>ángulos, razones trigonométricas, circunferencia goniométrica</span></a>
+    <a href="#t21c"><b>2.1 Triangulando (III)</b><span>teoremas del seno y del coseno, resolver triángulos</span></a>
+    <a href="#t22"><b>2.2 Orientando el plano</b><span>vectores, producto escalar, ecuaciones de la recta</span></a>
+  </nav>
+
+  <div class="row" style="margin-top:22px">
+    <div class="postit"><b>Cómo usar los apuntes</b>Lee la teoría, tapa la solución e inténtalo. Despliega <span class="grn">✎ Ver solución</span> solo para comprobar. Marca <span class="pen-grey">☐ hecho</span> en cada ejercicio terminado: se queda guardado en tu navegador.</div>
+    <div class="postit o"><b>Niveles</b>★ básico · ★★ medio · ★★★ reto.<br>Los <span class="tag">Ejercicio de Guillermo</span> son los retos de clase.<br>Calculadora en modo <b>DEG</b>.</div>
+  </div>
+</section>
+
+<!-- ===================== 2.1 (I) SEMEJANZA ===================== -->
+<section class="sheet" id="t21a">
+  <span class="date">UP3 · 16 sesiones</span>
+  <span class="kicker">Tema 2.1 · Triangulando (I)</span>
+  <h2 class="vio">Semejanza</h2>
+
+  <h3 class="v">Figuras semejantes</h3>
+  <p>Dos figuras son <span class="hl">semejantes</span> si tienen la <b>misma forma</b> pero distinto tamaño. Los elementos que se corresponden se llaman <b>homólogos</b>.</p>
+  <div class="row">
+    <div class="box vio"><span class="t">Dos polígonos son semejantes si…</span>
+      sus ángulos homólogos son <span class="hlg">iguales</span><br>y sus lados homólogos son <span class="hlp">proporcionales</span>.</div>
+    <div class="box red"><span class="t">Razón de semejanza</span>
+      <span class="m big">k = <span class="f"><i>a′</i><i>a</i></span> = <span class="f"><i>b′</i><i>b</i></span> = <span class="f"><i>c′</i><i>c</i></span></span><br>
+      <span class="note">k &gt; 1 amplía · k &lt; 1 reduce</span></div>
+  </div>
+  <div class="wrap"><table class="tb">
+    <tr><th>Si las longitudes se multiplican por…</th><th>las áreas por…</th><th>los volúmenes por…</th></tr>
+    <tr><td class="big">k</td><td class="big red">k<sup>2</sup></td><td class="big vio">k<sup>3</sup></td></tr>
+  </table></div>
+  <p>Ejemplo: un cuadrado de lado 3 cm ampliado con k = 2 tiene lado 6 cm y área <span class="m">9 · 2<sup>2</sup> = <span class="res">36 cm<sup>2</sup></span></span>, no 18.</p>
+
+  <h3>Teorema de Tales · triángulos en posición de Tales</h3>
+  <div class="row">
+    <figure class="fig" style="margin:0">
+      <svg viewBox="0 0 300 200" width="300" role="img" aria-label="Triángulo ABC cortado por un segmento DE paralelo a BC">
+        <path class="ln s-ink" d="M40 180 L150 20 L270 180 Z"/>
+        <path class="ln s-red" d="M95.5 99.5 L208 99.5" stroke-dasharray="0"/>
+        <path class="ln s-red" d="M40 180 L270 180" stroke-width="3.2"/>
+        <text x="146" y="14" class="t-ink" font-size="17">A</text>
+        <text x="22" y="190" class="t-ink" font-size="17">B</text>
+        <text x="274" y="190" class="t-ink" font-size="17">C</text>
+        <text x="74" y="100" class="t-red" font-size="17">D</text>
+        <text x="214" y="100" class="t-red" font-size="17">E</text>
+        <text x="124" y="124" class="t-red" font-size="15">DE ∥ BC</text>
+      </svg>
+      <figcaption>ADE y ABC son semejantes</figcaption>
+    </figure>
+    <div style="flex:1 1 260px">
+      <p>Si una recta paralela a un lado corta a los otros dos, forma un triángulo <b>semejante</b> al grande:</p>
+      <div class="box ink"><span class="m big"><span class="f"><i>AD</i><i>AB</i></span> = <span class="f"><i>AE</i><i>AC</i></span> = <span class="f"><i>DE</i><i>BC</i></span></span></div>
+      <p class="note">Sirve para medir alturas con sombras: el sol forma triángulos en posición de Tales.</p>
+    </div>
+  </div>
+
+  <h3>Criterios de semejanza de triángulos</h3>
+  <div class="mini">
+    <div class="dash"><b class="vio">1 · Ángulos</b>Dos ángulos iguales<br><span class="note">(el tercero también lo es)</span></div>
+    <div class="dash"><b class="red">2 · Lados</b>Los tres lados proporcionales</div>
+    <div class="dash"><b class="grn">3 · Mixto</b>Dos lados proporcionales y el ángulo que forman, igual</div>
+  </div>
+
+  <h3 class="r">Triángulo rectángulo: altura y cateto</h3>
+  <div class="row">
+    <figure class="fig" style="margin:0">
+      <svg viewBox="0 0 320 190" width="320" role="img" aria-label="Triángulo rectángulo con la altura sobre la hipotenusa que la divide en m y n">
+        <path class="ln s-ink" d="M20 160 L110 29 L300 160 Z"/>
+        <path class="ln s-red" d="M110 29 L110 160"/>
+        <path class="ln s-red" d="M110 150 L120 150 L120 160" stroke-width="1.6"/>
+        <path class="ln s-pen" d="M103.2 38.9 L113.1 45.7 L119.9 35.8" stroke-width="1.6"/>
+        <text x="114" y="108" class="t-red" font-size="18">h</text>
+        <text x="58" y="182" class="t-vio" font-size="18">m</text>
+        <text x="200" y="182" class="t-vio" font-size="18">n</text>
+        <text x="46" y="94" class="t-ink" font-size="18">c</text>
+        <text x="212" y="92" class="t-ink" font-size="18">b</text>
+      </svg>
+      <figcaption>a = m + n es la hipotenusa · m, n = proyecciones</figcaption>
+    </figure>
+    <div style="flex:1 1 240px">
+      <div class="box red"><span class="t">Teorema de la altura</span><span class="m big">h<sup>2</sup> = m · n</span></div>
+      <div class="box vio"><span class="t">Teorema del cateto</span><span class="m big">c<sup>2</sup> = a · m</span> &nbsp; <span class="m big">b<sup>2</sup> = a · n</span><br><span class="note">cada cateto con su proyección</span></div>
+      <div class="box ink"><span class="t">Pitágoras</span><span class="m big">a<sup>2</sup> = b<sup>2</sup> + c<sup>2</sup></span></div>
+    </div>
+  </div>
+
+  <h3 class="g">Ejercicios</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Un triángulo tiene un lado de 48 cm. ¿Cuánto mide el lado homólogo de un triángulo semejante si la razón de semejanza es k = 5? ¿Y si es k = 1/5?</span><label class="done"><input type="checkbox" id="ck-t21a-1"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">48 · 5 = <span class="res">240 cm</span> &nbsp;·&nbsp; 48 : 5 = <span class="res">9,6 cm</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="q">Un polígono de 25 cm<sup>2</sup> se amplía con razón k = 4. ¿Cuál es el área de la ampliación?</span><label class="done"><input type="checkbox" id="ck-t21a-2"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Las áreas se multiplican por k<sup>2</sup> = 16: 25 · 16 = <span class="res">400 cm<sup>2</sup></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★★</span><span class="q">Un cuerpo de 225 cm<sup>3</sup> se amplía con razón k = 3,5. ¿Qué volumen tiene la ampliación?</span><label class="done"><input type="checkbox" id="ck-t21a-3"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">k<sup>3</sup> = 3,5<sup>3</sup> = 42,875 → 225 · 42,875 = <span class="res">9 646,875 cm<sup>3</sup></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">En el triángulo ABC, el segmento DE es paralelo a BC (como en el dibujo de Tales). AD = 4 cm, AB = 10 cm, DE = 6 cm y AE = 5 cm. Calcula BC y AC.</span><label class="done"><input type="checkbox" id="ck-t21a-4"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Razón ABC/ADE: k = 10/4 = 2,5.<br>BC = 6 · 2,5 = <span class="res">15 cm</span> &nbsp; AC = 5 · 2,5 = <span class="res">12,5 cm</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">A la misma hora, una persona de 1,60 m proyecta una sombra de 2 m y un árbol una sombra de 15 m. ¿Cuánto mide el árbol?</span><label class="done"><input type="checkbox" id="ck-t21a-5"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Triángulos semejantes: <span class="m"><span class="f"><i>x</i><i>15</i></span> = <span class="f"><i>1,6</i><i>2</i></span></span> → x = <span class="res">12 m</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">La altura sobre la hipotenusa de un triángulo rectángulo la divide en dos trozos de 3,2 cm y 1,8 cm. Calcula la altura y los dos catetos.</span><label class="done"><input type="checkbox" id="ck-t21a-6"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Altura: h<sup>2</sup> = 3,2 · 1,8 = 5,76 → <span class="res">h = 2,4 cm</span><br>
+      Hipotenusa a = 3,2 + 1,8 = 5 cm. Catetos: 5 · 3,2 = 16 → <span class="res">4 cm</span>; 5 · 1,8 = 9 → <span class="res">3 cm</span><br>
+      <span class="ok">Comprobación:</span> 3<sup>2</sup> + 4<sup>2</sup> = 25 = 5<sup>2</sup> ✓</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">En un mapa a escala 1 : 50 000, dos pueblos están a 7,4 cm. Un pinar ocupa 2 cm<sup>2</sup> en el mapa. ¿Qué distancia real separa los pueblos? ¿Qué superficie real tiene el pinar, en km<sup>2</sup>?</span><label class="done"><input type="checkbox" id="ck-t21a-7"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">k = 50 000. Distancia: 7,4 · 50 000 = 370 000 cm = <span class="res">3,7 km</span><br>
+      Área: 2 · 50 000<sup>2</sup> = 2 · 2,5·10<sup>9</sup> = 5·10<sup>9</sup> cm<sup>2</sup>. Como 1 km<sup>2</sup> = 10<sup>10</sup> cm<sup>2</sup> → <span class="res">0,5 km<sup>2</sup></span><br>
+      <span class="note">¡Las áreas usan k², no k!</span></div></details></div>
+  </div>
+  <p class="endnote">sigue: trigonometría →</p>
+</section>
+
+<!-- ===================== 2.1 (II) TRIGONOMETRÍA ===================== -->
+<section class="sheet" id="t21b">
+  <span class="date">UP3 · 16 sesiones</span>
+  <span class="kicker">Tema 2.1 · Triangulando (II)</span>
+  <h2 class="red">Trigonometría</h2>
+
+  <h3 class="v">Medida de ángulos</h3>
+  <div class="row">
+    <div class="box ink"><span class="t">Grados sexagesimales</span>1 vuelta = 360°<br>1° = 60′ &nbsp;·&nbsp; 1′ = 60″<br><span class="note">como las horas: se mide en grados, minutos y segundos</span></div>
+    <div class="box vio"><span class="t">Radianes</span>1 rad es el ángulo cuyo arco <span class="hl">mide lo mismo que el radio</span>.<br><span class="m big">360° = 2π rad &nbsp;·&nbsp; 180° = π rad</span></div>
+  </div>
+  <div class="wrap"><table class="tb notab">
+    <tr><th>grados</th><td>0°</td><td>30°</td><td>45°</td><td>60°</td><td>90°</td><td>120°</td><td>135°</td><td>150°</td><td>180°</td><td>270°</td><td>360°</td></tr>
+    <tr><th>rad</th><td>0</td><td><span class="f"><i>π</i><i>6</i></span></td><td><span class="f"><i>π</i><i>4</i></span></td><td><span class="f"><i>π</i><i>3</i></span></td><td><span class="f"><i>π</i><i>2</i></span></td><td><span class="f"><i>2π</i><i>3</i></span></td><td><span class="f"><i>3π</i><i>4</i></span></td><td><span class="f"><i>5π</i><i>6</i></span></td><td>π</td><td><span class="f"><i>3π</i><i>2</i></span></td><td>2π</td></tr>
+  </table></div>
+  <p>Regla de tres: <span class="m">x rad = grados · <span class="f"><i>π</i><i>180</i></span></span> &nbsp;&nbsp; <span class="m">grados = rad · <span class="f"><i>180</i><i>π</i></span></span></p>
+
+  <h3>Razones de un ángulo agudo</h3>
+  <div class="row">
+    <figure class="fig" style="margin:0">
+      <svg viewBox="0 0 300 190" width="300" role="img" aria-label="Triángulo rectángulo con ángulo alfa, cateto contiguo, cateto opuesto e hipotenusa">
+        <path class="ln s-ink" d="M20 160 L270 160 L270 30 Z"/>
+        <path class="ln s-ink" d="M255 160 L255 145 L270 145" stroke-width="1.6"/>
+        <path class="ln s-red" d="M70 160 A50 50 0 0 0 64 137"/>
+        <text x="76" y="152" class="t-red" font-size="19">α</text>
+        <text x="110" y="182" class="t-grn" font-size="16">cateto contiguo</text>
+        <text x="276" y="80" class="t-vio" font-size="16" transform="rotate(90 276 80)">cateto opuesto</text>
+        <text x="96" y="84" class="t-ink" font-size="16" transform="rotate(-27.5 96 84)">hipotenusa</text>
+      </svg>
+    </figure>
+    <div style="flex:1 1 260px">
+      <div class="box red">
+        <span class="m big">sen α = <span class="f"><i class="vio">opuesto</i><i>hipotenusa</i></span></span><br>
+        <span class="m big">cos α = <span class="f"><i class="grn">contiguo</i><i>hipotenusa</i></span></span><br>
+        <span class="m big">tg α = <span class="f"><i class="vio">opuesto</i><i class="grn">contiguo</i></span> = <span class="f"><i>sen α</i><i>cos α</i></span></span>
+      </div>
+      <p class="pen-grey">Razones inversas: <b>cosec α</b> = 1/sen α · <b>sec α</b> = 1/cos α · <b>cotg α</b> = 1/tg α</p>
+    </div>
+  </div>
+  <div class="warn"><span class="ojo"><span>¡OJO!</span></span><p>Las razones dependen <b>solo del ángulo</b>, no del tamaño del triángulo: todos los triángulos rectángulos con el mismo α son semejantes.</p></div>
+
+  <h3 class="r">Relaciones fundamentales</h3>
+  <div class="row">
+    <div class="box red"><span class="m big">sen<sup>2</sup>α + cos<sup>2</sup>α = 1</span></div>
+    <div class="box red"><span class="m big">tg α = <span class="f"><i>sen α</i><i>cos α</i></span></span></div>
+    <div class="box vio"><span class="m big">1 + tg<sup>2</sup>α = <span class="f"><i>1</i><i>cos<sup>2</sup>α</i></span></span></div>
+  </div>
+  <p>Con <b>una sola razón</b> se calculan las otras dos. <span class="note">la 1ª sale de Pitágoras dividiendo entre la hipotenusa²</span></p>
+  <div class="dash">
+    <b class="vio">Ejemplo.</b> cos α = <span class="f"><i>1</i><i>4</i></span>, α agudo.<br>
+    sen<sup>2</sup>α = 1 − <span class="f"><i>1</i><i>16</i></span> = <span class="f"><i>15</i><i>16</i></span> → sen α = <span class="f"><i><span class="sq"><i>15</i></span></i><i>4</i></span> &nbsp;→&nbsp; tg α = <span class="f"><i><span class="sq"><i>15</i></span>/4</i><i>1/4</i></span> = <span class="res"><span class="sq"><i>15</i></span></span>
+  </div>
+
+  <h3>Ángulos notables (valores exactos)</h3>
+  <div class="row">
+    <div class="wrap"><table class="tb">
+      <tr><th></th><th>0°</th><th>30°</th><th>45°</th><th>60°</th><th>90°</th></tr>
+      <tr><th>sen</th><td>0</td><td><span class="f"><i>1</i><i>2</i></span></td><td><span class="f"><i><span class="sq"><i>2</i></span></i><i>2</i></span></td><td><span class="f"><i><span class="sq"><i>3</i></span></i><i>2</i></span></td><td>1</td></tr>
+      <tr><th>cos</th><td>1</td><td><span class="f"><i><span class="sq"><i>3</i></span></i><i>2</i></span></td><td><span class="f"><i><span class="sq"><i>2</i></span></i><i>2</i></span></td><td><span class="f"><i>1</i><i>2</i></span></td><td>0</td></tr>
+      <tr><th>tg</th><td>0</td><td><span class="f"><i><span class="sq"><i>3</i></span></i><i>3</i></span></td><td>1</td><td><span class="sq"><i>3</i></span></td><td class="red">∄</td></tr>
+    </table></div>
+    <div class="postit"><b>Truco</b>sen 30° = cos 60° y sen 60° = cos 30°: son <span class="hl">complementarios</span> (suman 90°).<br>45° sale de la mitad de un cuadrado; 30° y 60° de la mitad de un triángulo equilátero.</div>
+  </div>
+
+  <h3 class="g">Circunferencia goniométrica</h3>
+  <div class="row">
+    <figure class="fig" style="margin:0">
+      <svg viewBox="0 0 285 260" width="285" role="img" aria-label="Circunferencia de radio 1: el coseno es la coordenada x del punto y el seno la coordenada y; signos de seno y coseno en cada cuadrante">
+        <path class="ln s-pen" d="M10 130 L250 130 M130 250 L130 10" stroke-width="1.4"/>
+        <circle cx="130" cy="130" r="100" class="ln s-ink"/>
+        <path class="ln s-ink" d="M130 130 L206.6 65.7"/>
+        <path class="ln s-grn" d="M130 130 L206.6 130" stroke-width="3.4"/>
+        <path class="ln s-vio" d="M206.6 130 L206.6 65.7" stroke-width="3.4"/>
+        <circle cx="206.6" cy="65.7" r="4.5" class="t-red"/>
+        <path class="ln s-red" d="M160 130 A30 30 0 0 0 153 110.7" stroke-width="1.8"/>
+        <text x="163" y="122" class="t-red" font-size="15">α</text>
+        <text x="148" y="148" class="t-grn" font-size="15">cos α</text>
+        <text x="212" y="102" class="t-vio" font-size="15">sen α</text>
+        <text x="282" y="58" class="t-red" font-size="14" text-anchor="end">(cos α, sen α)</text>
+        <text x="152" y="36" class="t-pen" font-size="15">I</text><text x="96" y="36" class="t-pen" font-size="15">II</text>
+        <text x="92" y="232" class="t-pen" font-size="15">III</text><text x="152" y="232" class="t-pen" font-size="15">IV</text>
+        <text x="236" y="146" class="t-pen" font-size="13">1</text>
+      </svg>
+    </figure>
+    <div style="flex:1 1 260px">
+      <p>Circunferencia de <b>radio 1</b> centrada en el origen. Para cualquier ángulo α:</p>
+      <div class="box ink"><span class="m big"><span class="grn">cos α = x</span> &nbsp; <span class="vio">sen α = y</span></span><br><span class="m">−1 ≤ sen α ≤ 1 &nbsp;·&nbsp; −1 ≤ cos α ≤ 1</span></div>
+      <div class="wrap"><table class="sg">
+        <tr><th></th><th>I</th><th>II</th><th>III</th><th>IV</th></tr>
+        <tr><td>sen</td><td class="p">+</td><td class="p">+</td><td class="n">−</td><td class="n">−</td></tr>
+        <tr><td>cos</td><td class="p">+</td><td class="n">−</td><td class="n">−</td><td class="p">+</td></tr>
+        <tr><td>tg</td><td class="p">+</td><td class="n">−</td><td class="p">+</td><td class="n">−</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <h3 class="v">Reducción al primer cuadrante</h3>
+  <p>Cualquier ángulo se relaciona con uno del primer cuadrante. Lo que cambia es <b>solo el signo</b>:</p>
+  <div class="wrap"><table class="tb">
+    <tr><th>Relación</th><th>Ángulo</th><th>sen</th><th>cos</th><th>tg</th><th>Ejemplo</th></tr>
+    <tr><td>Suplementarios</td><td>180° − α</td><td>sen α</td><td class="red">−cos α</td><td class="red">−tg α</td><td>sen 150° = sen 30° = ½</td></tr>
+    <tr><td>Difieren 180°</td><td>180° + α</td><td class="red">−sen α</td><td class="red">−cos α</td><td>tg α</td><td>cos 240° = −cos 60° = −½</td></tr>
+    <tr><td>Opuestos</td><td>−α ó 360° − α</td><td class="red">−sen α</td><td>cos α</td><td class="red">−tg α</td><td>sen(−60°) = −<span class="sq"><i>3</i></span>/2</td></tr>
+    <tr><td>Complementarios</td><td>90° − α</td><td class="vio">cos α</td><td class="vio">sen α</td><td class="vio">1/tg α</td><td>cos 60° = sen 30°</td></tr>
+    <tr><td>Vueltas enteras</td><td>α + 360°·n</td><td>sen α</td><td>cos α</td><td>tg α</td><td>sen 415° = sen 55°</td></tr>
+  </table></div>
+
+  <h3 class="r">Calcular el ángulo a partir de una razón</h3>
+  <div class="row">
+    <div style="flex:1 1 300px">
+      <p>La calculadora (sen<sup>−1</sup>, cos<sup>−1</sup>, tg<sup>−1</sup>) da <b>un solo ángulo</b>, pero en una vuelta casi siempre hay <span class="hl">dos soluciones</span>:</p>
+      <ul class="pen">
+        <li>mismo <b>seno</b> → α y 180° − α</li>
+        <li>mismo <b>coseno</b> → α y 360° − α</li>
+        <li>misma <b>tangente</b> → α y 180° + α</li>
+      </ul>
+    </div>
+    <div class="postit o"><b>Ejemplo</b>sen α = −0,5<br>calculadora: −30° → <b>330°</b> (IV)<br>la otra: 180° + 30° = <b>210°</b> (III)</div>
+  </div>
+  <div class="warn"><span class="ojo"><span>¡OJO!</span></span><p>tg 90° y tg 270° <b>no existen</b> (dividiríamos entre cos = 0).</p></div>
+
+  <h3>Resolver triángulos rectángulos</h3>
+  <p>Resolver un triángulo es calcular <b>todos sus lados y ángulos</b>. Herramientas: las razones trigonométricas, <b>Pitágoras</b> y que los ángulos suman <b>180°</b>.</p>
+  <p class="note">Usa siempre que puedas los datos del enunciado y no los que has redondeado tú: así no arrastras errores.</p>
+
+  <h3 class="g">Ejercicios</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Pasa a radianes o a grados.</span><label class="done"><input type="checkbox" id="ck-t21b-1"> hecho</label></div>
+      <div class="items"><span>a) 60°</span><span>b) 135°</span><span>c) 210°</span><span>d) 330°</span><span>e) π/4 rad</span><span>f) 2π/3 rad</span><span>g) π/5 rad</span><span>h) 4π rad</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) π/3 &nbsp; b) 3π/4 &nbsp; c) 7π/6 &nbsp; d) 11π/6<br>e) 45° &nbsp; f) 120° &nbsp; g) 36° &nbsp; h) 720°</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="q">Resuelve el triángulo rectángulo con catetos de 5 cm y 12 cm.</span><label class="done"><input type="checkbox" id="ck-t21b-2"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Hipotenusa: <span class="sq"><i>25 + 144</i></span> = <span class="res">13 cm</span><br>
+      tg α = 5/12 → <span class="res">α ≈ 22,62°</span> (ángulo opuesto al de 5 cm) · β = 90° − 22,62° = <span class="res">67,38°</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★</span><span class="q">Un triángulo rectángulo tiene hipotenusa a = 18 dm y un ángulo B̂ = 55°. Calcula los catetos b (opuesto a B̂) y c, y el ángulo Ĉ.</span><label class="done"><input type="checkbox" id="ck-t21b-3"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Ĉ = 90° − 55° = <span class="res">35°</span><br>
+      b = 18 · sen 55° ≈ <span class="res">14,74 dm</span> &nbsp; c = 18 · cos 55° ≈ <span class="res">10,32 dm</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">Sin usar la calculadora, halla las otras razones de α (agudo). Después, con calculadora, da α en grados, minutos y segundos.</span><label class="done"><input type="checkbox" id="ck-t21b-4"> hecho</label></div>
+      <div class="items"><span>a) sen α = 1/3</span><span>b) tg α = 3</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) cos α = <span class="sq"><i>1 − 1/9</i></span> = <span class="f"><i>2<span class="sq"><i>2</i></span></i><i>3</i></span> · tg α = <span class="f"><i>1/3</i><i>2√2/3</i></span> = <span class="f"><i><span class="sq"><i>2</i></span></i><i>4</i></span> · <span class="res">α ≈ 19° 28′ 16″</span><br>
+      b) 1 + 9 = 1/cos<sup>2</sup>α → cos α = <span class="f"><i>1</i><i><span class="sq"><i>10</i></span></i></span> = <span class="f"><i><span class="sq"><i>10</i></span></i><i>10</i></span> · sen α = 3 cos α = <span class="f"><i>3<span class="sq"><i>10</i></span></i><i>10</i></span> · <span class="res">α ≈ 71° 33′ 54″</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">Calcula el valor exacto reduciendo al primer cuadrante.</span><label class="done"><input type="checkbox" id="ck-t21b-5"> hecho</label></div>
+      <div class="items"><span>a) sen 150°, cos 150°, tg 150°</span><span>b) sen 240°, cos 240°, tg 240°</span><span>c) sen 510°</span><span>d) sen(−660°)</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) 150° = 180° − 30° → ½ , −<span class="sq"><i>3</i></span>/2 , −<span class="sq"><i>3</i></span>/3<br>
+      b) 240° = 180° + 60° → −<span class="sq"><i>3</i></span>/2 , −½ , <span class="sq"><i>3</i></span><br>
+      c) 510° − 360° = 150° → sen 150° = <span class="res">½</span><br>
+      d) −660° + 720° = 60° → sen 60° = <span class="res"><span class="sq"><i>3</i></span>/2</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">Halla los dos ángulos entre 0° y 360° que cumplen:</span><label class="done"><input type="checkbox" id="ck-t21b-6"> hecho</label></div>
+      <div class="items"><span>a) sen α = 0,5</span><span>b) cos α = −0,5</span><span>c) tg α = −<span class="sq"><i>3</i></span>/3</span><span>d) cos α = 0,848</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="res">30°</span> y 180° − 30° = <span class="res">150°</span><br>
+      b) calculadora 120° → <span class="res">120°</span> y 360° − 120° = <span class="res">240°</span><br>
+      c) calculadora −30° → <span class="res">330°</span> y 330° − 180° = <span class="res">150°</span><br>
+      d) calculadora 32° → <span class="res">32°</span> y <span class="res">328°</span> (aprox.)</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★</span><span class="q">Desde 200 m de la base de un edificio se ve su azotea con un ángulo de elevación de 60°. ¿Qué altura tiene?</span><label class="done"><input type="checkbox" id="ck-t21b-7"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">tg 60° = h/200 → h = 200<span class="sq"><i>3</i></span> ≈ <span class="res">346,41 m</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">8</span><span class="lvl">★★</span><span class="q">Un hexágono regular está inscrito en una circunferencia de radio 8 cm. Calcula su perímetro y su área.</span><label class="done"><input type="checkbox" id="ck-t21b-8"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Son 6 triángulos equiláteros de lado 8 → perímetro <span class="res">48 cm</span><br>
+      Apotema: 8 · cos 30° = 4<span class="sq"><i>3</i></span> → área = <span class="f"><i>48 · 4√3</i><i>2</i></span> = <span class="res">96<span class="sq"><i>3</i></span> ≈ 166,28 cm<sup>2</sup></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">9</span><span class="lvl">★★★</span><span class="q">Desde un punto se ve la copa de un árbol con un ángulo de 35°. Si nos alejamos 5 m, el ángulo pasa a ser de 25°. ¿Qué altura tiene el árbol?</span><label class="done"><input type="checkbox" id="ck-t21b-9"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Sea x la distancia inicial al pie del árbol:
+      <div class="eqs"><span class="brace"><span>h = x · tg 35°</span><span>h = (x + 5) · tg 25°</span></span></div>
+      x · tg 35° = (x + 5) tg 25° → x (tg 35° − tg 25°) = 5 tg 25° → x ≈ 9,97 m<br>
+      h = 9,97 · tg 35° ≈ <span class="res">6,98 m</span> <span class="note">método de la doble observación</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">10</span><span class="lvl">★★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">Dos observadores están a 98 m el uno del otro y ven un globo que está entre ellos con ángulos de elevación de 48° y 36°. ¿A qué altura está el globo?</span><label class="done"><input type="checkbox" id="ck-t21b-10"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Si x es la distancia horizontal del primero al globo:
+      <div class="eqs"><span class="brace"><span>h = x · tg 48°</span><span>h = (98 − x) · tg 36°</span></span></div>
+      x (tg 48° + tg 36°) = 98 tg 36° → x ≈ 38,76 m → h ≈ <span class="res">43,04 m</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">11</span><span class="lvl">★★★</span><span class="q">Demuestra que <span class="m">1 + tg<sup>2</sup>α = <span class="f"><i>1</i><i>cos<sup>2</sup>α</i></span></span>.</span><label class="done"><input type="checkbox" id="ck-t21b-11"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol"><span>1 + tg<sup>2</sup>α = 1 +<span class="f"><i>sen<sup>2</sup>α</i><i>cos<sup>2</sup>α</i></span> = <span class="f"><i>cos<sup>2</sup>α + sen<sup>2</sup>α</i><i>cos<sup>2</sup>α</i></span> = <span class="f"><i>1</i><i>cos<sup>2</sup>α</i></span></span> <span class="ok">✓</span><br>
+      <span class="note">la misma idea con sen² da 1 + cotg²α = 1/sen²α</span></div></details></div>
+  </div>
+  <p class="endnote">sigue: triángulos cualesquiera →</p>
+</section>
+
+<!-- ===================== 2.1 (III) TRIÁNGULOS ===================== -->
+<section class="sheet" id="t21c">
+  <span class="date">UP3 · 16 sesiones</span>
+  <span class="kicker">Tema 2.1 · Triangulando (III)</span>
+  <h2 class="grn">Resolución de triángulos</h2>
+  <p>Si el triángulo <b>no es rectángulo</b>, no valen las razones directamente. Usamos dos teoremas.</p>
+
+  <div class="row">
+    <figure class="fig" style="margin:0">
+      <svg viewBox="0 0 300 190" width="300" role="img" aria-label="Triángulo ABC: el lado a está enfrente del ángulo A, b enfrente de B, c enfrente de C">
+        <path class="ln s-ink" d="M30 165 L200 25 L280 165 Z"/>
+        <text x="12" y="178" class="t-red" font-size="19">A</text>
+        <text x="196" y="18" class="t-red" font-size="19">B</text>
+        <text x="284" y="178" class="t-red" font-size="19">C</text>
+        <text x="248" y="90" class="t-vio" font-size="19">a</text>
+        <text x="150" y="186" class="t-vio" font-size="19">b</text>
+        <text x="100" y="88" class="t-vio" font-size="19">c</text>
+      </svg>
+      <figcaption>cada lado, enfrente de su ángulo</figcaption>
+    </figure>
+    <div style="flex:1 1 260px">
+      <div class="box red"><span class="t">Teorema del seno</span><span class="m big"><span class="f"><i>a</i><i>sen Â</i></span> = <span class="f"><i>b</i><i>sen B̂</i></span> = <span class="f"><i>c</i><i>sen Ĉ</i></span></span></div>
+      <div class="box vio"><span class="t">Teorema del coseno</span><span class="m big">a<sup>2</sup> = b<sup>2</sup> + c<sup>2</sup> − 2bc · cos Â</span><br>
+        <span class="m">cos Â = <span class="f"><i>b<sup>2</sup> + c<sup>2</sup> − a<sup>2</sup></i><i>2bc</i></span></span><br>
+        <span class="note">si Â = 90°, cos Â = 0 y queda Pitágoras</span></div>
+    </div>
+  </div>
+
+  <h3 class="r">¿Qué teorema uso?</h3>
+  <div class="wrap"><table class="tb">
+    <tr><th>Conozco…</th><th>Uso</th></tr>
+    <tr><td>dos ángulos y un lado</td><td class="red">seno</td></tr>
+    <tr><td>dos lados y el ángulo que forman</td><td class="vio">coseno</td></tr>
+    <tr><td>dos lados y un ángulo que no forman</td><td class="red">seno</td></tr>
+    <tr><td>los tres lados</td><td class="vio">coseno</td></tr>
+  </table></div>
+  <div class="warn"><span class="ojo"><span>¡OJO!</span></span><p>Si con el seno buscas un ángulo, recuerda que α y 180° − α tienen el mismo seno: puede haber <b>dos triángulos</b>. Con el coseno no hay ambigüedad.</p></div>
+
+  <h3 class="g">Ejercicios</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Resuelve el triángulo con a = 4 cm, B̂ = 35° y Ĉ = 60°.</span><label class="done"><input type="checkbox" id="ck-t21c-1"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Â = 180° − 35° − 60° = <span class="res">85°</span><br>
+      b = <span class="f"><i>4 · sen 35°</i><i>sen 85°</i></span> ≈ <span class="res">2,30 cm</span> &nbsp; c = <span class="f"><i>4 · sen 60°</i><i>sen 85°</i></span> ≈ <span class="res">3,48 cm</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">En un triángulo, Â = 30°, B̂ = 53° y a = 75 cm. Calcula b y c.</span><label class="done"><input type="checkbox" id="ck-t21c-2"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Ĉ = 97°. b = <span class="f"><i>75 · sen 53°</i><i>sen 30°</i></span> ≈ <span class="res">119,80 cm</span> &nbsp; c = <span class="f"><i>75 · sen 97°</i><i>sen 30°</i></span> ≈ <span class="res">148,88 cm</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">Sabemos que b = 84 cm, c = 52 cm y Â = 72°. Calcula a.</span><label class="done"><input type="checkbox" id="ck-t21c-3"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a<sup>2</sup> = 84<sup>2</sup> + 52<sup>2</sup> − 2 · 84 · 52 · cos 72° = 9 760 − 2 699,6 ≈ 7 060,4 → <span class="res">a ≈ 84,03 cm</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">Los lados de un triángulo miden a = 50 cm, b = 84 cm y c = 116 cm. Calcula el ángulo B̂.</span><label class="done"><input type="checkbox" id="ck-t21c-4"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">cos B̂ = <span class="f"><i>50<sup>2</sup> + 116<sup>2</sup> − 84<sup>2</sup></i><i>2 · 50 · 116</i></span> = <span class="f"><i>8 900</i><i>11 600</i></span> ≈ 0,7672 → <span class="res">B̂ ≈ 39° 53′ 35″</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">Halla los ángulos de un triángulo isósceles de lados 36 cm, 36 cm y 26 cm.</span><label class="done"><input type="checkbox" id="ck-t21c-5"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Ángulo desigual (opuesto a 26): cos = <span class="f"><i>36<sup>2</sup> + 36<sup>2</sup> − 26<sup>2</sup></i><i>2 · 36 · 36</i></span> = <span class="f"><i>1 916</i><i>2 592</i></span> ≈ 0,7392 → <span class="res">≈ 42° 20′ 13″</span><br>
+      Los otros dos son iguales: (180° − 42° 20′ 13″) : 2 ≈ <span class="res">68° 49′ 54″</span> cada uno</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">Dos lados de un triángulo miden 40 cm y 45 cm y forman un ángulo de 44°. ¿Cuánto mide el tercer lado?</span><label class="done"><input type="checkbox" id="ck-t21c-6"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">c<sup>2</sup> = 40<sup>2</sup> + 45<sup>2</sup> − 2 · 40 · 45 · cos 44° ≈ 1 035,4 → <span class="res">c ≈ 32,18 cm</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★★</span><span class="q">Para medir la distancia a un árbol C de la otra orilla de un río, se toman dos puntos A y B en esta orilla, separados 50 m. Se miden los ángulos Â = 45° y B̂ = 110°. ¿A qué distancia está el árbol de A y de B?</span><label class="done"><input type="checkbox" id="ck-t21c-7"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Ĉ = 180° − 45° − 110° = 25°. Teorema del seno con c = AB = 50:<br>
+      AC = <span class="f"><i>50 · sen 110°</i><i>sen 25°</i></span> ≈ <span class="res">111,18 m</span> &nbsp; BC = <span class="f"><i>50 · sen 45°</i><i>sen 25°</i></span> ≈ <span class="res">83,66 m</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">8</span><span class="lvl">★★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">Un octógono regular está inscrito en una circunferencia de radio 5 cm. Calcula su perímetro y su área.</span><label class="done"><input type="checkbox" id="ck-t21c-8"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">8 triángulos isósceles de lados 5, 5 y ángulo central 360°/8 = 45°.<br>
+      Lado: 2 · 5 · sen 22,5° ≈ 3,83 cm → perímetro ≈ <span class="res">30,61 cm</span><br>
+      Área de cada triángulo: ½ · 5 · 5 · sen 45° → total = 8 · ½ · 25 · <span class="f"><i><span class="sq"><i>2</i></span></i><i>2</i></span> = 50<span class="sq"><i>2</i></span> ≈ <span class="res">70,71 cm<sup>2</sup></span></div></details></div>
+  </div>
+  <p class="endnote">fin del tema 2.1 ✓</p>
+</section>
+
+<!-- ===================== 2.2 GEOMETRÍA ANALÍTICA ===================== -->
+<section class="sheet" id="t22">
+  <span class="date">UP4 · 16 sesiones</span>
+  <span class="kicker">Tema 2.2</span>
+  <h2 class="ink">Orientando el plano</h2>
+
+  <h3 class="v">Vectores</h3>
+  <div class="row">
+    <figure class="fig" style="margin:0">
+      <svg viewBox="0 0 230 210" width="230" role="img" aria-label="Vector de A(1,1) a B(4,4) en ejes de coordenadas, con sus componentes 3 y 3">
+        <g class="s-pen" stroke-width="0.6" opacity=".55">
+          <path d="M30 0V190M70 0V190M110 0V190M150 0V190M190 0V190M0 30H220M0 70H220M0 110H220M0 150H220"/>
+        </g>
+        <path class="ln s-pen" d="M10 190 L220 190 M30 205 L30 5" stroke-width="1.4"/>
+        <path class="ln s-grn" d="M70 150 L190 150" stroke-dasharray="5 5" stroke-width="1.8"/>
+        <path class="ln s-grn" d="M190 150 L190 30" stroke-dasharray="5 5" stroke-width="1.8"/>
+        <path class="ln s-red" d="M70 150 L190 30 M174 34 L190 30 L186 46" stroke-width="2.8"/>
+        <circle cx="70" cy="150" r="4" class="t-ink"/>
+        <text x="40" y="168" class="t-ink" font-size="15">A(1,1)</text>
+        <text x="150" y="22" class="t-ink" font-size="15">B(4,4)</text>
+        <text x="120" y="168" class="t-grn" font-size="15">3</text>
+        <text x="196" y="96" class="t-grn" font-size="15">3</text>
+        <text x="96" y="84" class="t-red" font-size="16">AB</text>
+      </svg>
+    </figure>
+    <div style="flex:1 1 280px">
+      <div class="box red"><span class="t">Vector de A a B</span><span class="m big"><span class="vc">AB</span> = (b<sub>1</sub> − a<sub>1</sub> , b<sub>2</sub> − a<sub>2</sub>)</span><br><span class="note">"final menos origen"</span></div>
+      <div class="box ink"><span class="t">Módulo (longitud)</span><span class="m big">|<span class="vc">v</span>| = <span class="sq"><i>v<sub>1</sub><sup>2</sup> + v<sub>2</sub><sup>2</sup></i></span></span><br><span class="m">d(A, B) = |<span class="vc">AB</span>|</span></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="dash" style="flex:1 1 260px"><b class="vio">Operaciones</b><br>
+      Suma: <span class="m">(2, 4) + (1, 5) = (3, 9)</span><br>
+      Por un número: <span class="m">3 · (2, −1) = (6, −3)</span><br>
+      <b>Combinación lineal</b>: <span class="m"><span class="vc">w</span> = a·<span class="vc">u</span> + b·<span class="vc">v</span></span></div>
+    <div class="box grn"><span class="t">Punto medio de AB</span><span class="m big">M = (<span class="f"><i>a<sub>1</sub> + b<sub>1</sub></i><i>2</i></span> , <span class="f"><i>a<sub>2</sub> + b<sub>2</sub></i><i>2</i></span>)</span></div>
+  </div>
+
+  <h3 class="r">Producto escalar</h3>
+  <div class="row">
+    <div class="box red"><span class="m big"><span class="vc">u</span> · <span class="vc">v</span> = u<sub>1</sub>v<sub>1</sub> + u<sub>2</sub>v<sub>2</sub></span><br><span class="m big"><span class="vc">u</span> · <span class="vc">v</span> = |<span class="vc">u</span>| · |<span class="vc">v</span>| · cos α</span><br><span class="note">el resultado es un NÚMERO, no un vector</span></div>
+    <div style="flex:1 1 260px">
+      <p>Juntando las dos fórmulas, el <b>ángulo entre dos vectores</b>:</p>
+      <p class="m big">cos α = <span class="f"><i>u<sub>1</sub>v<sub>1</sub> + u<sub>2</sub>v<sub>2</sub></i><i>|<span class="vc">u</span>| · |<span class="vc">v</span>|</i></span></p>
+      <p><span class="hl"><span class="vc">u</span> ⊥ <span class="vc">v</span> ⇔ <span class="vc">u</span> · <span class="vc">v</span> = 0</span> &nbsp; <span class="note">(cos 90° = 0)</span></p>
+    </div>
+  </div>
+  <p>Ejemplo: <span class="m">(−2, −4) · (2, −1) = −4 + 4 = 0</span> → son <b>perpendiculares</b>.</p>
+
+  <h3 class="g">Ecuaciones de la recta</h3>
+  <p>Una recta queda fijada por un <b>punto</b> P(x<sub>0</sub>, y<sub>0</sub>) y un <b>vector director</b> <span class="vc">u</span> = (u<sub>1</sub>, u<sub>2</sub>). Ejemplo: P(−2, 2), <span class="vc">u</span> = (1, −3).</p>
+  <div class="wrap"><table class="tb">
+    <tr><th>Ecuación</th><th>Forma</th><th>Ejemplo</th></tr>
+    <tr><td class="vio">Vectorial</td><td>(x, y) = (x<sub>0</sub>, y<sub>0</sub>) + t·(u<sub>1</sub>, u<sub>2</sub>)</td><td>(x, y) = (−2, 2) + t(1, −3)</td></tr>
+    <tr><td class="vio">Paramétricas</td><td><span class="brace"><span>x = x<sub>0</sub> + t·u<sub>1</sub></span><span>y = y<sub>0</sub> + t·u<sub>2</sub></span></span></td><td><span class="brace"><span>x = −2 + t</span><span>y = 2 − 3t</span></span></td></tr>
+    <tr><td class="vio">Continua</td><td><span class="f"><i>x − x<sub>0</sub></i><i>u<sub>1</sub></i></span> = <span class="f"><i>y − y<sub>0</sub></i><i>u<sub>2</sub></i></span></td><td><span class="f"><i>x + 2</i><i>1</i></span> = <span class="f"><i>y − 2</i><i>−3</i></span></td></tr>
+    <tr><td class="red">Punto‑pendiente</td><td>y − y<sub>0</sub> = m (x − x<sub>0</sub>)</td><td>y − 2 = −3(x + 2)</td></tr>
+    <tr><td class="red">Explícita</td><td>y = m x + n</td><td>y = −3x − 4</td></tr>
+    <tr><td class="grn">General (implícita)</td><td>Ax + By + C = 0</td><td>3x + y + 4 = 0</td></tr>
+  </table></div>
+  <div class="row" style="margin-top:8px">
+    <div class="box vio"><span class="t">Pendiente</span><span class="m big">m = <span class="f"><i>u<sub>2</sub></i><i>u<sub>1</sub></i></span> = <span class="f"><i>−A</i><i>B</i></span></span><br><span class="note">n = ordenada en el origen</span></div>
+    <div class="postit"><b>En la general Ax + By + C = 0</b>vector director: <b>(−B, A)</b><br>vector normal (⊥): <b>(A, B)</b></div>
+  </div>
+  <p><b>¿Un punto está en la recta?</b> Sustituye sus coordenadas: si se cumple la ecuación, <span class="grn">pertenece</span>.</p>
+
+  <h3 class="v">Posiciones relativas de dos rectas</h3>
+  <p class="m">r: Ax + By + C = 0 &nbsp;&nbsp; s: A′x + B′y + C′ = 0</p>
+  <div class="mini">
+    <div class="dash">
+      <svg viewBox="0 0 150 80" width="150" role="img" aria-label="Dos rectas que se cortan"><path class="ln s-ink" d="M10 70 L140 10"/><path class="ln s-red" d="M10 15 L140 70"/></svg>
+      <b class="red">Secantes</b><span class="m"><span class="f"><i>A</i><i>A′</i></span> ≠ <span class="f"><i>B</i><i>B′</i></span></span><br><span class="note">un punto en común</span></div>
+    <div class="dash">
+      <svg viewBox="0 0 150 80" width="150" role="img" aria-label="Dos rectas paralelas"><path class="ln s-ink" d="M10 55 L140 15"/><path class="ln s-red" d="M10 75 L140 35"/></svg>
+      <b class="grn">Paralelas</b><span class="m"><span class="f"><i>A</i><i>A′</i></span> = <span class="f"><i>B</i><i>B′</i></span> ≠ <span class="f"><i>C</i><i>C′</i></span></span><br><span class="note">misma pendiente</span></div>
+    <div class="dash">
+      <svg viewBox="0 0 150 80" width="150" role="img" aria-label="Dos rectas coincidentes"><path class="ln s-ink" d="M10 65 L140 15" stroke-width="5" opacity=".45"/><path class="ln s-red" d="M10 65 L140 15" stroke-dasharray="6 6"/></svg>
+      <b class="vio">Coincidentes</b><span class="m"><span class="f"><i>A</i><i>A′</i></span> = <span class="f"><i>B</i><i>B′</i></span> = <span class="f"><i>C</i><i>C′</i></span></span><br><span class="note">son la misma recta</span></div>
+  </div>
+  <div class="row">
+    <div class="box grn"><span class="t">Paralelas</span><span class="m big">m = m′</span></div>
+    <div class="box red"><span class="t">Perpendiculares</span><span class="m big">m · m′ = −1</span></div>
+    <p style="flex:1 1 240px">Para el <b>punto de corte</b> de dos secantes se resuelve el <span class="hl">sistema</span> formado por sus ecuaciones.</p>
+  </div>
+  <div class="dash"><b class="vio">Mediatriz de AB</b>: recta perpendicular a AB por su punto medio. Todos sus puntos están a la misma distancia de A y de B. Se escribe con el punto medio M y el vector <span class="vc">AB</span> como <b>vector normal</b>.</div>
+
+  <h3 class="g">Ejercicios</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Dados A(1, 1) y B(4, 4), calcula <span class="vc">AB</span>, su módulo y el punto medio de AB.</span><label class="done"><input type="checkbox" id="ck-t22-1"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol"><span class="vc">AB</span> = <span class="res">(3, 3)</span> · |<span class="vc">AB</span>| = <span class="sq"><i>18</i></span> = <span class="res">3<span class="sq"><i>2</i></span> ≈ 4,24</span> · M = <span class="res">(2,5 ; 2,5)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">Dados <span class="vc">u</span> = (2, 4) y <span class="vc">v</span> = (1, 5): a) calcula <span class="vc">u</span> + <span class="vc">v</span>; b) calcula 2<span class="vc">u</span> − <span class="vc">v</span>; c) escribe <span class="vc">w</span> = (10, 10) como combinación lineal de <span class="vc">u</span> y <span class="vc">v</span>.</span><label class="done"><input type="checkbox" id="ck-t22-2"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="res">(3, 9)</span> &nbsp; b) (4, 8) − (1, 5) = <span class="res">(3, 3)</span><br>
+      c) (10, 10) = a(2, 4) + b(1, 5) → <span class="brace"><span>2a + b = 10</span><span>4a + 5b = 10</span></span> → a = <span class="f"><i>20</i><i>3</i></span>, b = <span class="f"><i>−10</i><i>3</i></span><br>
+      <span class="res"><span class="vc">w</span> = <span class="f"><i>20</i><i>3</i></span> <span class="vc">u</span> − <span class="f"><i>10</i><i>3</i></span> <span class="vc">v</span></span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★★</span><span class="q">Calcula el ángulo que forman los vectores.</span><label class="done"><input type="checkbox" id="ck-t22-3"> hecho</label></div>
+      <div class="items"><span>a) <span class="vc">u</span> = (−2, −4), <span class="vc">v</span> = (2, −1)</span><span>b) <span class="vc">u</span> = (2, <span class="sq"><i>3</i></span>), <span class="vc">v</span> = (<span class="sq"><i>3</i></span>, 1)</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="vc">u</span>·<span class="vc">v</span> = −4 + 4 = 0 → <span class="res">90°</span><br>
+      b) <span class="vc">u</span>·<span class="vc">v</span> = 2<span class="sq"><i>3</i></span> + <span class="sq"><i>3</i></span> = 3<span class="sq"><i>3</i></span>; |<span class="vc">u</span>| = <span class="sq"><i>7</i></span>, |<span class="vc">v</span>| = 2 → cos α = <span class="f"><i>3√3</i><i>2√7</i></span> ≈ 0,982 → <span class="res">α ≈ 10° 53′ 36″</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★</span><span class="q">Escribe todas las ecuaciones de la recta que pasa por A(−2, 2) y tiene pendiente m = −3.</span><label class="done"><input type="checkbox" id="ck-t22-4"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Vector director: (1, −3).<br>
+      Vectorial: (x, y) = (−2, 2) + t(1, −3) · Paramétricas: x = −2 + t, y = 2 − 3t<br>
+      Continua: <span class="f"><i>x + 2</i><i>1</i></span> = <span class="f"><i>y − 2</i><i>−3</i></span> · Punto‑pendiente: y − 2 = −3(x + 2)<br>
+      Explícita: <span class="res">y = −3x − 4</span> · General: <span class="res">3x + y + 4 = 0</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">Halla la ecuación explícita y la general de la recta que pasa por A(2, 8) con vector director <span class="vc">u</span> = (−1, 9).</span><label class="done"><input type="checkbox" id="ck-t22-5"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">m = 9/(−1) = −9 → y − 8 = −9(x − 2) → <span class="res">y = −9x + 26</span> → <span class="res">9x + y − 26 = 0</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">Comprueba si los puntos A(0, −1) y B(6, −1) pertenecen a la recta <span class="m"><span class="f"><i>x − 3</i><i>3</i></span> = <span class="f"><i>y + 2</i><i>−1</i></span></span>.</span><label class="done"><input type="checkbox" id="ck-t22-6"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">A: <span class="f"><i>−3</i><i>3</i></span> = −1 y <span class="f"><i>1</i><i>−1</i></span> = −1 → iguales → <span class="res">pertenece</span><br>
+      B: <span class="f"><i>3</i><i>3</i></span> = 1 y <span class="f"><i>1</i><i>−1</i></span> = −1 → distintos → <span class="res">no pertenece</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">Dadas r: 2x + 3y − 12 = 0 y s: <span class="m"><span class="f"><i>x − 3</i><i>4</i></span> = <span class="f"><i>y + 1</i><i>1</i></span></span>: a) escribe r en paramétricas; b) escribe s en forma general; c) estudia su posición y halla el punto de corte.</span><label class="done"><input type="checkbox" id="ck-t22-7"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) director (−B, A) = (−3, 2); un punto: x = 0 → y = 4. <span class="res">x = −3t, y = 4 + 2t</span><br>
+      b) x − 3 = 4(y + 1) → <span class="res">x − 4y − 7 = 0</span><br>
+      c) <span class="f"><i>2</i><i>1</i></span> ≠ <span class="f"><i>3</i><i>−4</i></span> → <b>secantes</b>. Con x = 4y + 7 en r: 8y + 14 + 3y = 12 → y = −2/11, x = 69/11 → <span class="res">(<span class="f"><i>69</i><i>11</i></span> , <span class="f"><i>−2</i><i>11</i></span>)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">8</span><span class="lvl">★★</span><span class="q">Estudia la posición relativa de r: Ax + 6y + 1 = 0 y s: x + 2y + B = 0 según los valores de A y B.</span><label class="done"><input type="checkbox" id="ck-t22-8"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol"><span class="f"><i>A</i><i>1</i></span> = <span class="f"><i>6</i><i>2</i></span> = 3 ⇔ A = 3. Y <span class="f"><i>1</i><i>B</i></span> = 3 ⇔ B = 1/3.<br>
+      • A ≠ 3 → <span class="res">secantes</span><br>• A = 3 y B ≠ 1/3 → <span class="res">paralelas</span><br>• A = 3 y B = 1/3 → <span class="res">coincidentes</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">9</span><span class="lvl">★★</span><span class="q">Dada r: x = 3 − 5t, y = −2 + 2t, halla: a) la ecuación continua de la paralela a r por P(1, 3); b) la ecuación general de la perpendicular a r por Q(4, −1).</span><label class="done"><input type="checkbox" id="ck-t22-9"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Director de r: (−5, 2).<br>
+      a) mismo director: <span class="res"><span class="f"><i>x − 1</i><i>−5</i></span> = <span class="f"><i>y − 3</i><i>2</i></span></span><br>
+      b) (−5, 2) hace de vector normal: −5x + 2y + C = 0 con Q → −20 − 2 + C = 0 → C = 22 → <span class="res">5x − 2y − 22 = 0</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">10</span><span class="lvl">★★★</span><span class="tag">Ejercicio de Guillermo</span><span class="q">Triángulo de vértices A(0, 0), B(4, −2) y C(4, 8). a) Clasifícalo según sus ángulos. b) Calcula su área. c) Calcula su perímetro. d) Halla la mediatriz del lado AC. e) Comprueba que esa mediatriz pasa por el punto medio de BC. ¿Por qué ocurre?</span><label class="done"><input type="checkbox" id="ck-t22-10"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="vc">AB</span> = (4, −2), <span class="vc">AC</span> = (4, 8) → <span class="vc">AB</span>·<span class="vc">AC</span> = 16 − 16 = 0 → <span class="res">rectángulo en A</span><br>
+      b) Área = <span class="f"><i>|<span class="vc">AB</span>| · |<span class="vc">AC</span>|</i><i>2</i></span> = <span class="f"><i>√20 · √80</i><i>2</i></span> = <span class="res">20 u<sup>2</sup></span><br>
+      c) |<span class="vc">BC</span>| = |(0, 10)| = 10 → P = 2<span class="sq"><i>5</i></span> + 4<span class="sq"><i>5</i></span> + 10 = <span class="res">10 + 6<span class="sq"><i>5</i></span> ≈ 23,42 u</span><br>
+      d) Punto medio de AC: (2, 4); normal (4, 8): 4x + 8y + C = 0 → C = −40 → <span class="res">x + 2y − 10 = 0</span><br>
+      e) Punto medio de BC: (4, 3) → 4 + 6 − 10 = 0 <span class="ok">✓</span>. En un triángulo rectángulo el <b>circuncentro</b> (corte de las mediatrices) es el punto medio de la hipotenusa.</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">11</span><span class="lvl">★★★</span><span class="q">Halla el ángulo Â del triángulo A(−3, 0), B(3, 4), C(4, −2).</span><label class="done"><input type="checkbox" id="ck-t22-11"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol"><span class="vc">AB</span> = (6, 4), <span class="vc">AC</span> = (7, −2) → <span class="vc">AB</span>·<span class="vc">AC</span> = 42 − 8 = 34<br>
+      cos Â = <span class="f"><i>34</i><i>√52 · √53</i></span> ≈ 0,6476 → <span class="res">Â ≈ 49° 38′ 8″</span></div></details></div>
+  </div>
+  <p class="endnote">fin del tema 2.2 ✓ · fin de la 2ª evaluación</p>
+</section>
+
+<script>
+/* "hecho": se guarda solo en este navegador */
+document.querySelectorAll('.done input').forEach(cb=>{
+  try{ cb.checked = localStorage.getItem(cb.id)==="1"; }catch(e){}
+  cb.addEventListener('change',()=>{ try{ localStorage.setItem(cb.id, cb.checked?"1":"0"); }catch(e){} });
+});
+/* mostrar/ocultar todas las soluciones */
+(function(){
+  const btn=document.getElementById('toggleSol'); let open=false;
+  btn.addEventListener('click',()=>{ open=!open;
+    document.querySelectorAll('.ej details').forEach(d=>d.open=open);
+    btn.textContent = open ? 'ocultar soluciones' : 'ver todas las soluciones'; });
+})();
+</script>
+
+</body>
+</html>

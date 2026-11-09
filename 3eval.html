@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>Libreta 4º B · 3ª evaluación</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Kalam:wght@400;700&family=Patrick+Hand&display=swap">
+<style>
+@font-face{font-family:"BarFix";src:local("Arial"),local("Helvetica"),local("Roboto"),local("DejaVu Sans");unicode-range:U+007C}
+/* Layout: hojas de cuaderno cuadriculado apiladas sobre la mesa; pestañas de tema fijas arriba */
+:root{
+  --desk:#e6ebef; --paper:#fbfcf8; --grid:#d5e4ee; --grid2:#bfd3e1; --margin:#ef9a9a;
+  --ink:#24429c; --red:#cf3535; --green:#1d8655; --violet:#7a46b8; --pencil:#5a5f68;
+  --hl:#fff07a; --hlp:#ffc6da; --hlg:#c8f0c6; --postit:#fff4a3; --postit2:#ffd9b0;
+  --shadow:rgba(30,40,60,.16);
+  --f-body:"BarFix","Patrick Hand","Comic Sans MS","Segoe Print",cursive;
+  --f-head:"Kalam","Patrick Hand","Comic Sans MS",cursive;
+  --f-note:"Caveat","Kalam","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#10141c; --paper:#1b2130; --grid:#262f42; --grid2:#303c54; --margin:#7c3a46;
+  --ink:#9fc2ff; --red:#ff8d88; --green:#79dba6; --violet:#c9a7ff; --pencil:#aeb6c4;
+  --hl:rgba(255,226,70,.30); --hlp:rgba(255,110,170,.30); --hlg:rgba(110,230,150,.24); --postit:#4a4424; --postit2:#4d3a25;
+  --shadow:rgba(0,0,0,.5); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --desk:#10141c; --paper:#1b2130; --grid:#262f42; --grid2:#303c54; --margin:#7c3a46;
+  --ink:#9fc2ff; --red:#ff8d88; --green:#79dba6; --violet:#c9a7ff; --pencil:#aeb6c4;
+  --hl:rgba(255,226,70,.30); --hlp:rgba(255,110,170,.30); --hlg:rgba(110,230,150,.24); --postit:#4a4424; --postit2:#4d3a25;
+  --shadow:rgba(0,0,0,.5); color-scheme:dark }
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:20px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--desk)}
+
+/* ---------- pestañas ---------- */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--desk);display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding-block:10px 8px;max-width:940px;margin:0 auto}
+.tabs a{font-family:var(--f-head);font-weight:700;font-size:16px;text-decoration:none;color:var(--ink);background:var(--paper);
+  padding:4px 12px 2px;border:2px solid currentColor;border-radius:14px 4px 12px 5px/5px 12px 4px 14px;white-space:nowrap}
+.tabs a:nth-child(2){color:var(--violet)} .tabs a:nth-child(3){color:var(--red)} .tabs a:nth-child(4){color:var(--green)} .tabs a:nth-child(5){color:var(--ink)}
+.tabs a:focus-visible,.tabs button:focus-visible,summary:focus-visible{outline:3px dashed var(--red);outline-offset:3px}
+.tabs button{font-family:var(--f-note);font-size:20px;font-weight:700;background:var(--postit);color:var(--ink);border:none;padding:2px 12px;cursor:pointer;transform:rotate(-1.5deg);box-shadow:1px 2px 0 var(--shadow)}
+
+/* ---------- hoja ---------- */
+.sheet{position:relative;max-width:900px;margin:22px auto 0;background-color:var(--paper);
+  background-image:linear-gradient(var(--grid2) 1px,transparent 1px),linear-gradient(90deg,var(--grid2) 1px,transparent 1px),
+   linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:100px 100px,100px 100px,20px 20px,20px 20px;
+  box-shadow:0 1px 0 var(--grid2),0 8px 22px var(--shadow);border-radius:3px;
+  padding:34px 34px 40px 74px;min-width:0}
+.sheet::before{content:"";position:absolute;left:52px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.8}
+.sheet::after{content:"";position:absolute;left:14px;top:16px;bottom:16px;width:16px;
+  background:radial-gradient(circle at 8px 10px,var(--desk) 5px,transparent 6px) 0 0/16px 40px repeat-y}
+@media (max-width:620px){.sheet{padding:26px 16px 30px 40px}.sheet::before{left:30px}.sheet::after{left:6px;width:14px;background-size:14px 34px}body{font-size:18px}}
+
+.date{position:absolute;right:26px;top:12px;font-family:var(--f-note);font-size:21px;color:var(--pencil)}
+h1,h2,h3{font-family:var(--f-head);font-weight:700;text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(34px,6vw,54px);color:var(--violet);letter-spacing:.5px}
+h2{font-size:clamp(26px,4.4vw,36px);text-transform:uppercase;letter-spacing:1.5px;margin-top:6px}
+h3{font-size:23px;text-transform:uppercase;letter-spacing:1px;margin:30px 0 10px;display:inline-block;
+  text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+h3.r{color:var(--red)} h3.g{color:var(--green)} h3.v{color:var(--violet)}
+.kicker{font-family:var(--f-note);font-size:24px;color:var(--pencil);display:block}
+.wavy{text-decoration:underline wavy var(--red);text-decoration-thickness:1.5px;text-underline-offset:5px}
+p{margin:8px 0;max-width:68ch}
+ul.pen{margin:6px 0;padding-left:0;list-style:none}
+ul.pen li{padding-left:26px;position:relative;margin:4px 0}
+ul.pen li::before{content:"→";position:absolute;left:0;color:var(--red)}
+.red{color:var(--red)} .grn{color:var(--green)} .vio{color:var(--violet)} .pen-grey{color:var(--pencil)}
+.hl{background:linear-gradient(transparent 45%,var(--hl) 45%,var(--hl) 92%,transparent 92%);padding:0 3px}
+.hlp{background:linear-gradient(transparent 45%,var(--hlp) 45%,var(--hlp) 92%,transparent 92%);padding:0 3px}
+.hlg{background:linear-gradient(transparent 45%,var(--hlg) 45%,var(--hlg) 92%,transparent 92%);padding:0 3px}
+.note{font-family:var(--f-note);font-size:23px;color:var(--red);line-height:1.15}
+
+/* cajas dibujadas a mano */
+.box{border:2.2px solid currentColor;border-radius:255px 14px 225px 14px/14px 225px 14px 255px;padding:10px 16px;margin:12px 0;display:block;width:fit-content;max-width:100%}
+.box.ink{color:var(--ink)} .box.red{color:var(--red)} .box.grn{color:var(--green)} .box.vio{color:var(--violet)}
+.box .t{font-family:var(--f-head);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:1px;display:block}
+.box > *:not(.t){color:var(--ink)}
+.dash{border:2px dashed var(--pencil);border-radius:8px;padding:8px 14px;margin:12px 0}
+.row{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-start}
+.row > *{min-width:0}
+.postit{background:var(--postit);padding:12px 16px 14px;transform:rotate(-1.2deg);box-shadow:2px 4px 8px var(--shadow);max-width:340px;font-size:19px;margin:10px 0}
+.postit.o{background:var(--postit2);transform:rotate(1.1deg)}
+.postit > b:first-child{font-family:var(--f-head);display:block;color:var(--red);font-size:17px;text-transform:uppercase;letter-spacing:1px}
+.ojo{position:relative;display:inline-flex;align-items:center;justify-content:center;width:118px;height:96px;flex:none;
+  font-family:var(--f-head);font-weight:700;color:var(--red);font-size:19px;text-align:center;line-height:1.05}
+.ojo::before{content:"";position:absolute;inset:0;background:var(--red);
+  clip-path:polygon(50% 0,59% 22%,80% 6%,75% 31%,100% 30%,82% 49%,100% 66%,75% 67%,82% 94%,60% 78%,50% 100%,40% 78%,17% 94%,25% 67%,0 68%,18% 49%,0 30%,25% 31%,20% 6%,41% 22%)}
+.ojo::after{content:"";position:absolute;inset:3px;background:var(--paper);
+  clip-path:polygon(50% 0,59% 22%,80% 6%,75% 31%,100% 30%,82% 49%,100% 66%,75% 67%,82% 94%,60% 78%,50% 100%,40% 78%,17% 94%,25% 67%,0 68%,18% 49%,0 30%,25% 31%,20% 6%,41% 22%)}
+.ojo span{position:relative;z-index:1;padding:0 20px}
+.warn{display:flex;gap:12px;align-items:center;margin:12px 0}
+.warn p{margin:0}
+
+/* matemáticas a mano */
+.m{white-space:nowrap}
+.f{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 3px;line-height:1.15}
+.f > i{font-style:normal;display:block;padding:0 3px}
+.f > i:first-child{border-bottom:1.7px solid currentColor}
+.sq{position:relative;display:inline-flex;align-items:flex-start;margin-left:2px}
+.sq::before{content:"√";font-size:1.1em;line-height:1.25}
+.sq > i{font-style:normal;border-top:1.7px solid currentColor;padding:0 3px;margin-top:.2em;line-height:1.25}
+.sq[data-n]::after{content:attr(data-n);position:absolute;left:-.25em;top:-.2em;font-size:.6em}
+.sq[data-n]{margin-left:.45em}
+sup,sub{font-size:.68em}
+.big{font-size:1.25em}
+.eqs{display:flex;flex-direction:column;gap:4px;margin:8px 0;padding-left:10px}
+.brace{border-left:2.2px solid currentColor;border-radius:10px 0 0 10px;padding:2px 0 2px 12px;display:inline-flex;flex-direction:column;gap:2px;vertical-align:middle}
+
+/* tablas */
+.wrap{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;font-family:var(--f-body)}
+.tb td,.tb th{border:1.6px solid var(--pencil);padding:4px 12px;text-align:center}
+.tb th{font-family:var(--f-head);font-weight:700;color:var(--violet)}
+.ruf td{padding:2px 12px;text-align:center;min-width:30px}
+.ruf tr:nth-child(2) td{border-bottom:2px solid var(--ink)}
+.ruf td:first-child{border-right:2px solid var(--ink);color:var(--red)}
+.ruf .rest{border:2px solid var(--red);border-radius:6px;color:var(--red)}
+.sg td,.sg th{border:1.4px solid var(--pencil);padding:3px 12px;text-align:center}
+.sg th{font-weight:400;color:var(--pencil)}
+.sg td:first-child{text-align:right;color:var(--ink)}
+.sg .p{color:var(--green);font-weight:700} .sg .n{color:var(--red);font-weight:700}
+.sg tr:last-child td{border-top:2.4px solid var(--ink)}
+
+/* conjuntos */
+.sets{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;border:2.4px solid var(--ink);border-radius:10px 4px 12px 6px;padding:26px 12px 12px;position:relative;width:fit-content;max-width:100%}
+.sets::before{content:"ℝ  reales";position:absolute;top:2px;right:12px;font-family:var(--f-head);font-weight:700;color:var(--ink)}
+.set{border:2px solid currentColor;border-radius:8px 3px 9px 4px;padding:22px 10px 8px;position:relative;display:flex;align-items:flex-end}
+.set > .lbl{position:absolute;top:2px;left:8px;font-size:16px;white-space:nowrap}
+.set.q{color:var(--violet)} .set.z{color:var(--green)} .set.n{color:var(--red)} .set.i{color:var(--pencil);min-width:150px;align-items:center}
+.set .x{color:var(--ink);font-size:16px}
+
+/* temporalización */
+.plan{margin:14px 0 6px}
+.bar{display:flex;gap:4px;height:46px;margin:6px 0}
+.bar > div{border:2px solid currentColor;border-radius:6px 3px 7px 2px;display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-size:14px;line-height:1.05;text-align:center;padding:0 4px;min-width:0;overflow:hidden}
+.bar .on{background:repeating-linear-gradient(-45deg,transparent 0 6px,var(--hl) 6px 10px)}
+.bar .off{color:var(--pencil);opacity:.65;border-style:dashed}
+.legend{font-family:var(--f-note);font-size:19px;color:var(--pencil)}
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:16px}
+.toc a{display:block;text-decoration:none;color:var(--ink);border:2px solid currentColor;border-radius:14px 5px 12px 6px/6px 12px 5px 14px;padding:10px 14px;background:var(--paper)}
+.toc a b{font-family:var(--f-head);display:block;font-size:20px}
+.toc a span{font-family:var(--f-note);font-size:19px;color:var(--pencil)}
+.toc a:nth-child(1){color:var(--violet)} .toc a:nth-child(2){color:var(--red)} .toc a:nth-child(3){color:var(--green)} .toc a:nth-child(4){color:var(--ink)}
+
+/* ejercicios */
+.ejs{display:flex;flex-direction:column;gap:18px;margin-top:10px}
+.ej{border-top:1.5px dashed var(--grid2);padding-top:12px}
+.ej-h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.num{font-family:var(--f-head);font-weight:700;color:var(--red);border:2px solid var(--red);border-radius:50%;min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;font-size:17px;flex:none}
+.lvl{color:var(--violet);font-size:17px;letter-spacing:2px}
+.tag{font-family:var(--f-note);font-size:20px;color:var(--green);border-bottom:2px solid var(--green);line-height:1}
+.ej-h .q{flex:1 1 300px;min-width:0}
+.done{font-family:var(--f-note);font-size:19px;color:var(--pencil);display:inline-flex;gap:4px;align-items:center;cursor:pointer;margin-left:auto}
+.done input{accent-color:var(--green);width:17px;height:17px}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 20px;margin:6px 0 4px 44px}
+@media (max-width:620px){.items{margin-left:0}}
+details{margin:6px 0 0 44px}
+@media (max-width:620px){details{margin-left:0}}
+summary{cursor:pointer;font-family:var(--f-note);font-size:22px;color:var(--green);width:fit-content;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"✎ ";}
+details[open] summary{color:var(--pencil)}
+.sol{border-left:3px solid var(--green);padding:6px 0 6px 14px;margin-top:6px;color:var(--ink)}
+.sol .ok{color:var(--green);font-weight:700}
+.res{border:2px solid var(--ink);border-radius:5px 2px 6px 3px;padding:0 6px;display:inline-block}
+.endnote{font-family:var(--f-note);font-size:22px;color:var(--pencil);text-align:right;margin-top:24px}
+svg text{font-family:var(--f-body)}
+</style>
+<style>
+.fig{flex:none;max-width:100%;margin:0}
+.fig svg{display:block;max-width:100%;height:auto}
+.fig figcaption{font-family:var(--f-note);font-size:19px;color:var(--pencil);text-align:center}
+.plot svg{display:block;max-width:100%;height:auto}
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:10px 0}
+.mini > div{text-align:center;min-width:0}
+.mini .plot svg{margin:0 auto}
+.mini b{font-family:var(--f-head);display:block}
+.ln{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.s-ink{stroke:var(--ink)} .s-red{stroke:var(--red)} .s-grn{stroke:var(--green)} .s-vio{stroke:var(--violet)} .s-pen{stroke:var(--pencil)}
+.t-ink{fill:var(--ink)} .t-red{fill:var(--red)} .t-grn{fill:var(--green)} .t-vio{fill:var(--violet)} .t-pen{fill:var(--pencil)}
+.src{font-family:var(--f-note);font-size:20px;color:var(--pencil);border-left:3px solid var(--postit2);padding-left:10px;margin:6px 0 12px}
+.ct td,.ct th{border:1.6px solid var(--pencil);padding:4px 14px;text-align:center}
+.ct th{font-family:var(--f-head);color:var(--violet)}
+.ct .tot{color:var(--red);font-weight:700}
+</style>
+
+<nav class="tabs" aria-label="Temas">
+  <a href="#portada">Índice</a>
+  <a href="#t34a">Funciones I</a>
+  <a href="#t34b">Funciones II</a>
+  <a href="#t41">4.1 Correlaciones</a>
+  <a href="#t42">4.2 Azar</a>
+  <button type="button" id="toggleSol">ver todas las soluciones</button>
+</nav>
+
+<!-- ===================== PORTADA ===================== -->
+<section class="sheet" id="portada">
+  <span class="date">curso 2026 / 27</span>
+  <span class="kicker">Matemáticas B · 4º ESO</span>
+  <h1>Apuntes de la 3ª evaluación</h1>
+  <p>Resumen de la teoría, ejemplos resueltos y ejercicios con solución, ordenados según la <span class="hl">temporalización del curso 26‑27</span>.</p>
+
+  <div class="plan">
+    <h3 class="v" style="margin-top:14px">El curso de un vistazo</h3>
+    <div class="bar" aria-label="Sesiones por evaluación">
+      <div class="off" style="flex:45">1ª · 45</div>
+      <div class="off" style="flex:32">2ª · 32</div>
+      <div class="on" style="flex:40;color:var(--green)">3ª eval · 40 ses.</div>
+    </div>
+    <p class="legend">Rayado = lo que recogen estos apuntes. 1ª: números, polinomios, ecuaciones e inecuaciones. 2ª: semejanza, trigonometría y geometría analítica.</p>
+
+    <h3 class="r">3ª evaluación: 40 sesiones</h3>
+    <div class="bar" aria-label="Sesiones por tema">
+      <div style="flex:20;color:var(--violet)">3.4 Modelos · 20</div>
+      <div style="flex:12;color:var(--green)">4.1 · 12</div>
+      <div style="flex:8;color:var(--ink)">4.2 · 8</div>
+    </div>
+    <div class="row legend" style="justify-content:space-between">
+      <span>UP5 · Funciones (20 sesiones)</span>
+      <span>UP6 · Estadística y probabilidad (20 sesiones)</span>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Índice de temas">
+    <a href="#t34a"><b>3.4 Modelos (I)</b><span>dominio, cortes, monotonía, curvatura, simetría, continuidad, límites y asíntotas</span></a>
+    <a href="#t34b"><b>3.4 Modelos (II)</b><span>funciones elementales, a trozos, composición, inversa y problemas</span></a>
+    <a href="#t41"><b>4.1 Correlaciones</b><span>tablas de contingencia, nube de puntos, correlación y regresión</span></a>
+    <a href="#t42"><b>4.2 Las leyes del azar</b><span>Laplace, árboles, experimentos compuestos, probabilidad condicionada</span></a>
+  </nav>
+
+  <div class="row" style="margin-top:22px">
+    <div class="postit"><b>Cómo usar los apuntes</b>Lee la teoría, tapa la solución e inténtalo. Despliega <span class="grn">✎ Ver solución</span> solo para comprobar. Marca <span class="pen-grey">☐ hecho</span> en cada ejercicio terminado: se queda guardado en tu navegador.</div>
+    <div class="postit o"><b>Niveles</b>★ básico · ★★ medio · ★★★ reto.<br>Para estadística, ten a mano la calculadora en modo <b>STAT</b> o una hoja de cálculo.</div>
+  </div>
+</section>
+
+<!-- ===================== 3.4 (I) ===================== -->
+<section class="sheet" id="t34a">
+  <span class="date">UP5 · 20 sesiones</span>
+  <span class="kicker">Tema 3.4 · Modelos (I)</span>
+  <h2 class="vio">Características de las funciones</h2>
+
+  <h3 class="v">¿Qué es una función?</h3>
+  <div class="row">
+    <div style="flex:1 1 300px">
+      <p>Una <b>función</b> es una relación entre dos variables en la que a cada valor de <b>x</b> le corresponde <span class="hl">un único valor</span> de <b>y</b>.</p>
+      <ul class="pen">
+        <li><b>x</b>: variable independiente (le damos valores)</li>
+        <li><b>y = f(x)</b>: variable dependiente o imagen</li>
+        <li>Los puntos de la gráfica son de la forma <span class="m">(x, f(x))</span></li>
+      </ul>
+    </div>
+    <div class="postit"><b>Prueba de la vertical</b>Si una recta vertical corta a la gráfica en <b>dos</b> puntos, no es una función: un mismo x tendría dos valores de y.</div>
+  </div>
+
+  <h3>Dominio y recorrido</h3>
+  <div class="row">
+    <div class="box ink"><span class="t">Dominio · Dom f</span>valores de <b>x</b> que puede tomar la función<br><span class="note">en la gráfica: mira el eje X</span></div>
+    <div class="box vio"><span class="t">Recorrido · Im f</span>valores de <b>y</b> que toma la función<br><span class="note">en la gráfica: mira el eje Y</span></div>
+  </div>
+  <div class="wrap"><table class="tb">
+    <tr><th>Tipo</th><th>Dominio</th><th>Ejemplo</th></tr>
+    <tr><td>Polinómica</td><td>todo ℝ</td><td>f(x) = x³ + 4 → ℝ</td></tr>
+    <tr><td>Fracción</td><td>ℝ menos los ceros del denominador</td><td><span class="f"><i>2x</i><i>x − 3</i></span> → ℝ − {3}</td></tr>
+    <tr><td>Raíz de índice <b>par</b></td><td>radicando ≥ 0 <span class="note">(inecuación)</span></td><td><span class="sq"><i>5 − 2x</i></span> → (−∞, 5/2]</td></tr>
+    <tr><td>Raíz de índice impar</td><td>todo ℝ <span class="note">(si no hay fracción)</span></td><td><span class="sq" data-n="3"><i>x² − 9</i></span> → ℝ</td></tr>
+    <tr><td>Logaritmo</td><td>argumento &gt; 0 <span class="note">(estricto)</span></td><td>ln(5 − 10x) → (−∞, 1/2)</td></tr>
+    <tr><td>Exponencial</td><td>el dominio de su exponente</td><td>5<sup>1/(x−3)</sup> → ℝ − {3}</td></tr>
+  </table></div>
+
+  <h3 class="r">Puntos de corte con los ejes</h3>
+  <div class="row">
+    <div class="box red"><span class="t">Eje Y</span>x = 0 → calculo f(0)<br><span class="note">como mucho uno</span></div>
+    <div class="box red"><span class="t">Eje X</span>y = 0 → resuelvo f(x) = 0<br><span class="note">puede haber varios o ninguno</span></div>
+    <p style="flex:1 1 220px">Ejemplo: f(x) = x² − 6x + 8<br>Eje Y: f(0) = 8 → (0, 8)<br>Eje X: x² − 6x + 8 = 0 → (2, 0) y (4, 0)</p>
+  </div>
+
+  <h3 class="g">Monotonía, extremos y curvatura</h3>
+  <div class="row">
+    <figure class="fig">
+      <div class="plot" data-x="-5,5" data-y="-3,3" data-w="320" data-h="200" data-f="4*x/(x*x+1)|ink" data-pts="1,2,máx;-1,-2,mín"></div>
+      <figcaption>f(x) = 4x / (x² + 1)</figcaption>
+    </figure>
+    <div style="flex:1 1 260px">
+      <ul class="pen">
+        <li><b class="grn">Creciente</b> en un intervalo: si x<sub>1</sub> &lt; x<sub>2</sub> → f(x<sub>1</sub>) &lt; f(x<sub>2</sub>)</li>
+        <li><b class="red">Decreciente</b>: si x<sub>1</sub> &lt; x<sub>2</sub> → f(x<sub>1</sub>) &gt; f(x<sub>2</sub>)</li>
+        <li><b>Máximo relativo</b>: pasa de creciente a decreciente. <b>Mínimo relativo</b>: de decreciente a creciente.</li>
+        <li><b>Absoluto</b>: el valor más alto (o más bajo) de toda la función.</li>
+      </ul>
+      <p>En el dibujo: decreciente en (−∞, −1) ∪ (1, +∞), creciente en (−1, 1); mínimo en (−1, −2) y máximo en (1, 2).</p>
+      <p class="note">Los intervalos de monotonía se dan siempre ABIERTOS y en el eje X.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="box grn"><span class="t">Cóncava hacia arriba</span><span class="big">∪</span> &nbsp; forma de vaso</div>
+    <div class="box red"><span class="t">Cóncava hacia abajo</span><span class="big">∩</span> &nbsp; forma de montaña</div>
+    <p style="flex:1 1 220px"><b>Punto de inflexión</b>: donde la función es continua y <span class="hl">cambia la curvatura</span>. En el dibujo hay uno en (0, 0).</p>
+  </div>
+
+  <h3 class="v">Simetrías</h3>
+  <div class="row">
+    <div class="box vio"><span class="t">Par</span><span class="m big">f(−x) = f(x)</span><br>simétrica respecto del <b>eje Y</b><br><span class="note">ej.: x², x²/(x²+6)</span></div>
+    <div class="box vio"><span class="t">Impar</span><span class="m big">f(−x) = −f(x)</span><br>simétrica respecto del <b>origen</b><br><span class="note">ej.: 1/x, x⁵ − x³</span></div>
+    <div class="postit o"><b>Cómo se comprueba</b>1) Calcula f(−x).<br>2) ¿Es igual a f(x)? → par.<br>3) Si no, calcula −f(x). ¿Coincide? → impar.<br>4) Si nada coincide: no tiene simetría.</div>
+  </div>
+
+  <h3>Continuidad y discontinuidades</h3>
+  <p>f es <b>continua en x = a</b> si se cumplen las tres condiciones:</p>
+  <div class="box ink"><span class="m">1) existe f(a)</span><br><span class="m">2) existe <span class="big">lím</span><sub>x→a</sub> f(x)</span> (laterales iguales)<br><span class="m">3) <span class="big">lím</span><sub>x→a</sub> f(x) = f(a)</span></div>
+  <div class="wrap"><table class="tb">
+    <tr><th>Discontinuidad</th><th>¿Qué pasa?</th></tr>
+    <tr><td class="grn">Evitable</td><td>los laterales coinciden, pero f(a) no existe o vale otra cosa (un "agujero")</td></tr>
+    <tr><td class="vio">De salto finito</td><td>los laterales son números distintos</td></tr>
+    <tr><td class="red">De salto infinito</td><td>algún lateral es ±∞ → <b>asíntota vertical</b> x = a</td></tr>
+  </table></div>
+
+  <h3 class="r">Límites en el infinito y asíntotas</h3>
+  <div class="row">
+    <figure class="fig">
+      <div class="plot" data-x="-4,8" data-y="-5,7" data-w="300" data-h="230" data-f="(x+1)/(x-2)|vio" data-asym="x=2;y=1"></div>
+      <figcaption>f(x) = (x + 1) / (x − 2)</figcaption>
+    </figure>
+    <div style="flex:1 1 260px">
+      <ul class="pen">
+        <li><b>Asíntota horizontal</b> y = L si <span class="m">lím<sub>x→±∞</sub> f(x) = L</span></li>
+        <li><b>Asíntota vertical</b> x = a si un límite lateral en a es ±∞. Suele estar donde se anula el denominador.</li>
+      </ul>
+      <p>En el dibujo:<br>
+      <span class="m">lím<sub>x→2<sup>−</sup></sub> f(x) = −∞ , lím<sub>x→2<sup>+</sup></sub> f(x) = +∞</span> → <span class="hl">A.V. x = 2</span><br>
+      <span class="m">lím<sub>x→±∞</sub> f(x) = 1</span> → <span class="hl">A.H. y = 1</span></p>
+    </div>
+  </div>
+
+  <h3 class="g">Tasa de variación media</h3>
+  <div class="row">
+    <div class="box grn"><span class="m big">TVM[a, b] = <span class="f"><i>f(b) − f(a)</i><i>b − a</i></span></span></div>
+    <p style="flex:1 1 260px">Es la <b>pendiente</b> del segmento que une los dos puntos: mide lo rápido que crece (+) o decrece (−) la función en ese intervalo, en "unidades de y por unidad de x".</p>
+  </div>
+
+  <h3 class="g">Ejercicios</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Calcula el dominio.</span><label class="done"><input type="checkbox" id="ck-t34a-1"> hecho</label></div>
+      <div class="items"><span>a) f(x) = 3x − 5</span><span>b) f(x) = <span class="f"><i>x² + 3</i><i>x² + 5x + 6</i></span></span><span>c) f(x) = <span class="f"><i>3</i><i>x² + 4</i></span></span><span>d) f(x) = <span class="sq"><i>2x − 2</i></span></span><span>e) f(x) = <span class="sq"><i>x² − 9</i></span></span><span>f) f(x) = <span class="sq" data-n="3"><i>4 − 2x</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="res">ℝ</span> (polinómica)<br>
+      b) x² + 5x + 6 = 0 → x = −2, −3 → <span class="res">ℝ − {−3, −2}</span><br>
+      c) x² + 4 nunca vale 0 → <span class="res">ℝ</span><br>
+      d) 2x − 2 ≥ 0 → <span class="res">[1, +∞)</span><br>
+      e) (x − 3)(x + 3) ≥ 0 → <span class="res">(−∞, −3] ∪ [3, +∞)</span><br>
+      f) índice impar → <span class="res">ℝ</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★★</span><span class="q">Calcula el dominio (necesitarás una tabla de signos).</span><label class="done"><input type="checkbox" id="ck-t34a-2"> hecho</label></div>
+      <div class="items"><span>a) f(x) = log(x² − 3x + 2)</span><span>b) f(x) = <span class="f"><i>x</i><i><span class="sq"><i>x + 2</i></span></i></span></span><span>c) f(x) = ln<span class="f"><i>x + 1</i><i>x² − 81</i></span></span><span>d) f(x) = <span class="sq"><i><span class="f"><i>x − 2</i><i>x² − 3x + 2</i></span></i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) (x − 1)(x − 2) &gt; 0 → <span class="res">(−∞, 1) ∪ (2, +∞)</span><br>
+      b) raíz en el denominador: x + 2 &gt; 0 (estricto) → <span class="res">(−2, +∞)</span><br>
+      c) <span class="f"><i>x + 1</i><i>(x + 9)(x − 9)</i></span> &gt; 0 → <span class="res">(−9, −1) ∪ (9, +∞)</span><br>
+      d) <span class="f"><i>x − 2</i><i>(x − 1)(x − 2)</i></span> ≥ 0 con x ≠ 1, 2 → <span class="res">(1, 2) ∪ (2, +∞)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★</span><span class="q">Halla los puntos de corte con los ejes.</span><label class="done"><input type="checkbox" id="ck-t34a-3"> hecho</label></div>
+      <div class="items"><span>a) f(x) = 2x² − 8</span><span>b) f(x) = <span class="f"><i>x² − 4</i><i>x</i></span></span><span>c) f(x) = <span class="f"><i>x</i><i>x² − 4</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) Eje Y (0, −8). Eje X: x² = 4 → (−2, 0) y (2, 0)<br>
+      b) x = 0 no está en el dominio → <b>no corta</b> al eje Y. Eje X: (−2, 0) y (2, 0)<br>
+      c) Corta en el origen (0, 0), y solo ahí</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">Estudia la simetría.</span><label class="done"><input type="checkbox" id="ck-t34a-4"> hecho</label></div>
+      <div class="items"><span>a) f(x) = x⁵ − x³</span><span>b) f(x) = <span class="f"><i>x²</i><i>x² + 6</i></span></span><span>c) f(x) = <span class="f"><i>x</i><i>x − 5</i></span></span><span>d) f(x) = x² + 2x</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) f(−x) = −x⁵ + x³ = −f(x) → <span class="res">impar</span><br>
+      b) f(−x) = f(x) → <span class="res">par</span><br>
+      c) f(−x) = <span class="f"><i>−x</i><i>−x − 5</i></span> = <span class="f"><i>x</i><i>x + 5</i></span>: no es f(x) ni −f(x) → <span class="res">sin simetría</span><br>
+      d) f(−x) = x² − 2x → <span class="res">sin simetría</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">Estudia el signo de f(x) = <span class="f"><i>x</i><i>x² − 4</i></span>.</span><label class="done"><input type="checkbox" id="ck-t34a-5"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Ceros y puntos fuera del dominio: x = −2, 0, 2.
+      <div class="wrap"><table class="sg">
+        <tr><th></th><th>(−∞,−2)</th><th>(−2,0)</th><th>(0,2)</th><th>(2,+∞)</th></tr>
+        <tr><td>x</td><td class="n">−</td><td class="n">−</td><td class="p">+</td><td class="p">+</td></tr>
+        <tr><td>x + 2</td><td class="n">−</td><td class="p">+</td><td class="p">+</td><td class="p">+</td></tr>
+        <tr><td>x − 2</td><td class="n">−</td><td class="n">−</td><td class="n">−</td><td class="p">+</td></tr>
+        <tr><td>f(x)</td><td class="n">−</td><td class="p">+</td><td class="n">−</td><td class="p">+</td></tr>
+      </table></div>
+      <span class="res">f &gt; 0 en (−2, 0) ∪ (2, +∞)</span> &nbsp; <span class="res">f &lt; 0 en (−∞, −2) ∪ (0, 2)</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">Fíjate en la gráfica de f(x) = (x + 1)/(x − 2) dibujada arriba. Da el dominio, el recorrido, la monotonía, los puntos de corte y las asíntotas.</span><label class="done"><input type="checkbox" id="ck-t34a-6"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Dom = <span class="res">ℝ − {2}</span> · Im = <span class="res">ℝ − {1}</span><br>
+      <span class="res">Decreciente</span> en (−∞, 2) y en (2, +∞); no tiene extremos.<br>
+      Cortes: f(0) = −1/2 → (0, −1/2); x + 1 = 0 → (−1, 0)<br>
+      A.V. <span class="res">x = 2</span> · A.H. <span class="res">y = 1</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★</span><span class="q">Clasifica las discontinuidades.</span><label class="done"><input type="checkbox" id="ck-t34a-7"> hecho</label></div>
+      <div class="items"><span>a) f(x) = <span class="brace"><span>x + 1 &nbsp; si x &lt; 1</span><span>2x − 3 si x ≥ 1</span></span></span><span>b) g(x) = <span class="f"><i>x² − 4</i><i>x − 2</i></span></span><span>c) h(x) = <span class="f"><i>3</i><i>x + 1</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) lím<sub>x→1⁻</sub> = 2, lím<sub>x→1⁺</sub> = −1 → <span class="res">salto finito en x = 1</span><br>
+      b) g(2) no existe, pero g(x) = x + 2 si x ≠ 2 → lím<sub>x→2</sub> = 4 → <span class="res">evitable en x = 2</span><br>
+      c) laterales en −1 son ∓∞ → <span class="res">salto infinito en x = −1</span> (asíntota vertical)</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">8</span><span class="lvl">★★★</span><span class="q">Para f(x) = x² − 6x + 8, calcula la TVM en [0, 2] y en [3, 5]. ¿Qué significa el signo?</span><label class="done"><input type="checkbox" id="ck-t34a-8"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">f(0) = 8, f(2) = 0, f(3) = −1, f(5) = 3<br>
+      TVM[0, 2] = (0 − 8)/2 = <span class="res">−4</span> → en ese tramo <b>baja</b> 4 unidades por cada unidad de x<br>
+      TVM[3, 5] = (3 − (−1))/2 = <span class="res">2</span> → ahí <b>sube</b> 2 unidades por unidad</div></details></div>
+  </div>
+  <p class="endnote">sigue: funciones elementales →</p>
+</section>
+
+<!-- ===================== 3.4 (II) ===================== -->
+<section class="sheet" id="t34b">
+  <span class="date">UP5 · 20 sesiones</span>
+  <span class="kicker">Tema 3.4 · Modelos (II)</span>
+  <h2 class="red">Funciones elementales</h2>
+
+  <div class="mini">
+    <div class="dash"><b class="ink">Lineal · y = mx + n</b><div class="plot" data-x="-4,4" data-y="-4,4" data-w="180" data-h="150" data-f="2*x+1|ink;-0.5*x-1|red"></div><span class="note">m pendiente · n corte con Y</span></div>
+    <div class="dash"><b class="red">Cuadrática · y = ax² + bx + c</b><div class="plot" data-x="-4,4" data-y="-4,5" data-w="180" data-h="150" data-f="x*x-2|ink;-x*x+3|red"></div><span class="note">a &gt; 0 ∪ · a &lt; 0 ∩</span></div>
+    <div class="dash"><b class="vio">Inversa · y = k / x</b><div class="plot" data-x="-4,4" data-y="-4,4" data-w="180" data-h="150" data-f="2/x|vio" data-asym="x=0;y=0"></div><span class="note">hipérbola · asíntotas x = 0, y = 0</span></div>
+    <div class="dash"><b class="grn">Radical · y = √x</b><div class="plot" data-x="-1,7" data-y="-1,3" data-w="180" data-h="150" data-f="Math.sqrt(x)|grn|0,7|c-"></div><span class="note">índice par: radicando ≥ 0</span></div>
+    <div class="dash"><b class="vio">Exponencial · y = aˣ</b><div class="plot" data-x="-4,4" data-y="-1,5" data-w="180" data-h="150" data-f="2**x|vio;0.5**x|red" data-pts="0,1"></div><span class="note">pasa por (0, 1) · siempre &gt; 0</span></div>
+    <div class="dash"><b class="ink">Logarítmica · y = logₐ x</b><div class="plot" data-x="-1,7" data-y="-3,3" data-w="180" data-h="150" data-f="Math.log2(x)|ink|0.01,7" data-pts="1,0" data-asym="x=0"></div><span class="note">Dom (0, +∞) · pasa por (1, 0)</span></div>
+  </div>
+
+  <h3 class="r">Parábolas</h3>
+  <div class="row">
+    <figure class="fig">
+      <div class="plot" data-x="-1,7" data-y="-2,9" data-w="260" data-h="240" data-f="x*x-6*x+8|red" data-pts="3,-1,V;2,0;4,0;0,8"></div>
+      <figcaption>y = x² − 6x + 8</figcaption>
+    </figure>
+    <div style="flex:1 1 260px">
+      <p>Para dibujar <span class="m">y = ax² + bx + c</span>:</p>
+      <ul class="pen">
+        <li><b>Forma</b>: a &gt; 0 → ∪ (mínimo); a &lt; 0 → ∩ (máximo)</li>
+        <li><b>Vértice</b>: <span class="m big">x<sub>v</sub> = <span class="f"><i>−b</i><i>2a</i></span></span> y luego y<sub>v</sub> = f(x<sub>v</sub>)</li>
+        <li><b>Cortes</b>: eje Y en (0, c); eje X resolviendo ax² + bx + c = 0 (2, 1 ó 0 puntos)</li>
+      </ul>
+      <p class="dash">Ejemplo: a = 1 &gt; 0 → ∪. x<sub>v</sub> = 6/2 = 3, f(3) = −1 → V(3, −1).<br>Cortes: (0, 8), (2, 0), (4, 0).</p>
+    </div>
+  </div>
+
+  <h3 class="v">Funciones definidas a trozos</h3>
+  <div class="row">
+    <figure class="fig">
+      <div class="plot" data-x="-4,5" data-y="-4,6" data-w="260" data-h="240" data-f="x+1|ink|-4,1|-o;2*x-3|red|1,5|c-"></div>
+      <figcaption>f(x) = x + 1 si x &lt; 1 ; 2x − 3 si x ≥ 1</figcaption>
+    </figure>
+    <div style="flex:1 1 260px">
+      <p>Tienen <b>una expresión distinta en cada intervalo</b> del dominio. Se dibuja cada trozo solo en su intervalo, con tabla de valores incluyendo los extremos:</p>
+      <ul class="pen">
+        <li><span class="red">●</span> punto <b>relleno</b> si el extremo está incluido (≤, ≥)</li>
+        <li><span class="red">○</span> punto <b>hueco</b> si no lo está (&lt;, &gt;)</li>
+      </ul>
+      <p>Aquí: en x = 1 los laterales valen 2 y −1 → <span class="hl">salto finito</span>.</p>
+    </div>
+  </div>
+
+  <h3 class="g">Operaciones, composición e inversa</h3>
+  <div class="row">
+    <div class="box ink"><span class="t">Operar</span>(f + g)(x) = f(x) + g(x) &nbsp;·&nbsp; (f · g)(x) = f(x) · g(x)<br>(f / g)(x) = f(x) / g(x) con g(x) ≠ 0<br><span class="note">dominio: la intersección de los dominios</span></div>
+    <div class="box grn"><span class="t">Composición</span><span class="m big">(g ∘ f)(x) = g( f(x) )</span><br><span class="note">primero f, después g: se lee "g compuesta con f"</span></div>
+  </div>
+  <div class="row">
+    <div class="box vio"><span class="t">Función inversa f⁻¹</span>deshace lo que hace f: <span class="m">f⁻¹( f(x) ) = x</span><br>Para calcularla: escribe y = f(x), <b>despeja x</b> e intercambia las letras.<br><span class="m">f(x) = 2x + 1</span> → <span class="m">x = <span class="f"><i>y − 1</i><i>2</i></span></span> → <span class="m">f⁻¹(x) = <span class="f"><i>x − 1</i><i>2</i></span></span></div>
+    <div class="warn" style="flex:1 1 240px"><span class="ojo"><span>¡OJO!</span></span><p>f⁻¹(x) <b>no</b> es <span class="f"><i>1</i><i>f(x)</i></span>. Las gráficas de f y f⁻¹ son simétricas respecto de la recta y = x.</p></div>
+  </div>
+
+  <h3 class="g">Ejercicios</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Halla el vértice y los cortes con los ejes, y di si tiene máximo o mínimo.</span><label class="done"><input type="checkbox" id="ck-t34b-1"> hecho</label></div>
+      <div class="items"><span>a) y = −x² + 9</span><span>b) y = x² − 2x</span><span>c) y = −x² − 2x − 1</span><span>d) y = x² + 4</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) ∩, <span class="res">V(0, 9)</span> máximo; cortes (0, 9), (−3, 0), (3, 0)<br>
+      b) ∪, <span class="res">V(1, −1)</span> mínimo; cortes (0, 0), (2, 0)<br>
+      c) ∩, <span class="res">V(−1, 0)</span> máximo; toca el eje X solo en (−1, 0); corte Y (0, −1)<br>
+      d) ∪, <span class="res">V(0, 4)</span> mínimo; x² = −4 no tiene solución → <b>no corta</b> al eje X; corte Y (0, 4)</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="q">Para cada hipérbola, di si es creciente o decreciente y da un punto por el que pase con x = 3.</span><label class="done"><input type="checkbox" id="ck-t34b-2"> hecho</label></div>
+      <div class="items"><span>a) y = 6/x</span><span>b) y = −6/x</span><span>c) y = 8/x</span></div>
+      <details><summary>Ver solución</summary><div class="sol">k &gt; 0 → decreciente; k &lt; 0 → creciente (en cada rama).<br>
+      a) <span class="res">decreciente</span>, (3, 2) &nbsp; b) <span class="res">creciente</span>, (3, −2) &nbsp; c) <span class="res">decreciente</span>, (3, 8/3)</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★★</span><span class="q">Representa f(x) = <span class="brace"><span>x − 2 si x ≤ 4</span><span>4 − x si x &gt; 4</span></span> y estudia su continuidad.</span><label class="done"><input type="checkbox" id="ck-t34b-3"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">
+      <div class="plot" data-x="-1,8" data-y="-4,4" data-w="240" data-h="200" data-f="x-2|ink|-1,4|-c;4-x|red|4,8|o-"></div>
+      f(4) = 2 y lím<sub>x→4⁺</sub> = 0 → laterales distintos → <span class="res">salto finito en x = 4</span>. Continua en el resto.</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">Con f(x) = x² y g(x) = 3x − 1, calcula (f ∘ g)(x), (g ∘ f)(x) y (f ∘ g)(2).</span><label class="done"><input type="checkbox" id="ck-t34b-4"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">(f ∘ g)(x) = f(3x − 1) = <span class="res">(3x − 1)²</span><br>(g ∘ f)(x) = g(x²) = <span class="res">3x² − 1</span> <span class="note">¡no es lo mismo!</span><br>(f ∘ g)(2) = 5² = <span class="res">25</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">Halla la función inversa y comprueba que f⁻¹(f(1)) = 1.</span><label class="done"><input type="checkbox" id="ck-t34b-5"> hecho</label></div>
+      <div class="items"><span>a) f(x) = 3x − 4</span><span>b) f(x) = <span class="f"><i>x − 3</i><i>5</i></span></span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="res">f⁻¹(x) = <span class="f"><i>x + 4</i><i>3</i></span></span>; f(1) = −1, f⁻¹(−1) = 3/3 = 1 <span class="ok">✓</span><br>
+      b) <span class="res">f⁻¹(x) = 5x + 3</span>; f(1) = −2/5, f⁻¹(−2/5) = −2 + 3 = 1 <span class="ok">✓</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">Los ingresos de una empresa al vender x artículos son I(x) = 50x − 0,01x² euros. ¿Cuántos artículos debe vender para que los ingresos sean máximos? ¿Cuánto ingresa entonces?</span><label class="done"><input type="checkbox" id="ck-t34b-6"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Parábola con a = −0,01 &lt; 0 → ∩, el vértice es el máximo.<br>
+      x<sub>v</sub> = <span class="f"><i>−50</i><i>2·(−0,01)</i></span> = <span class="res">2 500 artículos</span> · I(2 500) = 125 000 − 62 500 = <span class="res">62 500 €</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★</span><span class="q">El número de personas afectadas por un virus t días después de detectarse es I(t) = <span class="f"><i>30 000 t</i><i>t + 199</i></span>. a) ¿Cuántas hay el primer día? ¿Y a la semana? b) ¿Qué día habrá 5 125 personas afectadas?</span><label class="done"><input type="checkbox" id="ck-t34b-7"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) I(1) = 30 000/200 = <span class="res">150</span> · I(7) = 210 000/206 ≈ <span class="res">1 019</span><br>
+      b) 30 000t = 5 125(t + 199) → 24 875t = 1 019 875 → <span class="res">t = 41 días</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">8</span><span class="lvl">★★</span><span class="q">Un cultivo tiene 500 bacterias y su número se duplica cada 30 minutos: N(t) = 500 · 2<sup>t/30</sup> (t en minutos). a) ¿Cuántas hay al cabo de 1 hora? b) ¿Cuándo habrá 8 000?</span><label class="done"><input type="checkbox" id="ck-t34b-8"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) N(60) = 500 · 2² = <span class="res">2 000</span><br>
+      b) 2<sup>t/30</sup> = 16 = 2⁴ → t/30 = 4 → <span class="res">t = 120 min = 2 h</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">9</span><span class="lvl">★★★</span><span class="q">Una sustancia radiactiva se desintegra según m(t) = 400 · 2<sup>−0,005t</sup> gramos (t en horas). a) ¿Qué masa queda a las 2 horas? b) ¿Cuánto tiempo tiene que pasar para que queden 100 g?</span><label class="done"><input type="checkbox" id="ck-t34b-9"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) m(2) = 400 · 2<sup>−0,01</sup> ≈ <span class="res">397,24 g</span><br>
+      b) 2<sup>−0,005t</sup> = 1/4 = 2<sup>−2</sup> → −0,005t = −2 → <span class="res">t = 400 h</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">10</span><span class="lvl">★★★</span><span class="q">El efecto de un medicamento t minutos después de tomarlo es E(t) = −<span class="f"><i>25</i><i>16</i></span> t² + 25t. a) ¿Cuándo es máximo el efecto y cuánto vale? b) ¿Cuándo desaparece?</span><label class="done"><input type="checkbox" id="ck-t34b-10"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) a &lt; 0 → máximo en el vértice: t = <span class="f"><i>−25</i><i>2·(−25/16)</i></span> = <span class="res">8 min</span>, E(8) = −100 + 200 = <span class="res">100</span><br>
+      b) E(t) = 0 → t(−<span class="f"><i>25</i><i>16</i></span>t + 25) = 0 → t = 0 ó <span class="res">t = 16 min</span></div></details></div>
+  </div>
+  <p class="endnote">fin del tema 3.4 ✓</p>
+</section>
+
+<!-- ===================== 4.1 CORRELACIONES ===================== -->
+<section class="sheet" id="t41">
+  <span class="date">UP6 · 12 sesiones</span>
+  <span class="kicker">Tema 4.1</span>
+  <h2 class="grn">Correlaciones</h2>
+  <p class="src">Este tema no aparece en las libretas de clase: está redactado a partir de los saberes de la programación.</p>
+
+  <h3 class="v">Variables bidimensionales</h3>
+  <p>Estudiamos <b>dos variables a la vez</b> en cada individuo: horas de estudio y nota, temperatura y helados vendidos… Cada dato es un par <span class="m">(x<sub>i</sub>, y<sub>i</sub>)</span>.</p>
+
+  <h3>Tablas de contingencia</h3>
+  <div class="row">
+    <div class="wrap"><table class="ct">
+      <tr><th></th><th>Usa bici</th><th>No usa</th><th>Total</th></tr>
+      <tr><th>3º ESO</th><td>30</td><td>70</td><td class="tot">100</td></tr>
+      <tr><th>4º ESO</th><td>45</td><td>55</td><td class="tot">100</td></tr>
+      <tr><th>Total</th><td class="tot">75</td><td class="tot">125</td><td class="tot">200</td></tr>
+    </table></div>
+    <div style="flex:1 1 240px">
+      <p>Cruzan dos variables (normalmente <b>cualitativas</b>). Los totales de las filas y columnas son las <span class="hl">frecuencias marginales</span>.</p>
+      <p class="note">% de los de 4º que usan bici: 45/100 = 45 %<br>% de los ciclistas que son de 4º: 45/75 = 60 %</p>
+    </div>
+  </div>
+
+  <h3 class="r">Nube de puntos y correlación</h3>
+  <div class="mini">
+    <div class="dash"><b class="grn">Positiva fuerte</b><div class="plot" data-x="0,10" data-y="0,10" data-w="170" data-h="140" data-noticks="1" data-dots="1,1.5;2,2.2;2.5,3.4;3.5,3.6;4,4.8;5,5.1;6,6.5;6.5,6.2;7.5,7.9;8.5,8.4;9,9.3"></div><span class="note">r cerca de 1</span></div>
+    <div class="dash"><b class="red">Negativa</b><div class="plot" data-x="0,10" data-y="0,10" data-w="170" data-h="140" data-noticks="1" data-dots="1,8.5;2,8.8;2.5,7;3.5,7.6;4,5.5;5,6.4;6,4.2;6.5,5;7.5,3.1;8.5,3.6;9,1.8"></div><span class="note">r cerca de −1</span></div>
+    <div class="dash"><b class="vio">Nula</b><div class="plot" data-x="0,10" data-y="0,10" data-w="170" data-h="140" data-noticks="1" data-dots="1,4;2,8;2.5,2;3.5,6;4,9;5,3;6,7;6.5,1.5;7.5,5;8.5,8.5;9,3.2"></div><span class="note">r cerca de 0</span></div>
+  </div>
+  <ul class="pen">
+    <li><b>Positiva</b>: cuando x crece, y tiende a crecer. <b>Negativa</b>: cuando x crece, y tiende a bajar.</li>
+    <li>Es <b>fuerte</b> si los puntos están muy pegados a una recta y <b>débil</b> si están muy dispersos.</li>
+  </ul>
+
+  <h3 class="g">Covarianza, coeficiente de correlación y recta de regresión</h3>
+  <div class="row">
+    <div class="box ink"><span class="t">Covarianza</span><span class="m big">S<sub>xy</sub> = <span class="f"><i>Σ x<sub>i</sub>y<sub>i</sub></i><i>n</i></span> − x̄ · ȳ</span></div>
+    <div class="box red"><span class="t">Coeficiente de correlación</span><span class="m big">r = <span class="f"><i>S<sub>xy</sub></i><i>S<sub>x</sub> · S<sub>y</sub></i></span></span> &nbsp; <span class="m">−1 ≤ r ≤ 1</span></div>
+  </div>
+  <div class="row">
+    <div class="box vio"><span class="t">Recta de regresión de y sobre x</span><span class="m big">y − ȳ = <span class="f"><i>S<sub>xy</sub></i><i>S<sub>x</sub><sup>2</sup></i></span> (x − x̄)</span><br><span class="note">sirve para estimar y a partir de x</span></div>
+    <div class="postit"><b>¿Me fío de la estimación?</b>Solo si |r| está cerca de 1 <b>y</b> el valor de x está dentro del rango de los datos. Fuera de él (extrapolar) puede salir un disparate.</div>
+  </div>
+  <div class="warn"><span class="ojo"><span>¡OJO!</span></span><p>Correlación <b>no</b> es causalidad: que dos variables vayan juntas no significa que una provoque la otra (puede haber una tercera causa).</p></div>
+
+  <div class="dash"><b class="vio">Ejemplo resuelto.</b> Horas de estudio (x) y nota (y) de 5 alumnos:
+    <div class="row" style="margin-top:6px">
+      <div class="wrap"><table class="tb">
+        <tr><th>x</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+        <tr><th>y</th><td>3</td><td>4</td><td>6</td><td>7</td><td>10</td></tr>
+      </table></div>
+      <div class="plot" data-x="0,6" data-y="0,11" data-w="220" data-h="180" data-dots="1,3;2,4;3,6;4,7;5,10" data-f="1.7*x+0.9|red"></div>
+    </div>
+    x̄ = 3, ȳ = 6, Σxy = 107 → S<sub>xy</sub> = 21,4 − 18 = 3,4<br>
+    S<sub>x</sub><sup>2</sup> = 55/5 − 9 = 2 → S<sub>x</sub> ≈ 1,414 · S<sub>y</sub><sup>2</sup> = 210/5 − 36 = 6 → S<sub>y</sub> ≈ 2,449<br>
+    r = 3,4 / (1,414 · 2,449) ≈ <span class="res">0,98</span> → correlación positiva muy fuerte<br>
+    Recta: y − 6 = 1,7(x − 3) → <span class="res">y = 1,7x + 0,9</span>. Con 3,5 h se estima una nota de 6,85.</div>
+
+  <h3 class="g">Ejercicios</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Asocia cada coeficiente a una situación: r = 0,95 · r = −0,82 · r = 0,05.<br>a) Altura de un alumno y su número de calzado. b) Horas de videojuegos y nota media. c) Número del DNI y estatura.</span><label class="done"><input type="checkbox" id="ck-t41-1"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) <span class="res">0,95</span> (positiva fuerte) · b) <span class="res">−0,82</span> (negativa) · c) <span class="res">0,05</span> (sin relación)</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="q">Con la tabla de contingencia de la bici: a) ¿qué porcentaje de alumnos usa la bici? b) ¿qué porcentaje de los de 3º la usa? c) de los que no la usan, ¿qué porcentaje es de 4º?</span><label class="done"><input type="checkbox" id="ck-t41-2"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">a) 75/200 = <span class="res">37,5 %</span> · b) 30/100 = <span class="res">30 %</span> · c) 55/125 = <span class="res">44 %</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★★</span><span class="q">Una heladería anota la temperatura máxima (°C) y los helados vendidos:</span><label class="done"><input type="checkbox" id="ck-t41-3"> hecho</label></div>
+      <div class="wrap" style="margin-left:44px"><table class="tb"><tr><th>x (°C)</th><td>20</td><td>22</td><td>25</td><td>28</td><td>30</td></tr><tr><th>y (helados)</th><td>58</td><td>70</td><td>88</td><td>96</td><td>113</td></tr></table></div>
+      <p style="margin-left:44px">a) Dibuja la nube de puntos. b) Calcula r e interprétalo. c) Halla la recta de regresión y estima las ventas para 27 °C.</p>
+      <details><summary>Ver solución</summary><div class="sol">
+      <div class="plot" data-x="18,32" data-y="40,120" data-w="260" data-h="200" data-step="2,10" data-dots="20,58;22,70;25,88;28,96;30,113" data-f="5.191*x-44.78|red"></div>
+      x̄ = 25, ȳ = 85, S<sub>xy</sub> = 10 978/5 − 2 125 = 70,6<br>
+      S<sub>x</sub><sup>2</sup> = 13,6 (S<sub>x</sub> ≈ 3,688) · S<sub>y</sub><sup>2</sup> = 373,6 (S<sub>y</sub> ≈ 19,33)<br>
+      b) r = 70,6 / (3,688 · 19,33) ≈ <span class="res">0,99</span> → positiva muy fuerte<br>
+      c) pendiente 70,6/13,6 ≈ 5,19 → y − 85 = 5,19(x − 25) → <span class="res">y ≈ 5,19x − 44,78</span> → para 27 °C: <span class="res">≈ 95 helados</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">En un estudio sale r = −0,92 entre horas de móvil al día y nota media. Un periódico titula: «El móvil hace bajar las notas». ¿Qué opinas?</span><label class="done"><input type="checkbox" id="ck-t41-4"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Hay una correlación negativa <b>fuerte</b>: quien usa más el móvil suele sacar peores notas. Pero <span class="res">correlación no implica causalidad</span>: puede influir una tercera variable (horas de sueño, de estudio…). El estudio no demuestra la causa.</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★★</span><span class="q">Con la recta y = 1,7x + 0,9 del ejemplo resuelto, estima la nota de alguien que estudia 10 horas. ¿Es fiable?</span><label class="done"><input type="checkbox" id="ck-t41-5"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">y = 17 + 0,9 = 17,9 → ¡una nota mayor que 10! <span class="res">No es fiable</span>: x = 10 está muy fuera del rango de los datos (1 a 5 h). La recta solo vale para estimar <b>dentro</b> de ese rango.</div></details></div>
+  </div>
+  <p class="endnote">fin del tema 4.1 ✓</p>
+</section>
+
+<!-- ===================== 4.2 AZAR ===================== -->
+<section class="sheet" id="t42">
+  <span class="date">UP6 · 8 sesiones</span>
+  <span class="kicker">Tema 4.2</span>
+  <h2>Las leyes del azar</h2>
+  <p class="src">Este tema no aparece en las libretas de clase: está redactado a partir de los saberes de la programación.</p>
+
+  <h3 class="v">Experimentos y sucesos</h3>
+  <div class="row">
+    <div style="flex:1 1 300px">
+      <ul class="pen">
+        <li><b>Experimento aleatorio</b>: no se puede predecir el resultado (lanzar un dado).</li>
+        <li><b>Espacio muestral E</b>: todos los resultados posibles. Dado: E = {1, 2, 3, 4, 5, 6}</li>
+        <li><b>Suceso</b>: subconjunto de E. A = "sale par" = {2, 4, 6}</li>
+        <li><b>Seguro</b>: E. <b>Imposible</b>: ∅.</li>
+      </ul>
+    </div>
+    <div class="box vio"><span class="t">Operaciones</span>
+      <b>A ∪ B</b> (A o B): ocurre alguno<br>
+      <b>A ∩ B</b> (A y B): ocurren los dos<br>
+      <b>Ā</b> (contrario): ocurre si NO ocurre A<br>
+      <b>Incompatibles</b>: A ∩ B = ∅</div>
+  </div>
+
+  <h3 class="r">Regla de Laplace</h3>
+  <div class="row">
+    <div class="box red"><span class="m big">P(A) = <span class="f"><i>casos favorables</i><i>casos posibles</i></span></span><br><span class="note">solo si todos los resultados son igual de probables</span></div>
+    <div class="box ink"><span class="t">Propiedades</span>
+      0 ≤ P(A) ≤ 1 · P(E) = 1 · P(∅) = 0<br>
+      <span class="m">P(Ā) = 1 − P(A)</span><br>
+      <span class="m">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</span></div>
+  </div>
+  <p class="note">Si repetimos un experimento muchas veces, la frecuencia relativa de un suceso se acerca a su probabilidad (ley de los grandes números).</p>
+
+  <h3 class="g">Experimentos compuestos: diagramas de árbol</h3>
+  <div class="row">
+    <figure class="fig">
+      <svg viewBox="0 0 330 220" width="330" role="img" aria-label="Árbol: urna con 3 rojas y 2 azules, se sacan dos bolas sin devolver">
+        <circle cx="20" cy="110" r="5" class="t-ink"/>
+        <path class="ln s-red" d="M24 106 L120 50"/><path class="ln s-ink" d="M24 114 L120 170"/>
+        <text x="58" y="66" class="t-red" font-size="15">3/5</text><text x="58" y="166" class="t-ink" font-size="15">2/5</text>
+        <text x="124" y="55" class="t-red" font-size="18">R</text><text x="124" y="176" class="t-ink" font-size="18">A</text>
+        <path class="ln s-red" d="M140 48 L230 20"/><path class="ln s-ink" d="M140 52 L230 80"/>
+        <path class="ln s-red" d="M140 168 L230 140"/><path class="ln s-ink" d="M140 172 L230 200"/>
+        <text x="170" y="26" class="t-red" font-size="14">2/4</text><text x="170" y="82" class="t-ink" font-size="14">2/4</text>
+        <text x="170" y="146" class="t-red" font-size="14">3/4</text><text x="170" y="204" class="t-ink" font-size="14">1/4</text>
+        <text x="236" y="25" class="t-red" font-size="16">R → 6/20</text>
+        <text x="236" y="85" class="t-ink" font-size="16">A → 6/20</text>
+        <text x="236" y="145" class="t-red" font-size="16">R → 6/20</text>
+        <text x="236" y="205" class="t-ink" font-size="16">A → 2/20</text>
+      </svg>
+      <figcaption>urna con 3 rojas y 2 azules, se sacan 2 sin devolver</figcaption>
+    </figure>
+    <div style="flex:1 1 250px">
+      <ul class="pen">
+        <li>En cada rama se escribe su probabilidad; las ramas que salen de un nudo suman 1.</li>
+        <li><b>Multiplica</b> a lo largo de un camino.</li>
+        <li><b>Suma</b> los caminos que cumplen lo que te piden.</li>
+      </ul>
+      <p>P(dos rojas) = <span class="f"><i>3</i><i>5</i></span> · <span class="f"><i>2</i><i>4</i></span> = <span class="res"><span class="f"><i>3</i><i>10</i></span></span><br>
+      P(distinto color) = <span class="f"><i>6</i><i>20</i></span> + <span class="f"><i>6</i><i>20</i></span> = <span class="res"><span class="f"><i>3</i><i>5</i></span></span></p>
+      <p class="note">sin devolver, la 2ª extracción depende de la 1ª (sucesos dependientes)</p>
+    </div>
+  </div>
+
+  <h3 class="v">Probabilidad condicionada</h3>
+  <div class="row">
+    <div class="box vio"><span class="m big">P(A | B) = <span class="f"><i>P(A ∩ B)</i><i>P(B)</i></span></span><br><span class="note">probabilidad de A sabiendo que ha ocurrido B</span></div>
+    <p style="flex:1 1 240px">Con una tabla de contingencia es muy fácil: <b>te quedas solo con la fila o columna de B</b> y aplicas Laplace dentro de ella.<br>P(bici | 4º) = 45/100 = 0,45</p>
+  </div>
+  <div class="row">
+    <div class="box grn"><span class="t">Independientes</span><span class="m">P(A ∩ B) = P(A) · P(B)</span><br><span class="note">lanzar dos monedas, sacar con reemplazamiento…</span></div>
+  </div>
+
+  <h3 class="g">Ejercicios</h3>
+  <div class="ejs">
+    <div class="ej"><div class="ej-h"><span class="num">1</span><span class="lvl">★</span><span class="q">Se lanza un dado. Calcula la probabilidad de:</span><label class="done"><input type="checkbox" id="ck-t42-1"> hecho</label></div>
+      <div class="items"><span>a) sacar par</span><span>b) múltiplo de 3</span><span>c) par o múltiplo de 3</span><span>d) no sacar un 6</span></div>
+      <details><summary>Ver solución</summary><div class="sol">a) 3/6 = <span class="res">1/2</span> · b) {3, 6} → <span class="res">1/3</span><br>
+      c) {2, 3, 4, 6} → <span class="res">2/3</span> <span class="note">(o bien 1/2 + 1/3 − 1/6)</span> · d) 1 − 1/6 = <span class="res">5/6</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">2</span><span class="lvl">★</span><span class="q">Se extrae una carta de una baraja española de 40 cartas. Calcula P(oros), P(figura), P(rey de oros) y P(oros o figura).</span><label class="done"><input type="checkbox" id="ck-t42-2"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">P(oros) = 10/40 = <span class="res">1/4</span> · P(figura) = 12/40 = <span class="res">3/10</span> · P(rey de oros) = <span class="res">1/40</span><br>
+      P(oros ∪ figura) = 10/40 + 12/40 − 3/40 = <span class="res">19/40</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">3</span><span class="lvl">★★</span><span class="q">Se lanzan dos dados y se suman los puntos. Calcula P(suma 7), P(suma ≥ 10) y P(sacar dobles).</span><label class="done"><input type="checkbox" id="ck-t42-3"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Hay 6 · 6 = 36 casos posibles (haz la tabla 6 × 6).<br>
+      Suma 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) → <span class="res">6/36 = 1/6</span><br>
+      Suma ≥ 10: (4,6), (5,5), (6,4), (5,6), (6,5), (6,6) → <span class="res">1/6</span><br>
+      Dobles: 6 casos → <span class="res">1/6</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">4</span><span class="lvl">★★</span><span class="q">Se lanza una moneda tres veces. Calcula P(exactamente dos caras) y P(al menos una cara).</span><label class="done"><input type="checkbox" id="ck-t42-4"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">8 resultados: CCC, CCX, CXC, XCC, CXX, XCX, XXC, XXX.<br>
+      Dos caras: 3 casos → <span class="res">3/8</span><br>
+      Al menos una: por el contrario, 1 − P(XXX) = 1 − 1/8 = <span class="res">7/8</span> <span class="note">"al menos uno" → piensa en el contrario</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">5</span><span class="lvl">★★</span><span class="q">En la urna del árbol (3 rojas y 2 azules) se sacan dos bolas <b>devolviendo</b> la primera. Calcula P(dos rojas) y P(distinto color) y compáralas con las de sin devolver.</span><label class="done"><input type="checkbox" id="ck-t42-5"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Ahora son independientes: P(RR) = 3/5 · 3/5 = <span class="res">9/25 = 0,36</span> (sin devolver: 0,30)<br>
+      P(distinto) = 3/5 · 2/5 + 2/5 · 3/5 = <span class="res">12/25 = 0,48</span> (sin devolver: 0,60)</div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">6</span><span class="lvl">★★</span><span class="q">Con la tabla de la bici (200 alumnos) se elige uno al azar. Calcula P(usa bici), P(es de 4º y usa bici), P(usa bici | es de 4º) y P(es de 4º | usa bici).</span><label class="done"><input type="checkbox" id="ck-t42-6"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">P(B) = 75/200 = <span class="res">3/8</span> · P(4º ∩ B) = 45/200 = <span class="res">9/40</span><br>
+      P(B | 4º) = 45/100 = <span class="res">9/20</span> · P(4º | B) = 45/75 = <span class="res">3/5</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">7</span><span class="lvl">★★★</span><span class="q">¿Qué es más probable: sacar al menos un 6 en 4 lanzamientos de un dado, o no sacar ninguno?</span><label class="done"><input type="checkbox" id="ck-t42-7"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">P(ningún 6) = (5/6)⁴ = 625/1 296 ≈ 0,482<br>P(al menos un 6) = 1 − 0,482 ≈ <span class="res">0,518</span> → es (un poco) <span class="res">más probable sacar al menos un 6</span></div></details></div>
+
+    <div class="ej"><div class="ej-h"><span class="num">8</span><span class="lvl">★★★</span><span class="q">Una fábrica tiene dos máquinas: A hace el 60 % de las piezas y el 2 % le salen defectuosas; B hace el 40 % y el 5 % le salen defectuosas. a) ¿Qué probabilidad hay de que una pieza sea defectuosa? b) Si una pieza es defectuosa, ¿qué máquina es más probable que la haya hecho?</span><label class="done"><input type="checkbox" id="ck-t42-8"> hecho</label></div>
+      <details><summary>Ver solución</summary><div class="sol">Árbol: máquina → defectuosa / buena.<br>
+      a) P(D) = 0,6 · 0,02 + 0,4 · 0,05 = 0,012 + 0,020 = <span class="res">0,032</span><br>
+      b) P(B | D) = 0,020 / 0,032 = 0,625 y P(A | D) = 0,012 / 0,032 = 0,375 → <span class="res">más probable la máquina B</span>, aunque fabrique menos.</div></details></div>
+  </div>
+  <p class="endnote">fin del tema 4.2 ✓ · fin del curso</p>
+</section>
+
+<script>
+/* gráficas de funciones y nubes de puntos, a mano */
+(function(){
+  const NS="http://www.w3.org/2000/svg";
+  const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e};
+  const col=c=>({ink:"var(--ink)",red:"var(--red)",grn:"var(--green)",vio:"var(--violet)",pen:"var(--pencil)"}[c]||"var(--ink)");
+  const fmt=v=>String(Math.round(v*100)/100).replace(".",",").replace("-","−");
+  document.querySelectorAll(".plot").forEach((box,idx)=>{
+    const [x0,x1]=box.dataset.x.split(",").map(Number), [y0,y1]=box.dataset.y.split(",").map(Number);
+    const W=+(box.dataset.w||300), H=+(box.dataset.h||220), p=14;
+    const X=v=>p+(v-x0)/(x1-x0)*(W-2*p), Y=v=>H-p-(v-y0)/(y1-y0)*(H-2*p);
+    const [sx,sy]=(box.dataset.step||"").split(",").map(Number);
+    const stx=sx||((x1-x0)>14?Math.ceil((x1-x0)/10):1), sty=sy||((y1-y0)>14?Math.ceil((y1-y0)/10):1);
+    const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,width:W,role:"img","aria-label":"Gráfica"});
+    const cid="clip"+idx; const cp=el("clipPath",{id:cid}); cp.appendChild(el("rect",{x:p-2,y:p-2,width:W-2*p+4,height:H-2*p+4})); svg.appendChild(cp);
+    const ax=Math.min(Math.max(0,x0),x1), ay=Math.min(Math.max(0,y0),y1);
+    svg.appendChild(el("path",{d:`M${p-6} ${Y(ay)} L${W-4} ${Y(ay)} M${W-11} ${Y(ay)-4} L${W-4} ${Y(ay)} L${W-11} ${Y(ay)+4} M${X(ax)} ${H-4} L${X(ax)} ${p-8} M${X(ax)-4} ${p-1} L${X(ax)} ${p-8} L${X(ax)+4} ${p-1}`,stroke:"var(--pencil)","stroke-width":1.4,fill:"none","stroke-linecap":"round"}));
+    if(!box.dataset.noticks){
+      for(let v=Math.ceil(x0/stx)*stx; v<=x1; v+=stx){ if(Math.abs(v-ax)<1e-9) continue;
+        svg.appendChild(el("path",{d:`M${X(v)} ${Y(ay)-3} L${X(v)} ${Y(ay)+3}`,stroke:"var(--pencil)","stroke-width":1.2}));
+        const t=el("text",{x:X(v),y:Y(ay)+14,"text-anchor":"middle","font-size":11,fill:"var(--pencil)"});t.textContent=fmt(v);svg.appendChild(t);}
+      for(let v=Math.ceil(y0/sty)*sty; v<=y1; v+=sty){ if(Math.abs(v-ay)<1e-9) continue;
+        svg.appendChild(el("path",{d:`M${X(ax)-3} ${Y(v)} L${X(ax)+3} ${Y(v)}`,stroke:"var(--pencil)","stroke-width":1.2}));
+        const t=el("text",{x:X(ax)-6,y:Y(v)+4,"text-anchor":"end","font-size":11,fill:"var(--pencil)"});t.textContent=fmt(v);svg.appendChild(t);}
+    }
+    const g=el("g",{"clip-path":`url(#${cid})`}); svg.appendChild(g);
+    (box.dataset.asym||"").split(";").filter(Boolean).forEach(a=>{
+      const [k,v]=a.split("="); const n=+v;
+      const d=k.trim()==="x"?`M${X(n)} ${p} L${X(n)} ${H-p}`:`M${p} ${Y(n)} L${W-p} ${Y(n)}`;
+      g.appendChild(el("path",{d,stroke:"var(--red)","stroke-width":1.4,"stroke-dasharray":"5 4",fill:"none"}));
+    });
+    const ends=[];
+    (box.dataset.f||"").split(";").filter(Boolean).forEach(tok=>{
+      const [ex,c,dom,en]=tok.split("|"); let f; try{ f=new Function("x","return "+ex); }catch(e){ return; }
+      let a=x0,b=x1; if(dom){[a,b]=dom.split(",").map(Number);}
+      const N=500, lim=(y1-y0); let d="", pen=false, py=null;
+      for(let i=0;i<=N;i++){ const x=a+(b-a)*i/N; let y; try{y=f(x)}catch(e){y=NaN}
+        if(!isFinite(y)||y<y0-lim||y>y1+lim||(py!==null&&Math.abs(y-py)>lim)){ pen=false; py=isFinite(y)?y:null; continue; }
+        d+=(pen?" L":" M")+X(x).toFixed(1)+" "+Y(y).toFixed(1); pen=true; py=y; }
+      g.appendChild(el("path",{d,stroke:col(c),"stroke-width":2.6,fill:"none","stroke-linecap":"round","stroke-linejoin":"round"}));
+      if(en){ [[a,en[0]],[b,en[1]]].forEach(([x,m])=>{ if(m!=="c"&&m!=="o") return; const y=f(x); ends.push({x,y,closed:m==="c",c}); }); }
+    });
+    ends.forEach(e=>svg.appendChild(el("circle",{cx:X(e.x),cy:Y(e.y),r:4.2,fill:e.closed?col(e.c):"var(--paper)",stroke:col(e.c),"stroke-width":2})));
+    (box.dataset.dots||"").split(";").filter(Boolean).forEach(s=>{ const [x,y]=s.split(",").map(Number);
+      svg.appendChild(el("circle",{cx:X(x),cy:Y(y),r:4,fill:"var(--violet)",stroke:"var(--paper)","stroke-width":1})); });
+    (box.dataset.pts||"").split(";").filter(Boolean).forEach(s=>{ const [x,y,l]=s.split(",");
+      svg.appendChild(el("circle",{cx:X(+x),cy:Y(+y),r:4.2,fill:"var(--red)"}));
+      if(l){ const t=el("text",{x:X(+x)+7,y:Y(+y)+(+y>=0?-6:16),"font-size":14,fill:"var(--red)"}); t.textContent=l; svg.appendChild(t);} });
+    box.appendChild(svg);
+  });
+})();
+/* "hecho": se guarda solo en este navegador */
+document.querySelectorAll('.done input').forEach(cb=>{
+  try{ cb.checked = localStorage.getItem(cb.id)==="1"; }catch(e){}
+  cb.addEventListener('change',()=>{ try{ localStorage.setItem(cb.id, cb.checked?"1":"0"); }catch(e){} });
+});
+/* mostrar/ocultar todas las soluciones */
+(function(){
+  const btn=document.getElementById('toggleSol'); let open=false;
+  btn.addEventListener('click',()=>{ open=!open;
+    document.querySelectorAll('.ej details').forEach(d=>d.open=open);
+    btn.textContent = open ? 'ocultar soluciones' : 'ver todas las soluciones'; });
+})();
+</script>
+
+</body>
+</html>
